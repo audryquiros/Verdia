@@ -18,13 +18,14 @@
     "rag:test": "node scripts/test-google-rag.js"
   },
   "dependencies": {
+    "@google/genai": "latest",
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
+    "google-auth-library": "latest",
+    "googleapis": "^190.0.0",
     "mysql2": "latest",
-    "sequelize": "latest",
-    "@google/genai": "latest",
-    "google-auth-library": "latest"
+    "sequelize": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",
