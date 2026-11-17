@@ -397,3 +397,40 @@ La base del proyecto ya contiene:
 - mockups visuales en `docs/`.
 
 El trabajo actual es **llevar el frontend existente a una implementación visual fiel al mockup**, no rehacer la arquitectura desde cero.
+
+---
+
+## Design system frontend — decisión vigente
+
+El frontend no utiliza Tailwind. Se mantiene **CSS normal por componente**.
+
+### Tokens
+Los valores globales del sistema visual se centralizan en:
+
+`frontend/src/styles/variables.css`
+
+`frontend/src/styles/global.css` mantiene aliases de compatibilidad para componentes existentes.
+
+### Tipografía
+- `Outfit` → logo.
+- `Manrope` → títulos y cifras.
+- `DM Sans` → interfaz y contenido.
+
+### Assets botánicos aprobados para el Landing
+Los assets suministrados por el proyecto se encuentran en:
+
+`frontend/src/assets/brand/botanical/`
+
+Incluyen `group-6.svg` a `group-10.svg` y `enredadera.svg`.
+
+No deben convertirse en un fondo único rasterizado. La composición debe hacerse con posicionamiento CSS para poder acercarla al mockup y mantener responsive.
+
+### Método de fidelidad visual
+1. Extraer/definir tokens.
+2. Construir geometría del layout.
+3. Integrar assets aprobados.
+4. Comparar captura contra mockup.
+5. Ajustar proporciones y espaciado.
+6. Repetir hasta cerrar diferencias relevantes.
+
+El mockup es la referencia visual; no se debe sustituir por un diseño genérico.

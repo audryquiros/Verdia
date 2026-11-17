@@ -1,0 +1,37 @@
+:root {
+  /* Verdia brand */
+  --color-forest: #285E45;
+  --color-forest-deep: #0F3D2E;
+  --color-forest-dark: #0B3528;
+  --color-soft-green: #A9D29A;
+  --color-cream: #F3F6EF;
+  --color-sage: #E4EDE1;
+  --color-graphite: #26342B;
+  --color-muted: #718078;
+  --color-white: #FFFFFF;
+  --color-line: #DCE7DC;
+  --color-line-soft: #E9EFE8;
+  --color-danger: #D95B55;
+  --color-warning: #D8A74A;
+  --color-purple: #7D61D7;
+
+  /* Typography */
+  --font-logo: 'Outfit', sans-serif;
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-button: 12px;
+  --radius-card: 16px;
+  --radius-card-lg: 20px;
+
+  /* Shadows */
+  --shadow-card: 0 12px 34px rgba(38, 52, 43, 0.07);
+  --shadow-lg: 0 24px 70px rgba(38, 52, 43, 0.13);
+  --shadow-button: 0 9px 22px rgba(40, 94, 69, 0.16);
+
+  /* Layout */
+  --container-max: 1440px;
+  --nav-height: 76px;
+}

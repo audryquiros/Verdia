@@ -1,12 +1,5 @@
 import { Link } from 'react-router-dom';
-import {
-  ArrowRight,
-  Wallet,
-  Target,
-  CreditCard,
-  ReceiptText,
-  Mail,
-} from 'lucide-react';
+import { ArrowRight, WalletCards, CircleDollarSign, CreditCard, ReceiptText, Mail } from 'lucide-react';
 import Logo from '../../components/Logo/Logo.jsx';
 import heroDevices from '../../assets/landing/verdia-hero-devices.svg';
 import leafCorner from '../../assets/landing/verdia-leaf-corner.svg';
@@ -18,7 +11,7 @@ export default function Landing() {
     <div className="landing-page">
       <header className="landing-nav">
         <Link to="/" aria-label="Verdia, inicio">
-          <Logo />
+          <Logo light />
         </Link>
 
         <nav className="landing-links" aria-label="Navegación principal">
@@ -30,7 +23,7 @@ export default function Landing() {
 
         <div className="nav-actions">
           <Link className="btn btn-outline btn-sm" to="/login">Iniciar sesión</Link>
-          <Link className="btn btn-primary btn-sm" to="/registro">Registrarse</Link>
+          <Link className="btn btn-soft btn-sm" to="/registro">Registrarse</Link>
         </div>
       </header>
 
@@ -46,7 +39,7 @@ export default function Landing() {
               tu asistente financiera.
             </p>
             <div className="hero-actions">
-              <Link className="btn btn-primary hero-primary" to="/registro">
+              <Link className="btn btn-soft hero-primary" to="/registro">
                 Comenzar gratis <ArrowRight size={16} strokeWidth={2.2} />
               </Link>
               <a className="btn btn-outline hero-secondary" href="#funcionalidades">
@@ -61,20 +54,15 @@ export default function Landing() {
         </section>
 
         <section id="funcionalidades" className="features" aria-label="Funcionalidades de Verdia">
-          <Feature icon={Wallet} title="Control de gastos" />
-          <Feature icon={Target} title="Metas de ahorro" />
+          <Feature icon={WalletCards} title="Control de gastos" />
+          <Feature icon={CircleDollarSign} title="Metas de ahorro" />
           <Feature icon={CreditCard} title="Tarjetas" />
           <Feature icon={ReceiptText} title="Pagos de servicios" />
           <Feature icon={Mail} title="Automatización con tu correo" />
         </section>
 
-        <section id="seguridad" className="sr-only-section">
-          <h2>Seguridad</h2>
-          <p>Verdia prioriza claridad, privacidad y control. Vera propone; tú confirmas.</p>
-        </section>
-        <section id="ayuda" className="sr-only-section">
-          <h2>Ayuda</h2>
-        </section>
+        <section id="seguridad" className="sr-only-section"><h2>Seguridad</h2></section>
+        <section id="ayuda" className="sr-only-section"><h2>Ayuda</h2></section>
       </main>
     </div>
   );

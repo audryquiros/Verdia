@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Outfit:wght@700;800&display=swap');
+@import './variables.css';
 
 :root{
-  --forest:#285E45;
-  --forest-deep:#0F3D2E;
-  --forest-dark:#0B3528;
-  --soft-green:#A9D29A;
-  --cream:#F3F6EF;
-  --sage:#E4EDE1;
-  --graphite:#26342B;
-  --muted:#718078;
-  --white:#FFFFFF;
-  --line:#DCE7DC;
-  --line-soft:#E9EFE8;
-  --danger:#D95B55;
-  --warning:#D8A74A;
-  --purple:#7D61D7;
-  --shadow:0 12px 34px rgba(38,52,43,.07);
-  --shadow-lg:0 24px 70px rgba(38,52,43,.13);
-  --radius:16px;
-  --radius-lg:20px;
-  font-family:'DM Sans',sans-serif;
-  color:var(--graphite);
-  background:var(--cream);
-  font-synthesis:none;
-  text-rendering:optimizeLegibility;
+  --forest: var(--color-forest);
+  --forest-deep: var(--color-forest-deep);
+  --forest-dark: var(--color-forest-dark);
+  --soft-green: var(--color-soft-green);
+  --cream: var(--color-cream);
+  --sage: var(--color-sage);
+  --graphite: var(--color-graphite);
+  --muted: var(--color-muted);
+  --white: var(--color-white);
+  --line: var(--color-line);
+  --line-soft: var(--color-line-soft);
+  --danger: var(--color-danger);
+  --warning: var(--color-warning);
+  --purple: var(--color-purple);
+  --shadow: var(--shadow-card);
+  --radius: var(--radius-card);
+  --radius-lg: var(--radius-card-lg);
+  font-family: var(--font-body);
+  color: var(--graphite);
+  background: var(--cream);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 *{box-sizing:border-box}
 html,body,#root{min-height:100%;margin:0}
@@ -31,8 +31,8 @@ body{background:var(--cream);overflow-x:hidden}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
-h1,h2,h3,h4{font-family:'Manrope',sans-serif;margin:0}
-.logo{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.04em}
+h1,h2,h3,h4{font-family:var(--font-heading);margin:0}
+.logo{font-family:var(--font-logo);font-size:22px;font-weight:800;letter-spacing:-.04em}
 .muted{color:var(--muted)}
 .page{min-height:100vh}
 .btn{border:0;border-radius:10px;padding:10px 16px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
