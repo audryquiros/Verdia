@@ -1,1 +1,13 @@
-.sidebar{width:220px;background:#0b3528;color:#dcebe1;min-height:100vh;position:fixed;left:0;top:0;bottom:0;padding:22px 14px;display:flex;flex-direction:column;z-index:30}.sidebar-head{display:flex;align-items:center;justify-content:space-between;padding:0 8px 26px}.mobile-close{display:none;background:transparent;border:0;color:#fff}.sidebar nav{display:flex;flex-direction:column;gap:4px}.side-link{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;font-size:12px;font-weight:600;color:#c5d8cc}.side-link.active{background:#a9d29a;color:#173c2b}.side-link:hover{background:rgba(169,210,154,.13);color:#fff}.sidebar-foot{margin-top:auto}.vera-mini{display:flex;align-items:center;gap:10px;padding:12px;border-top:1px solid rgba(255,255,255,.1)}.vera-mini small{display:block;color:#93a99d;font-size:10px;margin-top:2px}@media(max-width:850px){.sidebar{transform:translateX(-100%);transition:.2s ease;width:245px}.sidebar.open{transform:translateX(0)}.mobile-close{display:block}}
+.sidebar{width:206px;background:var(--forest-dark);color:#DCEBE1;min-height:100vh;position:fixed;left:0;top:0;bottom:0;padding:18px 12px 14px;display:flex;flex-direction:column;z-index:30;overflow:hidden}
+.sidebar:after{content:"";position:absolute;width:155px;height:155px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(169,210,154,.5),rgba(169,210,154,0) 68%);right:-85px;bottom:-55px;pointer-events:none}
+.sidebar-head{display:flex;align-items:center;justify-content:space-between;padding:0 8px 22px;position:relative;z-index:1}
+.mobile-close{display:none;background:transparent;border:0;color:#fff}
+.sidebar nav{display:flex;flex-direction:column;gap:3px;position:relative;z-index:1}
+.side-link{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;font-size:10px;font-weight:600;color:#C5D8CC;transition:.15s ease}
+.side-link.active{background:#A9D29A;color:#173C2B}
+.side-link:hover{background:rgba(169,210,154,.12);color:#fff}
+.sidebar-foot{margin-top:auto;position:relative;z-index:1}
+.vera-mini{display:flex;align-items:center;gap:9px;padding:13px 9px;border-top:1px solid rgba(255,255,255,.1)}
+.vera-mini small{display:block;color:#93A99D;font-size:8px;margin-top:2px}
+.vera-mini strong{font-size:10px}
+@media(max-width:850px){.sidebar{transform:translateX(-100%);transition:.2s ease;width:245px}.sidebar.open{transform:translateX(0)}.mobile-close{display:block}}

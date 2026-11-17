@@ -1,1 +1,1 @@
-.mini-chart{height:120px;display:flex;align-items:flex-end;gap:12px;padding:8px 4px}.mini-chart span{width:18px;max-height:100%;background:var(--soft-green);border-radius:7px 7px 2px 2px}.mini-chart span:nth-child(4),.mini-chart span:last-child{background:var(--forest)}
+.mini-chart{height:106px;display:flex;align-items:flex-end;gap:9px;padding:8px 4px}.mini-chart span{width:16px;max-height:100%;background:var(--soft-green);border-radius:6px 6px 2px 2px}.mini-chart span:nth-child(4),.mini-chart span:last-child{background:var(--forest)}

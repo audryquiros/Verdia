@@ -1,0 +1,79 @@
+<svg width="760" height="520" viewBox="0 0 760 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="halo" x1="185" y1="64" x2="592" y2="444" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DDEFD4"/>
+      <stop offset="0.55" stop-color="#A9D29A" stop-opacity="0.86"/>
+      <stop offset="1" stop-color="#A9D29A" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="60" y="50" width="650" height="430" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#26342B" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <ellipse cx="450" cy="256" rx="285" ry="205" fill="url(#halo)" transform="rotate(-8 450 256)"/>
+
+  <!-- botanical leaves -->
+  <path d="M175 365C120 352 89 316 91 274C133 282 169 311 175 365Z" fill="#A9D29A"/>
+  <path d="M196 346C193 299 214 267 251 252C258 292 238 325 196 346Z" fill="#6FC37B"/>
+  <path d="M545 106C573 65 617 48 664 58C649 103 610 127 545 106Z" fill="#A9D29A"/>
+  <path d="M592 126C621 92 656 83 690 95C676 132 644 147 592 126Z" fill="#70C57D"/>
+  <path d="M626 292C668 257 708 256 738 275C716 311 680 324 626 292Z" fill="#65B873"/>
+
+  <!-- laptop -->
+  <g filter="url(#shadow)" transform="translate(132 125) rotate(-2 235 140)">
+    <rect x="0" y="0" width="470" height="276" rx="18" fill="#E9F0EA"/>
+    <rect x="13" y="13" width="444" height="236" rx="10" fill="white"/>
+    <rect x="26" y="27" width="418" height="26" rx="7" fill="#F7FAF6"/>
+    <circle cx="39" cy="40" r="4" fill="#A9D29A"/>
+    <text x="53" y="44" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#285E45">Verdia</text>
+
+    <rect x="26" y="66" width="72" height="166" rx="9" fill="#F1F6F0"/>
+    <rect x="37" y="79" width="48" height="8" rx="4" fill="#2F8A5E"/>
+    <rect x="37" y="96" width="40" height="7" rx="3.5" fill="#D5E6D5"/>
+    <rect x="37" y="112" width="44" height="7" rx="3.5" fill="#D5E6D5"/>
+    <rect x="37" y="128" width="38" height="7" rx="3.5" fill="#D5E6D5"/>
+    <rect x="37" y="144" width="45" height="7" rx="3.5" fill="#D5E6D5"/>
+    <rect x="37" y="160" width="36" height="7" rx="3.5" fill="#D5E6D5"/>
+
+    <rect x="112" y="66" width="157" height="54" rx="11" fill="#EDF8E9"/>
+    <text x="125" y="83" font-family="Arial, sans-serif" font-size="8" fill="#718078">Disponible</text>
+    <text x="125" y="103" font-family="Arial, sans-serif" font-size="17" font-weight="800" fill="#183B2A">₡425.000</text>
+
+    <rect x="278" y="66" width="166" height="54" rx="11" fill="#F4F7F2"/>
+    <text x="291" y="83" font-family="Arial, sans-serif" font-size="8" fill="#718078">Ingresos</text>
+    <text x="291" y="103" font-family="Arial, sans-serif" font-size="17" font-weight="800" fill="#183B2A">₡620.000</text>
+
+    <rect x="112" y="133" width="332" height="99" rx="11" fill="#F8FBF7"/>
+    <path d="M133 210H421" stroke="#DDE8DD" stroke-width="2"/>
+    <path d="M133 184H421" stroke="#E5ECE5" stroke-width="2"/>
+    <path d="M133 158H421" stroke="#E5ECE5" stroke-width="2"/>
+    <rect x="151" y="186" width="35" height="24" rx="5" fill="#A9D29A"/>
+    <rect x="198" y="169" width="35" height="41" rx="5" fill="#A9D29A"/>
+    <rect x="245" y="175" width="35" height="35" rx="5" fill="#A9D29A"/>
+    <rect x="292" y="145" width="35" height="65" rx="5" fill="#285E45"/>
+    <rect x="339" y="156" width="35" height="54" rx="5" fill="#285E45"/>
+    <rect x="386" y="126" width="35" height="84" rx="5" fill="#285E45"/>
+
+    <path d="M-13 279H483C476 294 459 302 438 302H32C11 302 -6 294 -13 279Z" fill="#D0DAD2"/>
+  </g>
+
+  <!-- phone -->
+  <g filter="url(#shadow)" transform="translate(544 232) rotate(4)">
+    <rect width="116" height="234" rx="22" fill="#E8EEEA"/>
+    <rect x="7" y="7" width="102" height="220" rx="17" fill="white"/>
+    <rect x="39" y="12" width="38" height="5" rx="2.5" fill="#D6DFD8"/>
+    <text x="17" y="36" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#285E45">Verdia</text>
+    <rect x="16" y="48" width="84" height="43" rx="9" fill="#A9D29A"/>
+    <text x="25" y="63" font-family="Arial, sans-serif" font-size="7" fill="#355642">Disponible</text>
+    <text x="25" y="80" font-family="Arial, sans-serif" font-size="14" font-weight="800" fill="#183B2A">₡425.000</text>
+    <text x="16" y="108" font-family="Arial, sans-serif" font-size="7" fill="#718078">Gastos</text>
+    <text x="100" y="108" text-anchor="end" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#26342B">₡187.350</text>
+    <text x="16" y="124" font-family="Arial, sans-serif" font-size="7" fill="#718078">Ingresos</text>
+    <text x="100" y="124" text-anchor="end" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#26342B">₡620.000</text>
+    <rect x="16" y="139" width="84" height="70" rx="10" fill="#F3F8F1"/>
+    <rect x="25" y="180" width="12" height="20" rx="3" fill="#73BC78"/>
+    <rect x="43" y="168" width="12" height="32" rx="3" fill="#73BC78"/>
+    <rect x="61" y="175" width="12" height="25" rx="3" fill="#73BC78"/>
+    <rect x="79" y="158" width="12" height="42" rx="3" fill="#73BC78"/>
+  </g>
+</svg>
