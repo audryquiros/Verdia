@@ -1,50 +1,32 @@
-# Base de datos de Verdia
+# Database
 
-La base de datos se inicializa desde VS Code con tres piezas:
-
-```text
- database/schema.sql
-        ↓
- estructura base MySQL
-        ↓
- Sequelize migrations
-        ↓
- cambios controlados
-        ↓
- database/seed.sql
-        ↓
- datos iniciales no sensibles
-```
-
-## Primera instalación
-
-1. Crear/arrancar MySQL.
-2. Copiar `.env.example` a `.env`.
-3. Configurar `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` y `DB_PASSWORD`.
-4. Ejecutar:
+## Setup
 
 ```bash
 npm run db:setup
 ```
 
-## Cambios posteriores
+## Development data
 
-No editar tablas directamente en producción. Crear una nueva migration:
-
-```bash
-npx sequelize-cli migration:generate --name nombre-del-cambio
-```
-
-Luego:
+Para poblar una base local con datos coherentes de prueba de los principales dominios de Verdia:
 
 ```bash
-npm run db:migrate
+npm run db:seed
 ```
 
-## Seed
+El seed crea datos para usuarios, sesiones, espacios financieros, cuentas, tarjetas,
+categorías, tipos de cambio, deudas, metas, movimientos, presupuestos, conversaciones de Vera,
+mensajes, fuentes, propuestas, documentos/RAG, organizaciones, roles, membresías, políticas,
+versiones de políticas, auditoría y eventos.
 
-`seed.sql` contiene solamente datos iniciales que no dependen de datos personales reales. No contiene contraseñas ni credenciales.
+Los registros del seed usan IDs `900001+` y correos `@verdia.test`, y se eliminan/recrean solo esos
+registros al volver a ejecutar el seed. **No ejecutar en producción.**
 
-## Regla
+El usuario principal de prueba es:
 
-No usar `sequelize.sync()` para construir el esquema de Verdia. El esquema se controla mediante `schema.sql` y migrations.
+- Email: `demo@verdia.test`
+- Usuario ID: `900001`
+- Espacio financiero ID: `900001`
+
+El seed no crea una contraseña utilizable porque el flujo de autenticación todavía no está definido
+como parte del seed. El `password_hash` del usuario queda `NULL` intencionalmente.

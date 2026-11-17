@@ -161,6 +161,9 @@ CREATE TABLE IF NOT EXISTS `documentos` (
   `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `usuario_id` BIGINT,
   `organizacion_id` BIGINT,
+  `espacio_financiero_id` BIGINT,
+  `fuente_externa_id` VARCHAR(255),
+  `fuente_externa_modificada_at` DATETIME,
   `tipo` VARCHAR(80) NOT NULL,
   `origen` VARCHAR(80) NOT NULL,
   `nombre` VARCHAR(255) NOT NULL,
@@ -170,7 +173,9 @@ CREATE TABLE IF NOT EXISTS `documentos` (
   `estado` VARCHAR(30) NOT NULL DEFAULT 'ACTIVO',
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT `fk_doc_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`)
+  UNIQUE KEY `uq_documentos_espacio_fuente_externa` (`espacio_financiero_id`,`fuente_externa_id`),
+  CONSTRAINT `fk_doc_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`),
+  CONSTRAINT `fk_documentos_espacio` FOREIGN KEY (`espacio_financiero_id`) REFERENCES `espacios_financieros`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `documento_versiones` (
@@ -192,6 +197,7 @@ CREATE TABLE IF NOT EXISTS `fragmentos` (
   `indice` INT UNSIGNED NOT NULL,
   `contenido` TEXT NOT NULL,
   `metadata` JSON,
+  FULLTEXT KEY `ft_fragmentos_contenido` (`contenido`),
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT `fk_frag_version` FOREIGN KEY (`documento_version_id`) REFERENCES `documento_versiones`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

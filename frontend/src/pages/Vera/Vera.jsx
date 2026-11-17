@@ -19,7 +19,7 @@ export default function Vera() {
     setError('');
     try {
       const result = await queryRag({
-        spaceId: 'demo',
+        spaceId: import.meta.env.VITE_DEFAULT_SPACE_ID || '1',
         query,
         limit: 5,
       });
@@ -39,13 +39,13 @@ export default function Vera() {
       </div>
 
       <div className="vera-layout">
-        <SectionCard title="Vera con conocimiento documental" subtitle="Google Drive + Google Cloud RAG">
+        <SectionCard title="Vera con conocimiento documental" subtitle="Google Drive + MySQL">
           <div className="vera-large">
             <div className="vera-large-bot"><Bot size={54} /></div>
             <div className="proposal">
               <span>Consulta tus documentos</span>
               <strong>{answer || 'Haz una pregunta para probar el RAG.'}</strong>
-              {loading && <p className="vera-status">Consultando Google Cloud…</p>}
+              {loading && <p className="vera-status">Consultando documentos…</p>}
               {error && <p className="vera-error">{error}</p>}
               {sources.length > 0 && (
                 <div className="vera-sources">

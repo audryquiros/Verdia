@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { queryRag } from '../controllers/rag.controller.js';
+import { queryRag, syncRagFromGoogleDrive } from '../controllers/rag.controller.js';
 
 const router = Router();
 
 router.post('/query', queryRag);
+router.post('/sync-drive', syncRagFromGoogleDrive);
 
 export default router;

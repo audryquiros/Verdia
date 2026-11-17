@@ -3,9 +3,11 @@ import cors from 'cors';
 import { env } from './config/env.js';
 import { testDatabaseConnection } from './config/database.js';
 import routes from './routes/index.js';
+import db from './models/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 const app = express();
+app.locals.db = db;
 app.use(cors({ origin: env.CORS_ORIGIN }));
 app.use(express.json());
 app.use('/api', routes);

@@ -5,7 +5,7 @@ import './RagChatWidget.css';
 
 const INITIAL_MESSAGE = {
   role: 'assistant',
-  content: 'Hola, soy Vera. Puedes preguntarme algo sobre los documentos que conectemos a Google Cloud RAG.',
+  content: 'Hola, soy Vera. Puedes preguntarme algo sobre los documentos disponibles en Verdia.',
 };
 
 export default function RagChatWidget() {
@@ -24,7 +24,7 @@ export default function RagChatWidget() {
     setLoading(true);
 
     try {
-      const result = await queryRag({ spaceId: 'demo', query: trimmed, limit: 5 });
+      const result = await queryRag({ spaceId: import.meta.env.VITE_DEFAULT_SPACE_ID || '1', query: trimmed, limit: 5 });
       setMessages((current) => [
         ...current,
         {
@@ -55,7 +55,7 @@ export default function RagChatWidget() {
               <div className="rag-avatar"><Bot size={19} /></div>
               <div>
                 <strong>Vera</strong>
-                <span>Prueba de RAG · Google Cloud</span>
+                <span>Prueba de recuperación documental</span>
               </div>
             </div>
             <button className="rag-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar chat">
@@ -82,7 +82,7 @@ export default function RagChatWidget() {
             ))}
             {loading && (
               <div className="rag-message rag-message-assistant">
-                <div className="rag-bubble rag-loading">Consultando Google Cloud…</div>
+                <div className="rag-bubble rag-loading">Consultando documentos…</div>
               </div>
             )}
           </div>

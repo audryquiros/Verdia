@@ -1,23 +1,37 @@
+import db from '../models/index.js';
 import { buildContext } from './contextBuilder.js';
-import { GoogleCloudRagProvider } from './googleCloud.js';
+import { retrieveFragments } from './retriever.js';
 
-export async function answerWithRag({
-  query,
-  spaceId,
-  limit = 5,
-  provider = new GoogleCloudRagProvider(),
-}) {
+function buildAnswer(results = []) {
+  if (!results.length) {
+    return 'No encontré información relevante en los documentos disponibles para este espacio financiero.';
+  }
+
+  const context = buildContext(results.slice(0, 5));
+  return `Encontré información relevante en tus documentos. Esta es la información recuperada para que Vera la utilice como contexto:\n\n${context}`;
+}
+
+export async function answerWithRag({ query, spaceId, limit = 5 }) {
   if (!query?.trim()) throw new Error('query is required');
   if (!spaceId) throw new Error('spaceId is required');
 
-  const results = await provider.retrieve({ query, limit });
-  const context = buildContext(results);
-  const answer = await provider.generateAnswer({ query, context, sources: results });
+  const results = await retrieveFragments({
+    Fragmento: db.Fragmento,
+    query,
+    limit,
+    spaceId,
+  });
 
   return {
-    answer,
-    sources: results.map(({ id, title, uri, content }) => ({ id, title, uri, content })),
+    answer: buildAnswer(results),
+    sources: results.map(({ id, title, uri, content, score }) => ({
+      id,
+      title,
+      uri,
+      content,
+      score: score == null ? null : Number(score),
+    })),
     retrievedCount: results.length,
-    provider: 'google-cloud-rag-engine',
+    provider: 'mysql-full-text-search',
   };
 }

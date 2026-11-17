@@ -1,14 +1,14 @@
-# Verdia — Base + Google Cloud RAG + mini chat
+# Verdia — Base + RAG documental + mini chat
 
-Esta versión mantiene la arquitectura aprobada de Verdia:
+Esta versión mantiene la arquitectura de Verdia:
 
 - React + Vite
 - Node.js + Express
 - Sequelize + MySQL
 - Google Drive como origen documental
-- Google Cloud RAG Engine para indexación/recuperación
-- Gemini 3.5 Flash para generación
-- Mini chat de Vera en una esquina para probar el RAG
+- MySQL para documentos, versiones y fragmentos
+- MySQL Full-Text Search para recuperación documental
+- Mini chat de Vera para probar la recuperación
 
 ## Arranque rápido
 
@@ -29,7 +29,7 @@ npm install
 npm run dev
 ```
 
-## Configurar RAG
+## RAG
 
 Lee primero:
 
@@ -40,15 +40,16 @@ backend/src/rag/README.md
 Flujo:
 
 ```text
-Google Cloud project
-→ APIs
-→ autenticación
-→ carpeta de Google Drive
-→ corpus RAG
-→ importación Drive
-→ backend
+Google Drive
+→ extracción
+→ documentos y versiones
+→ fragmentos
+→ MySQL Full-Text Search
+→ contexto recuperado
 → mini chat de Vera
 ```
+
+El módulo RAG ya no depende de servicios externos de generación administrados.
 
 ## Mini chat
 
@@ -70,4 +71,4 @@ Endpoint:
 POST /api/rag/query
 ```
 
-El backend nunca expone las credenciales de Google Cloud al frontend.
+El backend nunca expone las credenciales de Google Drive al frontend.

@@ -7,7 +7,7 @@ export function initDocumentoVersion(sequelize) {
     version: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
     texto_extraido: { type: DataTypes.TEXT('medium'), allowNull: true },
     hash_contenido: { type: DataTypes.STRING(255), allowNull: true },
-    ubicacion: { type: DataTypes.STRING(255), allowNull: true },
+    ubicacion: { type: DataTypes.STRING(1000), allowNull: true },
     tamano_bytes: { type: DataTypes.BIGINT.UNSIGNED, allowNull: true },
   });
 }
