@@ -1,138 +1,73 @@
-# Verdia — base del proyecto
+# Verdia — Base + Google Cloud RAG + mini chat
 
-Base inicial de Verdia para trabajar en VS Code, alineada con los mockups entregados y con la arquitectura acordada.
+Esta versión mantiene la arquitectura aprobada de Verdia:
 
-## Stack
+- React + Vite
+- Node.js + Express
+- Sequelize + MySQL
+- Google Drive como origen documental
+- Google Cloud RAG Engine para indexación/recuperación
+- Gemini 3.5 Flash para generación
+- Mini chat de Vera en una esquina para probar el RAG
 
-- Frontend: React + Vite
-- Backend: Node.js + Express
-- ORM: Sequelize
-- Base de datos: MySQL
-- RAG: Google Drive + Google Cloud
-- Sin PostgreSQL, pgvector ni Docker
+## Arranque rápido
 
-## Estructura
-
-```text
-verdia-base/
-├── frontend/
-│   └── src/
-│       ├── components/
-│       ├── pages/
-│       ├── routes/
-│       ├── services/
-│       ├── context/
-│       ├── hooks/
-│       ├── utils/
-│       ├── styles/
-│       ├── app/
-│       └── main/
-├── backend/
-│   ├── database/
-│   │   ├── schema.sql
-│   │   └── seed.sql
-│   └── src/
-│       ├── config/
-│       ├── controllers/
-│       ├── models/
-│       ├── routes/
-│       ├── services/
-│       ├── migrations/
-│       ├── middlewares/
-│       ├── rag/
-│       └── jobs/
-└── docs/
-```
-
-## Base de datos
-
-El flujo acordado es:
-
-```text
-schema.sql
-    ↓
-MySQL / estructura base
-    ↓
-Sequelize migrations
-    ↓
-cambios estructurales controlados
-    ↓
-seed.sql
-    ↓
-datos iniciales
-```
-
-Desde `backend/`:
+### Backend
 
 ```bash
+cd backend
 npm install
 cp .env.example .env
-npm run db:setup
 npm run dev
 ```
 
-Cambios posteriores:
+### Frontend
 
 ```bash
-npm run db:migrate
-npm run db:migrate:undo
-npm run db:status
+cd frontend
+npm install
+npm run dev
 ```
 
-No se utiliza `sequelize.sync()` para construir el esquema.
+## Configurar RAG
 
-## DER implementado
-
-La base implementa las entidades definidas para el DER definitivo actual:
-
-- usuarios
-- sesiones
-- espacios_financieros
-- cuentas
-- tarjetas
-- categorias
-- movimientos
-- presupuestos
-- deudas
-- metas
-- tipos_cambio
-- conversaciones
-- mensajes
-- propuestas_vera
-- fuentes_mensaje
-- documentos
-- documento_versiones
-- fragmentos
-- organizaciones
-- roles
-- membresias
-- politicas
-- politica_versiones
-- auditoria
-- eventos
-
-Se mantienen fuera del esquema actual las entidades/funciones que fueron descartadas o quedaron pendientes, incluyendo `preferencias_usuario`, `integraciones`, `sincronizaciones`, `consentimientos`, `reservas`, `embeddings`, `planes`, `suscripciones`, `consumo` y un módulo independiente de monedas.
-
-## RAG — Google Drive + Google Cloud
+Lee primero:
 
 ```text
-Google Drive
-    ↓
-Ingesta documental
-    ↓
-MySQL: metadata / documentos / versiones / fragmentos
-    ↓
-Google Cloud: procesamiento + indexación + retrieval + IA
-    ↓
-Contexto + fuentes
-    ↓
-Vera
-    ↓
-Respuesta
+backend/src/rag/README.md
 ```
 
-Los servicios concretos de Google Cloud y el mecanismo exacto de embeddings/vector search se configuran en la implementación de infraestructura; no se fijan dentro del DER.
+Flujo:
 
-## Referencias visuales
+```text
+Google Cloud project
+→ APIs
+→ autenticación
+→ carpeta de Google Drive
+→ corpus RAG
+→ importación Drive
+→ backend
+→ mini chat de Vera
+```
 
-Las imágenes entregadas para el diseño se conservan en `docs/`.
+## Mini chat
+
+El componente está en:
+
+```text
+frontend/src/components/RagChatWidget/
+```
+
+y se monta globalmente desde:
+
+```text
+frontend/src/app/App.jsx
+```
+
+Endpoint:
+
+```text
+POST /api/rag/query
+```
+
+El backend nunca expone las credenciales de Google Cloud al frontend.

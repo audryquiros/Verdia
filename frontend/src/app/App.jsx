@@ -14,10 +14,12 @@ import MailIntegration from '../pages/MailIntegration/MailIntegration.jsx';
 import Settings from '../pages/Settings/Settings.jsx';
 import Reports from '../pages/Reports/Reports.jsx';
 import AppShell from '../components/AppShell/AppShell.jsx';
+import RagChatWidget from '../components/RagChatWidget/RagChatWidget.jsx';
 
 export default function App() {
   return (
-    <Routes>
+    <>
+      <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Register />} />
@@ -35,6 +37,8 @@ export default function App() {
         <Route path="/reportes" element={<Reports />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+      </Routes>
+      <RagChatWidget />
+    </>
   );
 }

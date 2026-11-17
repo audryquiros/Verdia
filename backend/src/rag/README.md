@@ -1,94 +1,159 @@
-# RAG de Verdia — Google Drive + Google Cloud
+# Verdia RAG — Google Drive + Google Cloud RAG Engine
 
-El RAG de Verdia utiliza **Google Drive como origen documental** y **Google Cloud como infraestructura del procesamiento y recuperación RAG**.
+Esta implementación usa **Google Drive como origen documental** y **Google Cloud RAG Engine + Gemini** para indexación, recuperación y generación. MySQL continúa siendo la base de datos de Verdia; el índice/vectorización del RAG permanece en Google Cloud.
 
-El RAG es un módulo de Verdia y sirve principalmente como infraestructura para Vera y otros módulos que necesiten consultar documentos.
-
-## Arquitectura conceptual
+## Flujo
 
 ```text
 Google Drive
     ↓
-Ingesta / sincronización documental
-    ↓
-Google Cloud
-    ├── procesamiento / extracción
-    ├── generación de representaciones
-    ├── índice / recuperación
-    └── servicios de IA
-    ↓
-Contexto recuperado
-    ↓
-Vera / aplicación
-    ↓
-Respuesta + fuentes
+Google Cloud RAG Engine
+    ├── importación
+    ├── chunking
+    ├── embeddings / índice administrado
+    └── retrieval
+            ↓
+      contexto recuperado
+            ↓
+       Gemini 3.5 Flash
+            ↓
+           Vera
+            ↓
+      respuesta + fuentes
 ```
 
-## Principios
+## 1. Google Cloud
 
-- Google Drive es el origen de los documentos.
-- Google Cloud aloja la infraestructura RAG.
-- El RAG no es el producto completo; es un módulo de Verdia.
-- Los documentos y fragmentos deben respetar el aislamiento por usuario/espacio.
-- Los documentos externos se consideran contenido no confiable hasta ser procesados y validados.
-- La recuperación debe devolver fuentes para que Vera pueda indicar de dónde proviene la información.
-- Vera propone; el usuario confirma cualquier acción financiera.
-- No se introducen PostgreSQL, pgvector ni Docker.
+Entra a Google Cloud Console y crea o selecciona el proyecto de desarrollo de Verdia.
 
-## Persistencia
+Habilita como mínimo:
 
-La base MySQL de Verdia conserva la información de aplicación y metadata documental necesaria para relacionar documentos, versiones, fragmentos y espacios.
+- Vertex AI / Agent Platform API
+- Google Drive API
 
-La infraestructura de búsqueda/vectorización del RAG se mantiene en Google Cloud.
+La documentación actual de Google confirma que RAG Engine puede importar directamente una carpeta de Google Drive y que la importación es asíncrona. También recomienda que la identidad que ejecuta la importación tenga permisos sobre la carpeta. urlDocumentación oficial: RAG Engine e ingestión desde Google Drivehttps://docs.cloud.google.com/gemini-enterprise-agent-platform/build/rag-engine/use-data-ingestion
 
-Por esta razón, la arquitectura RAG no fuerza el almacenamiento vectorial dentro de MySQL.
+## 2. Autenticación local
 
-## Flujo documental
+Para probar desde tu PC puedes usar Application Default Credentials:
+
+```bash
+gcloud auth application-default login
+```
+
+También puedes usar una cuenta de servicio. En ese caso, comparte la carpeta de Google Drive con el correo de la cuenta de servicio con permiso de lector y configura `GOOGLE_APPLICATION_CREDENTIALS` apuntando a la credencial **fuera del repositorio**.
+
+No subas JSON de credenciales a Git.
+
+## 3. Configurar `backend/.env`
+
+Copia:
 
 ```text
-Google Drive
-    ↓
-detección de archivo nuevo/cambiado
-    ↓
-ingesta
-    ↓
-documento
-    ↓
-documento_version
-    ↓
-extracción de contenido
-    ↓
-chunking
-    ↓
-procesamiento RAG en Google Cloud
-    ↓
-indexación
+backend/.env.example
 ```
 
-## Flujo de consulta
+como:
 
 ```text
-Usuario
-   ↓
-Vera
-   ↓
-consulta RAG
-   ↓
-Google Cloud
-   ↓
-retrieval
-   ↓
-fragmentos relevantes
-   ↓
-contexto + fuentes
-   ↓
-LLM
-   ↓
-respuesta de Vera
+backend/.env
 ```
 
-## Estado
+Y completa:
 
-La base deja preparada la separación entre aplicación Verdia, metadata documental en MySQL, Google Drive como origen, Google Cloud como infraestructura RAG y Vera como consumidor del contexto.
+```env
+GOOGLE_CLOUD_PROJECT=tu-project-id
+GOOGLE_CLOUD_LOCATION=us-central1
+GOOGLE_CLOUD_RAG_CORPUS=
+GOOGLE_CLOUD_DRIVE_FOLDER_ID=tu-folder-id
+GOOGLE_CLOUD_GEMINI_MODEL=gemini-3.5-flash
+```
 
-Los servicios concretos de Google Cloud (embeddings, índice/vector search, modelo, almacenamiento auxiliar, etc.) deben quedar definidos en la configuración técnica de implementación; no se inventan dentro del DER.
+Google documenta actualmente `gemini-3.5-flash` como modelo GA y muestra ejemplos de generación con ese modelo. urlDocumentación oficial: Gemini 3.5 Flashhttps://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-flash
+
+## 4. Crear el corpus
+
+Desde:
+
+```bash
+cd backend
+npm install
+```
+
+ejecuta:
+
+```bash
+npm run rag:create-corpus
+```
+
+El script devolverá algo parecido a:
+
+```env
+GOOGLE_CLOUD_RAG_CORPUS=projects/123456/locations/us-central1/ragCorpora/789012
+```
+
+Copia esa línea en `backend/.env`.
+
+## 5. Importar Google Drive
+
+Pon en `.env` el ID de la carpeta de Drive:
+
+```env
+GOOGLE_CLOUD_DRIVE_FOLDER_ID=...
+```
+
+Después:
+
+```bash
+npm run rag:import-drive
+```
+
+La operación de importación es asíncrona. Espera a que Google Cloud termine de procesar los archivos antes de probar el chat. Google RAG Engine usa el contenido de Drive para crear los fragmentos y el índice de recuperación. urlDocumentación oficial: importar archivos de Google Drivehttps://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/models/rag-api
+
+## 6. Levantar Verdia
+
+Backend:
+
+```bash
+cd backend
+npm run dev
+```
+
+Frontend, en otra terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Abre:
+
+```text
+http://localhost:5173
+```
+
+En la esquina inferior derecha aparecerá **Probar Vera**.
+
+## 7. Probar el RAG
+
+Haz preguntas que estén respondidas explícitamente en los documentos de la carpeta.
+
+Ejemplo:
+
+```text
+¿Qué dice el documento sobre el objetivo de Verdia?
+```
+
+La respuesta debe mostrar:
+
+- respuesta de Vera;
+- documentos recuperados como fuentes;
+- error claro si Google Cloud no está configurado;
+- ausencia de invención cuando el contexto no contiene la respuesta.
+
+## Importante para Verdia
+
+Este chat es **solo un arnés de prueba del RAG**. No debe tener acceso a operaciones financieras ni confirmar movimientos. Vera mantiene la regla del proyecto: **propone; el usuario confirma**.
+
+Los documentos recuperados se tratan como datos, no como instrucciones. Esto evita que un texto dentro de un PDF o documento pueda convertirse en una orden para Vera.

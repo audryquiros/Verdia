@@ -12,14 +12,19 @@
     "db:migrate": "sequelize-cli db:migrate",
     "db:migrate:undo": "sequelize-cli db:migrate:undo",
     "db:migrate:undo:all": "sequelize-cli db:migrate:undo:all",
-    "db:status": "sequelize-cli db:migrate:status"
+    "db:status": "sequelize-cli db:migrate:status",
+    "rag:create-corpus": "node scripts/setup-google-rag.js",
+    "rag:import-drive": "node scripts/import-google-drive-rag.js",
+    "rag:test": "node scripts/test-google-rag.js"
   },
   "dependencies": {
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
     "mysql2": "latest",
-    "sequelize": "latest"
+    "sequelize": "latest",
+    "@google/genai": "latest",
+    "google-auth-library": "latest"
   },
   "devDependencies": {
     "nodemon": "latest",

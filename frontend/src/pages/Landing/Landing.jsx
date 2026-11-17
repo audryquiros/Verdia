@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, WalletCards, CircleDollarSign, CreditCard, ReceiptText, Mail } from 'lucide-react';
-import Logo from '../../components/Logo/Logo.jsx';
-import heroDevices from '../../assets/landing/verdia-hero-devices.svg';
-import leafCorner from '../../assets/landing/verdia-leaf-corner.svg';
-import leafTop from '../../assets/landing/verdia-leaf-top.svg';
 import './Landing.css';
+
+import logo from '../../assets/landing/verdia-logo.svg';
+import heroDevices from '../../assets/landing/hero/img-landing.svg';
+import vine from '../../assets/landing/botanical/enredadera-corner.svg';
 
 export default function Landing() {
   return (
     <div className="landing-page">
       <header className="landing-nav">
-        <Link to="/" aria-label="Verdia, inicio">
-          <Logo light />
+        <Link to="/" className="landing-brand" aria-label="Verdia, inicio">
+          <img src={logo} alt="Verdia" />
         </Link>
 
         <nav className="landing-links" aria-label="Navegación principal">
@@ -23,24 +23,29 @@ export default function Landing() {
 
         <div className="nav-actions">
           <Link className="btn btn-outline btn-sm" to="/login">Iniciar sesión</Link>
-          <Link className="btn btn-soft btn-sm" to="/registro">Registrarse</Link>
+          <Link className="btn btn-primary btn-sm" to="/registro">Registrarse</Link>
         </div>
       </header>
 
       <main id="inicio" className="landing-main">
-        <img className="landing-leaf landing-leaf-top" src={leafTop} alt="" aria-hidden="true" />
-        <img className="landing-leaf landing-leaf-corner" src={leafCorner} alt="" aria-hidden="true" />
-
+        <img
+          className="landing-corner-vine"
+          src={vine}
+          alt=""
+          aria-hidden="true"
+        />
         <section className="hero">
           <div className="hero-copy">
-            <h1>Tus finanzas, más simples<br />e inteligentes</h1>
+            <div className="hero-title-wrap">
+              <h1>Tus finanzas, más simples<br />e inteligentes</h1>
+            </div>
             <p>
               Organiza, controla y automatiza tu dinero en un solo lugar, con la ayuda de Vera,
               tu asistente financiera.
             </p>
             <div className="hero-actions">
-              <Link className="btn btn-soft hero-primary" to="/registro">
-                Comenzar gratis <ArrowRight size={16} strokeWidth={2.2} />
+              <Link className="btn btn-primary hero-primary" to="/registro">
+                Comenzar gratis <ArrowRight size={17} strokeWidth={2.2} />
               </Link>
               <a className="btn btn-outline hero-secondary" href="#funcionalidades">
                 Conocer más
@@ -49,7 +54,7 @@ export default function Landing() {
           </div>
 
           <div className="hero-visual" aria-label="Vista previa de Verdia en computadora y teléfono">
-            <img src={heroDevices} alt="Vista previa de Verdia en computadora y teléfono" />
+            <img className="hero-devices" src={heroDevices} alt="Computadora y teléfono con una vista previa de Verdia" />
           </div>
         </section>
 
@@ -63,6 +68,7 @@ export default function Landing() {
 
         <section id="seguridad" className="sr-only-section"><h2>Seguridad</h2></section>
         <section id="ayuda" className="sr-only-section"><h2>Ayuda</h2></section>
+
       </main>
     </div>
   );
@@ -71,7 +77,7 @@ export default function Landing() {
 function Feature({ icon: Icon, title }) {
   return (
     <div className="feature">
-      <div className="feature-icon"><Icon size={18} strokeWidth={1.8} /></div>
+      <div className="feature-icon"><Icon size={25} strokeWidth={1.8} /></div>
       <span>{title}</span>
     </div>
   );

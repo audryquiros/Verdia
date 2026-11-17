@@ -6,6 +6,5 @@ export async function queryRag({ spaceId, query, limit = 5 }) {
     query,
     limit,
   });
-
   return response.data;
 }
