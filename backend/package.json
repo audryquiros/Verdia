@@ -1,0 +1,28 @@
+{
+  "name": "verdia-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "db:schema": "node scripts/run-sql.js database/schema.sql",
+    "db:seed": "node scripts/run-sql.js database/seed.sql",
+    "db:setup": "npm run db:schema && npm run db:migrate && npm run db:seed",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:migrate:undo": "sequelize-cli db:migrate:undo",
+    "db:migrate:undo:all": "sequelize-cli db:migrate:undo:all",
+    "db:status": "sequelize-cli db:migrate:status"
+  },
+  "dependencies": {
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "mysql2": "latest",
+    "sequelize": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest",
+    "sequelize-cli": "latest"
+  }
+}

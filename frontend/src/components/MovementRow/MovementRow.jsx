@@ -1,0 +1,3 @@
+import {ArrowDownLeft,ArrowUpRight,ShoppingBag,ReceiptText,Wallet} from 'lucide-react';
+import './MovementRow.css';
+export default function MovementRow({name,category,date,amount,type='expense'}){const income=type==='income';const Icon=income?ArrowDownLeft:(category==='Servicios'?ReceiptText:ShoppingBag);return <div className="movement-row"><div className={`movement-icon ${income?'income':''}`}><Icon size={15}/></div><div className="movement-info"><strong>{name}</strong><span>{category} · {date}</span></div><strong className={`movement-amount ${income?'income':''}`}>{income?'+':''}{amount}</strong></div>}

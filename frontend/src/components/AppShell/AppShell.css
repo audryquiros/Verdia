@@ -1,0 +1,1 @@
+.shell{min-height:100vh;background:var(--cream)}.shell-main{margin-left:220px;min-height:100vh}.content{padding:28px;max-width:1540px;margin:0 auto}@media(max-width:850px){.shell-main{margin-left:0}.content{padding:18px 14px}}
