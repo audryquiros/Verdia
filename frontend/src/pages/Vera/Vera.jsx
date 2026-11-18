@@ -19,7 +19,7 @@ export default function Vera() {
     setError('');
     try {
       const result = await queryRag({
-        spaceId: import.meta.env.VITE_DEFAULT_SPACE_ID || '1',
+        spaceId: import.meta.env.VITE_DEFAULT_SPACE_ID || '900001',
         query,
         limit: 5,
       });

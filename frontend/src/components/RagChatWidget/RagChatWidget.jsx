@@ -24,7 +24,7 @@ export default function RagChatWidget() {
     setLoading(true);
 
     try {
-      const result = await queryRag({ spaceId: import.meta.env.VITE_DEFAULT_SPACE_ID || '1', query: trimmed, limit: 5 });
+      const result = await queryRag({ spaceId: import.meta.env.VITE_DEFAULT_SPACE_ID || '900001', query: trimmed, limit: 5 });
       setMessages((current) => [
         ...current,
         {

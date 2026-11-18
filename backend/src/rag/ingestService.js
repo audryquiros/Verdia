@@ -1,10 +1,10 @@
 import crypto from 'node:crypto';
 import { Op } from 'sequelize';
 import { GoogleDriveSource } from './googleDrive.js';
-import { chunkText } from './chunker.js';
+import { chunkText, normalizeText } from './chunker.js';
 
-function hashBuffer(buffer) {
-  return crypto.createHash('sha256').update(buffer).digest('hex');
+function hashText(text) {
+  return crypto.createHash('sha256').update(text, 'utf8').digest('hex');
 }
 
 function toDate(value) {
@@ -92,7 +92,8 @@ export async function syncGoogleDrive({
 
     try {
       const content = await source.getFileContent(file);
-      const hash = hashBuffer(content.buffer);
+      const normalizedText = normalizeText(content.text);
+      const hash = hashText(normalizedText);
       let document = await findDocument({
         Documento: db.Documento,
         spaceId,
@@ -126,7 +127,7 @@ export async function syncGoogleDrive({
         DocumentoVersion: db.DocumentoVersion,
         Fragmento: db.Fragmento,
         documentId: document.id,
-        text: content.text,
+        text: normalizedText,
         file,
         hash,
       });

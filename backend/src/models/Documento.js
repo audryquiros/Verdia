@@ -5,7 +5,7 @@ export function initDocumento(sequelize) {
     id: { type: DataTypes.BIGINT.UNSIGNED, autoIncrement: true, primaryKey: true },
     usuario_id: { type: DataTypes.BIGINT.UNSIGNED, allowNull: true },
     organizacion_id: { type: DataTypes.BIGINT.UNSIGNED, allowNull: true },
-    espacio_financiero_id: { type: DataTypes.BIGINT.UNSIGNED, allowNull: true },
+    espacio_financiero_id: { type: DataTypes.BIGINT, allowNull: true },
     fuente_externa_id: { type: DataTypes.STRING(255), allowNull: true },
     fuente_externa_modificada_at: { type: DataTypes.DATE, allowNull: true },
     tipo: { type: DataTypes.STRING(255), allowNull: false },
