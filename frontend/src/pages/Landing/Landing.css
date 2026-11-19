@@ -1,8 +1,9 @@
+html { scroll-behavior: smooth; }
+
 .landing-page {
   width: 100%;
-  height: 100dvh;
-  min-height: 680px;
-  overflow: hidden;
+  min-height: 100dvh;
+  overflow-x: hidden;
   background: var(--cream);
   color: var(--graphite);
 }
@@ -67,25 +68,37 @@
 }
 
 
-.landing-corner-vine {
+.landing-vine-layer {
   position: absolute;
-  z-index: 2;
-  left: -30px;
-  bottom: -70px;
-  width: 260px;
+  z-index: 1;
+  top: 82px;
+  left: 0;
+  width: 100%;
+  height: min(82dvh, 820px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.landing-horizontal-vine {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: -650px;
+  width: min(1700px, 108vw);
   height: auto;
-  opacity: .58;
-  transform: rotate(-12deg);
-  transform-origin: bottom left;
+  opacity: .32;
+  transform: translateX(-50%) scaleX(-1);
+  transform-origin: center;
   pointer-events: none;
   user-select: none;
 }
 
 .landing-main {
   position: relative;
+  z-index: 2;
   width: 100%;
-  height: calc(100dvh - 82px);
-  overflow: hidden;
+  height: min(82dvh, 820px);
+  overflow: visible;
   background: var(--cream);
 }
 
@@ -239,14 +252,24 @@
 }
 
 @media (max-width: 900px) {
-  .landing-page { height: auto; min-height: 100dvh; overflow: auto; }
+  .landing-page { min-height: 100dvh; overflow-x: hidden; }
   .landing-nav { height: 68px; padding: 0 24px; }
   .landing-brand { width: 118px; }
   .landing-links { display: none; }
   .nav-actions { margin-left: auto; }
   .nav-actions .btn { height: 40px; min-width: 104px; border-radius: 999px; }
   .landing-main { height: auto; min-height: calc(100dvh - 68px); overflow: visible; }
-  .landing-corner-vine { width: 210px; left: -34px; bottom: -45px; opacity: .5; }
+  .landing-vine-layer {
+    top: 68px;
+    height: 720px;
+  }
+
+  .landing-horizontal-vine {
+    width: 250px;
+    bottom: -120px;
+    opacity: .28;
+    transform: translateX(-50%) rotate(90deg) scaleX(1.45);
+  }
   .hero {
     height: auto;
     min-height: 0;
@@ -278,7 +301,6 @@
   .nav-actions { gap: 7px; }
   .nav-actions .btn { min-width: 0; height: 36px; padding: 0 12px; font-size: 10px; border-radius: 999px; }
   .hero { padding: 38px 20px 0; }
-  .landing-corner-vine { width: 155px; left: -30px; bottom: -30px; opacity: .46; }
   .hero h1 { font-size: clamp(38px, 11vw, 50px); }
   .hero-title-vine { left: 180px; top: -70px; width: 150px; height: 240px; opacity: .18; }
   .hero p { margin-top: 18px; margin-bottom: 21px; font-size: 13px; }
@@ -289,3 +311,6 @@
   .feature:last-child { grid-column: auto; }
   .feature { justify-content: flex-start; padding-left: 8px; }
 }
+
+.features { scroll-margin-top: 24px; }
+.feature-explorer { scroll-margin-top: 24px; }

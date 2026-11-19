@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, WalletCards, CircleDollarSign, CreditCard, ReceiptText, Mail } from 'lucide-react';
 import './Landing.css';
+import FeatureExplorer from '../../components/FeatureExplorer/FeatureExplorer';
 
 import logo from '../../assets/landing/verdia-logo.svg';
 import heroDevices from '../../assets/landing/hero/img-landing.svg';
-import vine from '../../assets/landing/botanical/enredadera-corner.svg';
+import vine from '../../assets/landing/botanical/enredadera-horizontal.png';
 
 export default function Landing() {
   return (
@@ -16,7 +17,7 @@ export default function Landing() {
 
         <nav className="landing-links" aria-label="Navegación principal">
           <a href="#inicio">Inicio</a>
-          <a href="#funcionalidades">Funcionalidades</a>
+          <a href="#funcionalidades-interactivas">Funcionalidades</a>
           <a href="#seguridad">Seguridad</a>
           <a href="#ayuda">Ayuda</a>
         </nav>
@@ -27,13 +28,15 @@ export default function Landing() {
         </div>
       </header>
 
-      <main id="inicio" className="landing-main">
+      <div className="landing-vine-layer" aria-hidden="true">
         <img
-          className="landing-corner-vine"
+          className="landing-horizontal-vine"
           src={vine}
           alt=""
-          aria-hidden="true"
         />
+      </div>
+
+      <main id="inicio" className="landing-main">
         <section className="hero">
           <div className="hero-copy">
             <div className="hero-title-wrap">
@@ -47,7 +50,7 @@ export default function Landing() {
               <Link className="btn btn-primary hero-primary" to="/registro">
                 Comenzar gratis <ArrowRight size={17} strokeWidth={2.2} />
               </Link>
-              <a className="btn btn-outline hero-secondary" href="#funcionalidades">
+              <a className="btn btn-outline hero-secondary" href="#funcionalidades-interactivas">
                 Conocer más
               </a>
             </div>
@@ -58,7 +61,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section id="funcionalidades" className="features" aria-label="Funcionalidades de Verdia">
+        <section className="features" aria-label="Resumen de funcionalidades de Verdia">
           <Feature icon={WalletCards} title="Control de gastos" />
           <Feature icon={CircleDollarSign} title="Metas de ahorro" />
           <Feature icon={CreditCard} title="Tarjetas" />
@@ -70,6 +73,8 @@ export default function Landing() {
         <section id="ayuda" className="sr-only-section"><h2>Ayuda</h2></section>
 
       </main>
+
+      <FeatureExplorer />
     </div>
   );
 }
