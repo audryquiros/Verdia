@@ -89,6 +89,10 @@ comprobar que no aparezca scroll inesperado; - comprobar que no se
 rompan rutas ni funcionalidad.
 
 ## Dashboard de Verdia --- reglas visuales actuales
+### Fondo del contenedor dashboard
+
+El contenedor `.dashboard` no debe tener sombreado propio (`box-shadow`). El sombreado visual debe pertenecer únicamente a los componentes que lo necesiten, como tarjetas, y no al contenedor general del dashboard.
+
 
 ### Parte superior
 
