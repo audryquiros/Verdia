@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, WalletCards, CircleDollarSign, CreditCard, ReceiptText, Mail } from 'lucide-react';
 import './Landing.css';
 import FeatureExplorer from '../../components/FeatureExplorer/FeatureExplorer';
+import SecuritySection from '../../components/SecuritySection/SecuritySection';
+import HelpSection from '../../components/HelpSection/HelpSection';
 
 import logo from '../../assets/landing/verdia-logo.svg';
 import heroDevices from '../../assets/landing/hero/img-landing.svg';
@@ -69,12 +71,11 @@ export default function Landing() {
           <Feature icon={Mail} title="Automatización con tu correo" />
         </section>
 
-        <section id="seguridad" className="sr-only-section"><h2>Seguridad</h2></section>
-        <section id="ayuda" className="sr-only-section"><h2>Ayuda</h2></section>
-
       </main>
 
       <FeatureExplorer />
+      <SecuritySection />
+      <HelpSection />
     </div>
   );
 }
