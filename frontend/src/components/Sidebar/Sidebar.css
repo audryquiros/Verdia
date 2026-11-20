@@ -1,13 +1,99 @@
-.sidebar{width:206px;background:var(--forest-dark);color:#DCEBE1;min-height:100vh;position:fixed;left:0;top:0;bottom:0;padding:18px 12px 14px;display:flex;flex-direction:column;z-index:30;overflow:hidden}
-.sidebar:after{content:"";position:absolute;width:155px;height:155px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(169,210,154,.5),rgba(169,210,154,0) 68%);right:-85px;bottom:-55px;pointer-events:none}
-.sidebar-head{display:flex;align-items:center;justify-content:space-between;padding:0 8px 22px;position:relative;z-index:1}
+
+.sidebar{
+  width:240px;
+  background:var(--forest-dark);
+  color:#DCEBE1;
+  min-height:100vh;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  padding:24px 14px 16px;
+  display:flex;
+  flex-direction:column;
+  z-index:30;
+  overflow:hidden;
+}
+.sidebar-vine{
+  position:absolute;
+  left:-38px;
+  bottom:-100px;
+  width:225px;
+  height:475px;
+  background-image:url('../../assets/brand/botanical/enredadera.svg');
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:contain;
+  opacity:.20;
+  transform:rotate(-3deg);
+  pointer-events:none;
+  z-index:0;
+}
+.sidebar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 9px;
+  position:relative;
+  z-index:2;
+}
+.sidebar-logo{display:block;width:128px;height:auto;object-fit:contain}
 .mobile-close{display:none;background:transparent;border:0;color:#fff}
-.sidebar nav{display:flex;flex-direction:column;gap:3px;position:relative;z-index:1}
-.side-link{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;font-size:10px;font-weight:600;color:#C5D8CC;transition:.15s ease}
-.side-link.active{background:#A9D29A;color:#173C2B}
-.side-link:hover{background:rgba(169,210,154,.12);color:#fff}
-.sidebar-foot{margin-top:auto;position:relative;z-index:1}
-.vera-mini{display:flex;align-items:center;gap:9px;padding:13px 9px;border-top:1px solid rgba(255,255,255,.1)}
-.vera-mini small{display:block;color:#93A99D;font-size:8px;margin-top:2px}
-.vera-mini strong{font-size:10px}
-@media(max-width:850px){.sidebar{transform:translateX(-100%);transition:.2s ease;width:245px}.sidebar.open{transform:translateX(0)}.mobile-close{display:block}}
+.sidebar-nav{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  margin-top:48px;
+  position:relative;
+  z-index:2;
+}
+.side-link{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:13px 13px;
+  min-height:44px;
+  border-radius:11px;
+  font-size:14px;
+  line-height:1.2;
+  font-weight:650;
+  color:#C5D8CC;
+  transition:background .16s ease,color .16s ease,transform .16s ease;
+}
+.side-link.active{background:var(--soft-green);color:#173C2B}
+.side-link:hover{background:rgba(169,210,154,.13);color:#fff;transform:translateX(1px)}
+.sidebar-foot{
+  margin-top:auto;
+  position:relative;
+  z-index:2;
+}
+.vera-mini{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:16px 11px;
+  border-top:1px solid rgba(255,255,255,.12);
+  color:#E7F1EA;
+}
+.vera-mini small{display:block;color:#9CB2A5;font-size:11px;margin-top:3px}
+.vera-mini strong{font-size:13px}
+.sidebar-logout{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:13px 13px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:#C5D8CC;
+  font-size:14px;
+  font-weight:650;
+  text-align:left;
+}
+.sidebar-logout:hover{background:rgba(255,255,255,.08);color:#fff}
+@media(max-width:850px){
+  .sidebar{transform:translateX(-100%);transition:.2s ease;width:280px}
+  .sidebar.open{transform:translateX(0)}
+  .mobile-close{display:block}
+}

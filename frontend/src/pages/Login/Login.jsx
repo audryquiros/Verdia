@@ -1,17 +1,31 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, LockKeyhole, Mail } from 'lucide-react';
 import { useState } from 'react';
+import { login } from '../../services/auth.js';
 import Logo from '../../components/Logo/Logo.jsx';
 import vine from '../../assets/landing/botanical/enredadera-corner.svg';
 import './Auth.css';
 
 export default function Login() {
   const [show, setShow] = useState(false);
+  const [email, setEmail] = useState('demo@verdia.test');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    navigate('/inicio');
+    setError('');
+    setLoading(true);
+    try {
+      await login(email, password);
+      navigate('/inicio');
+    } catch (submitError) {
+      setError(submitError.message || 'No se pudo iniciar sesión.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -31,7 +45,8 @@ export default function Login() {
           <input
             placeholder="Correo electrónico"
             type="email"
-            defaultValue="audry@correo.com"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             autoComplete="email"
           />
         </label>
@@ -41,7 +56,8 @@ export default function Login() {
           <input
             placeholder="Contraseña"
             type={show ? 'text' : 'password'}
-            defaultValue="12345678"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
             autoComplete="current-password"
           />
           <button
@@ -61,8 +77,10 @@ export default function Login() {
           <a href="#">¿Olvidaste tu contraseña?</a>
         </div>
 
-        <button className="btn btn-primary auth-submit" type="submit">
-          Ingresar
+        {error && <p className="auth-error" role="alert">{error}</p>}
+
+        <button className="btn btn-primary auth-submit" type="submit" disabled={loading}>
+          {loading ? 'Ingresando…' : 'Ingresar'}
         </button>
 
         <div className="or">
@@ -93,8 +111,8 @@ function AuthLayout({ children }) {
         <img className="auth-vine" src={vine} alt="" aria-hidden="true" />
         <div className="leaf-orb" />
         <div className="leaf-copy">
-          <h2>Tu dinero,<br />más claro.</h2>
-          <p>Una forma tranquila de entender, organizar y decidir.</p>
+          <h2>Tu dinero,<br />tus decisiones,<br /><span className="accent">más tranquilidad.</span></h2>
+          <p>Organiza tus finanzas, entiende tu situación y avanza hacia tus metas, en un solo lugar.</p>
         </div>
       </div>
 

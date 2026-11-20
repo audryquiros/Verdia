@@ -65,8 +65,8 @@ DELETE FROM `usuarios` WHERE `id` BETWEEN 900001 AND 900010;
 -- Users
 INSERT INTO `usuarios` (`id`,`email`,`password_hash`,`nombre`,`apellido`,`foto_url`,`estado`,`email_verificado_at`)
 VALUES
-(900001,'demo@verdia.test',NULL,'Ana','Solís',NULL,'ACTIVO','2026-11-01 09:00:00'),
-(900002,'demo2@verdia.test',NULL,'Luis','Mora',NULL,'ACTIVO','2026-11-01 09:05:00');
+(900001,'demo@verdia.test','scrypt$16384$8$1$0GJVTeMTrxAnIfjuNtRjpQ$Bqj1vw3jcYb00AdUs4yyWgs7VocGdwWoJoG0tci1hest-yZli6QYopdnRed73HOG_Ie-vD9c8BsRxQWQXtTpdQ','Ana','Solís',NULL,'ACTIVO','2026-11-01 09:00:00'),
+(900002,'demo2@verdia.test','scrypt$16384$8$1$0GJVTeMTrxAnIfjuNtRjpQ$Bqj1vw3jcYb00AdUs4yyWgs7VocGdwWoJoG0tci1hest-yZli6QYopdnRed73HOG_Ie-vD9c8BsRxQWQXtTpdQ','Luis','Mora',NULL,'ACTIVO','2026-11-01 09:05:00');
 
 -- Sessions: token_hash is a development placeholder, not a real credential.
 INSERT INTO `sesiones` (`id`,`usuario_id`,`token_hash`,`ip`,`user_agent`,`expira_at`,`revocada_at`)

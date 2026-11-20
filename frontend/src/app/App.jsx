@@ -14,7 +14,11 @@ import MailIntegration from '../pages/MailIntegration/MailIntegration.jsx';
 import Settings from '../pages/Settings/Settings.jsx';
 import Reports from '../pages/Reports/Reports.jsx';
 import AppShell from '../components/AppShell/AppShell.jsx';
-import RagChatWidget from '../components/RagChatWidget/RagChatWidget.jsx';
+import { isAuthenticated } from '../services/auth.js';
+
+function ProtectedRoute({ children }) {
+  return isAuthenticated() ? children : <Navigate to="/login" replace />;
+}
 
 export default function App() {
   return (
@@ -23,7 +27,7 @@ export default function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Register />} />
-      <Route element={<AppShell />}>
+      <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
         <Route path="/inicio" element={<Dashboard />} />
         <Route path="/movimientos" element={<Movements />} />
         <Route path="/presupuestos" element={<Budgets />} />
@@ -38,7 +42,6 @@ export default function App() {
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <RagChatWidget />
     </>
   );
 }

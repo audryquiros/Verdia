@@ -9,5 +9,9 @@ export function initSesion(sequelize) {
     user_agent: { type: DataTypes.STRING(255), allowNull: true },
     expira_at: { type: DataTypes.DATE, allowNull: false },
     revocada_at: { type: DataTypes.DATE, allowNull: true },
+  }, {
+    // La tabla sesiones definida en database/schema.sql no tiene updated_at.
+    // Sequelize debe seguir gestionando created_at, pero no intentar escribir updated_at.
+    updatedAt: false,
   });
 }

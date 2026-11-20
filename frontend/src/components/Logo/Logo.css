@@ -1,3 +1,15 @@
-.brand{display:flex;align-items:center;gap:6px;font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.045em;color:var(--graphite)}
-.brand-mark{color:#69B67B;display:flex;align-items:center}
-.brand-light{color:#fff}.brand-light .brand-mark{color:#A9D29A}
+.brand-logo {
+  display: block;
+  width: 116px;
+  height: auto;
+}
+
+.brand-logo-light {
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 900px) {
+  .brand-logo {
+    width: 102px;
+  }
+}

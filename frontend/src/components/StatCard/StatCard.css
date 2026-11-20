@@ -1,4 +1,1 @@
-.stat-card{padding:13px 14px;display:flex;gap:10px;align-items:center;min-height:76px;position:relative;overflow:hidden}
-.stat-icon{width:32px;height:32px;border-radius:9px;background:#E7F3E4;color:var(--forest);display:grid;place-items:center;flex:0 0 auto}
-.stat-copy{display:flex;flex-direction:column;min-width:0}.stat-copy span{font-size:8px;color:var(--muted)}
-.stat-copy strong{font-family:'Manrope';font-size:18px;line-height:1.25;letter-spacing:-.03em}.stat-copy small{font-size:8px;font-weight:700;margin-top:1px}.up{color:#258247}.down{color:#C34C45}
+.stat-card{padding:15px 16px;display:flex;gap:11px;align-items:center;min-height:84px;position:relative;overflow:hidden}.stat-icon{width:36px;height:36px;border-radius:10px;background:#E7F3E4;color:var(--forest);display:grid;place-items:center;flex:0 0 auto}.stat-copy{display:flex;flex-direction:column;min-width:0}.stat-copy span{font-size:10px;color:var(--muted)}.stat-copy strong{font-family:'Manrope';font-size:21px;line-height:1.25;letter-spacing:-.03em}.stat-copy small{font-size:9px;font-weight:700;margin-top:2px}.up{color:#258247}.down{color:#C34C45}

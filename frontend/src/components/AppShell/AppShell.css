@@ -1,4 +1,4 @@
 .shell{min-height:100vh;background:var(--cream)}
-.shell-main{margin-left:206px;min-height:100vh}
-.content{padding:20px 24px 42px;max-width:1540px;margin:0 auto}
-@media(max-width:850px){.shell-main{margin-left:0}.content{padding:14px 14px 82px}}
+.shell-main{margin-left:240px;min-height:100vh}
+.content{padding:26px 30px 46px;max-width:1540px;margin:0 auto}
+@media(max-width:850px){.shell-main{margin-left:0}.content{padding:18px 16px 82px}}

@@ -1,3 +1,12 @@
-import { Leaf } from 'lucide-react';
 import './Logo.css';
-export default function Logo({light=false}){return <div className={`brand ${light?'brand-light':''}`}><span className="brand-mark"><Leaf size={19}/></span><span>Verdia</span></div>}
+import logo from '../../assets/brand/logos/logo.svg';
+
+export default function Logo({ light = false }) {
+  return (
+    <img
+      className={`brand-logo ${light ? 'brand-logo-light' : ''}`}
+      src={logo}
+      alt="Verdia"
+    />
+  );
+}

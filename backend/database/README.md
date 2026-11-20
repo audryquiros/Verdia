@@ -28,5 +28,9 @@ El usuario principal de prueba es:
 - Usuario ID: `900001`
 - Espacio financiero ID: `900001`
 
-El seed no crea una contraseña utilizable porque el flujo de autenticación todavía no está definido
-como parte del seed. El `password_hash` del usuario queda `NULL` intencionalmente.
+Los usuarios demo tienen una contraseña de desarrollo utilizable:
+
+- `demo@verdia.test` / `Demo1234!`
+- `demo2@verdia.test` / `Demo1234!`
+
+La contraseña nunca se guarda en texto plano; el seed almacena únicamente un hash scrypt.
