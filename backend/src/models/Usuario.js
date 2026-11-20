@@ -9,6 +9,7 @@ export function initUsuario(sequelize) {
     apellido: { type: DataTypes.STRING(255), allowNull: true },
     foto_url: { type: DataTypes.STRING(255), allowNull: true },
     estado: { type: DataTypes.ENUM('ACTIVO','BLOQUEADO','ELIMINADO'), allowNull: false },
+    rol: { type: DataTypes.ENUM('USUARIO','ADMIN'), allowNull: false, defaultValue: 'USUARIO' },
     email_verificado_at: { type: DataTypes.DATE, allowNull: true },
   });
 }

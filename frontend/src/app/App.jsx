@@ -13,11 +13,33 @@ import Vera from '../pages/Vera/Vera.jsx';
 import MailIntegration from '../pages/MailIntegration/MailIntegration.jsx';
 import Settings from '../pages/Settings/Settings.jsx';
 import Reports from '../pages/Reports/Reports.jsx';
+import Support from '../pages/Support/Support.jsx';
+import AdminDashboard from '../pages/AdminDashboard/AdminDashboard.jsx';
+import AdminUsers from '../pages/AdminUsers/AdminUsers.jsx';
+import AdminRag from '../pages/AdminRag/AdminRag.jsx';
+import AdminSupport from '../pages/AdminSupport/AdminSupport.jsx';
+import AdminMessaging from '../pages/AdminMessaging/AdminMessaging.jsx';
+import AdminAudit from '../pages/AdminAudit/AdminAudit.jsx';
+import AdminAnalytics from '../pages/AdminAnalytics/AdminAnalytics.jsx';
+import AdminProduct from '../pages/AdminProduct/AdminProduct.jsx';
+import AdminSecurity from '../pages/AdminSecurity/AdminSecurity.jsx';
+import AdminSettings from '../pages/AdminSettings/AdminSettings.jsx';
+import AdminAccount from '../pages/AdminAccount/AdminAccount.jsx';
+import { getSession } from '../services/auth.js';
 import AppShell from '../components/AppShell/AppShell.jsx';
+import AdminShell from '../components/AdminShell/AdminShell.jsx';
 import { isAuthenticated } from '../services/auth.js';
 
 function ProtectedRoute({ children }) {
   return isAuthenticated() ? children : <Navigate to="/login" replace />;
+}
+
+function AdminRoute({ children }) {
+  return getSession()?.user?.rol === 'ADMIN' ? children : <Navigate to="/inicio" replace />;
+}
+
+function UserRoute({ children }) {
+  return getSession()?.user?.rol === 'ADMIN' ? <Navigate to="/admin" replace /> : children;
 }
 
 export default function App() {
@@ -27,7 +49,7 @@ export default function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Register />} />
-      <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
+      <Route element={<ProtectedRoute><UserRoute><AppShell /></UserRoute></ProtectedRoute>}>
         <Route path="/inicio" element={<Dashboard />} />
         <Route path="/movimientos" element={<Movements />} />
         <Route path="/presupuestos" element={<Budgets />} />
@@ -39,6 +61,20 @@ export default function App() {
         <Route path="/correo" element={<MailIntegration />} />
         <Route path="/ajustes" element={<Settings />} />
         <Route path="/reportes" element={<Reports />} />
+        <Route path="/soporte" element={<Support />} />
+      </Route>
+      <Route element={<ProtectedRoute><AdminRoute><AdminShell /></AdminRoute></ProtectedRoute>}>
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/usuarios" element={<AdminUsers />} />
+        <Route path="/admin/analitica" element={<AdminAnalytics />} />
+        <Route path="/admin/producto" element={<AdminProduct />} />
+        <Route path="/admin/vera" element={<AdminRag />} />
+        <Route path="/admin/mensajeria" element={<AdminMessaging />} />
+        <Route path="/admin/soporte" element={<AdminSupport />} />
+        <Route path="/admin/seguridad" element={<AdminSecurity />} />
+        <Route path="/admin/auditoria" element={<AdminAudit />} />
+        <Route path="/admin/configuracion" element={<AdminSettings />} />
+        <Route path="/admin/cuenta" element={<AdminAccount />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

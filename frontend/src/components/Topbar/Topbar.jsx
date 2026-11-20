@@ -16,6 +16,12 @@ const sectionInfo = {
   '/vera': ['Vera', 'Tu asistente financiera.'],
   '/ajustes': ['Ajustes', 'Personaliza tu experiencia en Verdia.'],
   '/correo': ['Integración con correo', 'Revisa las conexiones de tu correo.'],
+  '/soporte': ['Soporte', 'Ayuda cuando Vera no tenga suficiente información.'],
+  '/admin': ['Administración', 'Operación de Verdia y Vera.'],
+  '/admin/usuarios': ['Usuarios', 'Vista operativa mínima.'],
+  '/admin/vera': ['Vera / RAG', 'Gestiona el conocimiento de Vera.'],
+  '/admin/soporte': ['Soporte admin', 'Atiende solicitudes de usuarios.'],
+  '/admin/auditoria': ['Auditoría', 'Revisa acciones administrativas sensibles.'],
 };
 
 export default function Topbar({ onMenu }) {

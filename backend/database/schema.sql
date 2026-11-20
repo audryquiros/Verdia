@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `apellido` VARCHAR(120),
   `foto_url` VARCHAR(500),
   `estado` ENUM('ACTIVO','BLOQUEADO','ELIMINADO') NOT NULL DEFAULT 'ACTIVO',
+  `rol` ENUM('USUARIO','ADMIN') NOT NULL DEFAULT 'USUARIO',
   `email_verificado_at` DATETIME,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -171,6 +172,9 @@ CREATE TABLE IF NOT EXISTS `documentos` (
   `mime_type` VARCHAR(120),
   `fecha_documento` DATE,
   `estado` VARCHAR(30) NOT NULL DEFAULT 'ACTIVO',
+  `descripcion` VARCHAR(500),
+  `subido_por_usuario_id` BIGINT,
+  `publicado_at` DATETIME,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY `uq_documentos_espacio_fuente_externa` (`espacio_financiero_id`,`fuente_externa_id`),
@@ -339,6 +343,38 @@ CREATE TABLE IF NOT EXISTS `politica_versiones` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT `fk_polver_pol` FOREIGN KEY (`politica_id`) REFERENCES `politicas`(`id`),
   CONSTRAINT `fk_polver_docver` FOREIGN KEY (`documento_version_id`) REFERENCES `documento_versiones`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS `casos_soporte` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `usuario_id` BIGINT NOT NULL,
+  `asignado_a_usuario_id` BIGINT,
+  `asunto` VARCHAR(180) NOT NULL,
+  `estado` ENUM('NUEVO','EN_PROGRESO','ESPERANDO_USUARIO','RESUELTO','CERRADO') NOT NULL DEFAULT 'NUEVO',
+  `prioridad` ENUM('BAJA','NORMAL','ALTA','URGENTE') NOT NULL DEFAULT 'NORMAL',
+  `origen` ENUM('USUARIO','VERA','SISTEMA') NOT NULL DEFAULT 'USUARIO',
+  `mensaje_inicial` TEXT NOT NULL,
+  `resuelto_at` DATETIME,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_soporte_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_soporte_asignado` FOREIGN KEY (`asignado_a_usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE SET NULL,
+  KEY `idx_soporte_usuario_estado` (`usuario_id`,`estado`),
+  KEY `idx_soporte_admin_queue` (`estado`,`prioridad`,`updated_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `mensajes_soporte` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `caso_soporte_id` BIGINT NOT NULL,
+  `autor_tipo` ENUM('USUARIO','ADMIN','SISTEMA') NOT NULL,
+  `autor_usuario_id` BIGINT,
+  `contenido` TEXT NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_soporte_mensaje_caso` FOREIGN KEY (`caso_soporte_id`) REFERENCES `casos_soporte`(`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_soporte_mensaje_autor` FOREIGN KEY (`autor_usuario_id`) REFERENCES `usuarios`(`id`) ON DELETE SET NULL,
+  KEY `idx_soporte_mensajes` (`caso_soporte_id`,`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `auditoria` (

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Bot, Check, PenLine, X, Send, FileText } from 'lucide-react';
 import SectionCard from '../../components/SectionCard/SectionCard.jsx';
 import { queryRag } from '../../services/rag.js';
@@ -25,6 +26,7 @@ export default function Vera() {
       });
       setAnswer(result.answer);
       setSources(result.sources || []);
+      if (result.needsSupport) setError('No encontré suficiente información en la base de conocimiento.');
     } catch (err) {
       setError(err.message || 'No fue posible consultar el RAG.');
     } finally {
@@ -47,6 +49,7 @@ export default function Vera() {
               <strong>{answer || 'Haz una pregunta para probar el RAG.'}</strong>
               {loading && <p className="vera-status">Consultando documentos…</p>}
               {error && <p className="vera-error">{error}</p>}
+              {!loading && sources.length === 0 && answer && <Link className="btn btn-outline vera-support-link" to="/soporte">Contactar soporte</Link>}
               {sources.length > 0 && (
                 <div className="vera-sources">
                   <span>Fuentes recuperadas</span>

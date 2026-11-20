@@ -39,7 +39,7 @@
 }
 .sidebar-logo{display:block;width:155px;height:auto;object-fit:contain}
 .mobile-close{display:none;background:transparent;border:0;color:#fff}
-.sidebar-nav{
+.sidebar-section-label{padding:12px 13px 2px;color:#8FA99A;text-transform:uppercase;letter-spacing:.08em;font-size:9px;font-weight:800}.sidebar-nav{
   display:flex;
   flex-direction:column;
   gap:7px;

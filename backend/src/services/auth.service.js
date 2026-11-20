@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import { hashSessionToken, verifyPassword, createSessionToken } from '../utils/password.js';
 const SESSION_DAYS = 30;
-function publicUser(user) { return { id: user.id, email: user.email, nombre: user.nombre, apellido: user.apellido, foto_url: user.foto_url, email_verificado_at: user.email_verificado_at }; }
+function publicUser(user) { return { id: user.id, email: user.email, nombre: user.nombre, apellido: user.apellido, foto_url: user.foto_url, rol: user.rol, email_verificado_at: user.email_verificado_at }; }
 export async function login({ email, password, ip, userAgent }, db) {
   const normalizedEmail = String(email || '').trim().toLowerCase();
   if (!normalizedEmail || !password) { const error = new Error('Correo y contraseña son obligatorios.'); error.status = 400; throw error; }

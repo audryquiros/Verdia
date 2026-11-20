@@ -1,4 +1,4 @@
-export async function retrieveFragments({ Fragmento, query, limit = 5, spaceId }) {
+export async function retrieveFragments({ Fragmento, query, limit = 5, spaceId = null, globalOnly = false }) {
   if (!Fragmento) throw new Error('Fragmento model is required');
 
   const safeLimit = Math.min(Math.max(Number(limit) || 5, 1), 20);
@@ -26,8 +26,7 @@ export async function retrieveFragments({ Fragmento, query, limit = 5, spaceId }
       FROM documento_versiones
       GROUP BY documento_id
     ) latest ON latest.documento_id = dv.documento_id AND latest.version = dv.version
-    WHERE d.espacio_financiero_id = :spaceId
-      AND d.estado = 'ACTIVO'
+    WHERE ${globalOnly ? "d.espacio_financiero_id IS NULL AND d.estado = 'PUBLICADO'" : "((d.espacio_financiero_id = :spaceId AND d.estado = 'ACTIVO') OR (d.espacio_financiero_id IS NULL AND d.estado = 'PUBLICADO'))"}
       AND MATCH(f.contenido) AGAINST (:query IN NATURAL LANGUAGE MODE)
     ORDER BY score DESC, f.id DESC
     LIMIT :limit
@@ -67,8 +66,7 @@ export async function retrieveFragments({ Fragmento, query, limit = 5, spaceId }
       FROM documento_versiones
       GROUP BY documento_id
     ) latest ON latest.documento_id = dv.documento_id AND latest.version = dv.version
-    WHERE d.espacio_financiero_id = :spaceId
-      AND d.estado = 'ACTIVO'
+    WHERE ${globalOnly ? "d.espacio_financiero_id IS NULL AND d.estado = 'PUBLICADO'" : "((d.espacio_financiero_id = :spaceId AND d.estado = 'ACTIVO') OR (d.espacio_financiero_id IS NULL AND d.estado = 'PUBLICADO'))"}
       AND (${likeConditions})
     ORDER BY f.id DESC
     LIMIT :limit

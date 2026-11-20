@@ -1,0 +1,21 @@
+import { Router } from 'express';
+import { requireAuth } from '../middlewares/auth.middleware.js';
+import { requireAdmin } from '../middlewares/admin.middleware.js';
+import { dashboard, ragOverview, ragQuery, users, knowledge, uploadKnowledge, publishKnowledge, unpublishKnowledge, supportCases, supportCase, supportReply, supportUpdate }  from '../controllers/admin.controller.js';
+
+const router = Router();
+router.use(requireAuth, requireAdmin);
+router.get('/dashboard', dashboard);
+router.get('/users', users);
+router.get('/rag/overview', ragOverview);
+router.post('/rag/query', ragQuery);
+router.get('/audit', async (req, res, next) => { try { const items = await req.app.locals.db.Auditoria.findAll({ order: [['created_at','DESC']], limit: 100 }); res.json({ items }); } catch (e) { next(e); } });
+router.get('/rag/documents', knowledge);
+router.post('/rag/documents', uploadKnowledge);
+router.post('/rag/documents/:id/publish', publishKnowledge);
+router.post('/rag/documents/:id/unpublish', unpublishKnowledge);
+router.get('/support/cases', supportCases);
+router.get('/support/cases/:id', supportCase);
+router.post('/support/cases/:id/messages', supportReply);
+router.patch('/support/cases/:id', supportUpdate);
+export default router;

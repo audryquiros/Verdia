@@ -15,5 +15,8 @@ export function initDocumento(sequelize) {
     mime_type: { type: DataTypes.STRING(255), allowNull: true },
     fecha_documento: { type: DataTypes.DATE, allowNull: true },
     estado: { type: DataTypes.STRING(255), allowNull: false },
+    descripcion: { type: DataTypes.STRING(500), allowNull: true },
+    subido_por_usuario_id: { type: DataTypes.BIGINT.UNSIGNED, allowNull: true },
+    publicado_at: { type: DataTypes.DATE, allowNull: true },
   });
 }

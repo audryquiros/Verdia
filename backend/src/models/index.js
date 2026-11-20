@@ -24,6 +24,8 @@ import { initPolitica } from './Politica.js';
 import { initPoliticaVersion } from './PoliticaVersion.js';
 import { initAuditoria } from './Auditoria.js';
 import { initEvento } from './Evento.js';
+import { initCasoSoporte } from './CasoSoporte.js';
+import { initMensajeSoporte } from './MensajeSoporte.js';
 
 const db = {
   Usuario: initUsuario(sequelize),
@@ -51,6 +53,8 @@ const db = {
   PoliticaVersion: initPoliticaVersion(sequelize),
   Auditoria: initAuditoria(sequelize),
   Evento: initEvento(sequelize),
+  CasoSoporte: initCasoSoporte(sequelize),
+  MensajeSoporte: initMensajeSoporte(sequelize),
   sequelize,
 };
 
@@ -59,7 +63,7 @@ const {
   TipoCambio, Deuda, Meta, Movimiento, Presupuesto, Conversacion,
   Mensaje, FuenteMensaje, PropuestaVera, Documento, DocumentoVersion,
   Fragmento, Organizacion, Rol, Membresia, Politica, PoliticaVersion,
-  Auditoria,
+  Auditoria, CasoSoporte, MensajeSoporte,
 } = db;
 
 Usuario.hasMany(Sesion, { foreignKey: 'usuario_id' });
@@ -134,6 +138,13 @@ PoliticaVersion.belongsTo(DocumentoVersion, { foreignKey: 'documento_version_id'
 DocumentoVersion.hasMany(PoliticaVersion, { foreignKey: 'documento_version_id' });
 Usuario.hasMany(Auditoria, { foreignKey: 'usuario_id' });
 Auditoria.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+Usuario.hasMany(CasoSoporte, { foreignKey: 'usuario_id' });
+CasoSoporte.belongsTo(Usuario, { as: 'usuario', foreignKey: 'usuario_id' });
+Usuario.hasMany(CasoSoporte, { as: 'casosAsignados', foreignKey: 'asignado_a_usuario_id' });
+CasoSoporte.belongsTo(Usuario, { as: 'asignadoA', foreignKey: 'asignado_a_usuario_id' });
+CasoSoporte.hasMany(MensajeSoporte, { foreignKey: 'caso_soporte_id' });
+MensajeSoporte.belongsTo(CasoSoporte, { foreignKey: 'caso_soporte_id' });
+MensajeSoporte.belongsTo(Usuario, { as: 'autor', foreignKey: 'autor_usuario_id' });
 
 export default db;
 export { sequelize };

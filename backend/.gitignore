@@ -2,3 +2,6 @@
 .env
 /credenciales
 *.json
+
+backend/storage/rag/*
+!backend/storage/rag/.gitkeep

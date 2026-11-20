@@ -24,6 +24,7 @@ export async function answerWithRag({ query, spaceId, limit = 5 }) {
 
   return {
     answer: buildAnswer(results),
+    needsSupport: results.length === 0,
     sources: results.map(({ id, title, uri, content, score }) => ({
       id,
       title,

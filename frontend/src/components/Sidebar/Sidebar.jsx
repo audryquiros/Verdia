@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Home, ArrowLeftRight, WalletCards, CreditCard, HandCoins, Target, ReceiptText, BarChart3, Bot, Settings, X, LogOut } from 'lucide-react';
-import { logout } from '../../services/auth.js';
+import { Home, ArrowLeftRight, WalletCards, CreditCard, HandCoins, Target, ReceiptText, BarChart3, Bot, Settings, X, LogOut, LifeBuoy, ShieldCheck, BookOpen, Users, ClipboardList } from 'lucide-react';
+import { logout, getSession } from '../../services/auth.js';
 import sidebarLogo from '../../assets/brand/logos/verdia-sidebar-logo.png';
 import './Sidebar.css';
 
@@ -19,6 +19,7 @@ const items = [
 
 export default function Sidebar({ open, onClose }) {
   const navigate = useNavigate();
+  const isAdmin = getSession()?.user?.rol === 'ADMIN';
 
   async function handleLogout() {
     await logout();
@@ -49,6 +50,17 @@ export default function Sidebar({ open, onClose }) {
             <span>{label}</span>
           </NavLink>
         ))}
+        <NavLink to="/soporte" onClick={onClose} className={({ isActive }) => `side-link ${isActive ? 'active' : ''}`}>
+          <LifeBuoy size={18} strokeWidth={1.9} /><span>Soporte</span>
+        </NavLink>
+        {isAdmin && <>
+          <div className="sidebar-section-label">Administración</div>
+          <NavLink to="/admin" onClick={onClose} className={({ isActive }) => `side-link ${isActive ? 'active' : ''}`}><ShieldCheck size={18} strokeWidth={1.9}/><span>Dashboard admin</span></NavLink>
+          <NavLink to="/admin/usuarios" onClick={onClose} className={({ isActive }) => `side-link ${isActive ? 'active' : ''}`}><Users size={18} strokeWidth={1.9}/><span>Usuarios</span></NavLink>
+          <NavLink to="/admin/vera" onClick={onClose} className={({ isActive }) => `side-link ${isActive ? 'active' : ''}`}><BookOpen size={18} strokeWidth={1.9}/><span>Vera / RAG</span></NavLink>
+          <NavLink to="/admin/soporte" onClick={onClose} className={({ isActive }) => `side-link ${isActive ? 'active' : ''}`}><LifeBuoy size={18} strokeWidth={1.9}/><span>Soporte admin</span></NavLink>
+          <NavLink to="/admin/auditoria" onClick={onClose} className={({ isActive }) => `side-link ${isActive ? 'active' : ''}`}><ClipboardList size={18} strokeWidth={1.9}/><span>Auditoría</span></NavLink>
+        </>}
       </nav>
 
       <div className="sidebar-foot">

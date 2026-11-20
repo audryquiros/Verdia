@@ -20,7 +20,7 @@ export default function Login() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate('/inicio');
+      navigate(data?.user?.rol === 'ADMIN' ? '/admin' : '/inicio');
     } catch (submitError) {
       setError(submitError.message || 'No se pudo iniciar sesión.');
     } finally {

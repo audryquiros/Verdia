@@ -34,3 +34,7 @@ Los usuarios demo tienen una contraseña de desarrollo utilizable:
 - `demo2@verdia.test` / `Demo1234!`
 
 La contraseña nunca se guarda en texto plano; el seed almacena únicamente un hash scrypt.
+
+## CRM, RAG y soporte
+
+El CRM administrativo utiliza `usuarios.rol` (`USUARIO`/`ADMIN`), `documentos` con `origen='CRM_ADMIN'` para conocimiento global de Vera y las tablas `casos_soporte` / `mensajes_soporte` para soporte. Los documentos administrados desde el CRM quedan en borrador hasta que un administrador los publique. El conocimiento publicado global puede ser recuperado por Vera sin mezclarlo con la información financiera privada de un espacio.
