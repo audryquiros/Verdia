@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Users, BookOpen, LifeBuoy, Bot, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Users, BookOpen, LifeBuoy, Bot, CheckCircle2, ArrowRight } from 'lucide-react';
 import SectionCard from '../../components/SectionCard/SectionCard.jsx';
 import AdminRagSummary from '../../components/AdminRagSummary/AdminRagSummary.jsx';
 import { adminApi } from '../../services/admin.js';
@@ -22,7 +22,7 @@ export default function AdminDashboard() {
       <SectionCard title="Salud operativa de Vera" subtitle="Puntos que el equipo debe vigilar antes de publicar cambios.">
         <div className="health-list">
           <Health icon={BookOpen} title="Base de conocimiento" text="Los documentos administrados desde CRM pueden revisarse y publicarse sin entrar a Drive." ok />
-          <Health icon={AlertTriangle} title="Embeddings" text="Todavía no están implementados; la recuperación actual usa MySQL FULLTEXT y fallback LIKE." />
+          <Health icon={CheckCircle2} title="Conocimiento publicado" text="El equipo puede revisar, probar y publicar conocimiento para Vera desde el CRM." ok />
           <Health icon={Bot} title="Escalamiento" text="Las preguntas que Vera no puede resolver pueden convertirse en casos de soporte." ok />
         </div>
       </SectionCard>
