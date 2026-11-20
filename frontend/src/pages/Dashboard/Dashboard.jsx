@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
-import { Wallet, ArrowDownLeft, ArrowUpRight, Target, Plus, Mail, ReceiptText } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { Wallet, ArrowDownLeft, ArrowUpRight, Target, Plus, Mail, ReceiptText, HandCoins, BarChart3, Eye, EyeOff, Send } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { getSession } from '../../services/auth.js';
 import StatCard from '../../components/StatCard/StatCard.jsx';
 import SectionCard from '../../components/SectionCard/SectionCard.jsx';
@@ -8,14 +8,16 @@ import MovementRow from '../../components/MovementRow/MovementRow.jsx';
 import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
 import DonutChart from '../../components/DonutChart/DonutChart.jsx';
 import VeraCard from '../../components/VeraCard/VeraCard.jsx';
-import MiniChart from '../../components/MiniChart/MiniChart.jsx';
 import MobileBottomNav from '../../components/MobileBottomNav/MobileBottomNav.jsx';
 import './Dashboard.css';
 
 export default function Dashboard() {
   const user = getSession()?.user;
   const displayName = user?.nombre || 'Usuario';
+  const navigate = useNavigate();
+  const [balanceVisible, setBalanceVisible] = useState(true);
   const monthLabel = useMemo(() => new Intl.DateTimeFormat('es-CR', { month: 'long', year: 'numeric' }).format(new Date()), []);
+  const formattedMonth = monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1);
 
   return (
     <div className="dashboard">
@@ -24,20 +26,29 @@ export default function Dashboard() {
           <h1>¡Hola, {displayName}! 👋</h1>
           <p>Aquí está el resumen de tus finanzas.</p>
         </div>
-        <div className="month">{monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)}⌄</div>
+        <button className="month" type="button" aria-label={`Periodo ${formattedMonth}`}>
+          {formattedMonth}<span>⌄</span>
+        </button>
       </div>
 
       <div className="stats-grid">
-        <StatCard label="Disponible" value="₡425.000" change="Balance actual" icon={Wallet} />
-        <StatCard label="Gastos del mes" value="₡187.350" change="12% vs. mes anterior" icon={ArrowDownLeft} positive={false} />
-        <StatCard label="Ingresos del mes" value="₡620.000" change="3% vs. mes anterior" icon={ArrowUpRight} />
-        <StatCard label="Meta en curso" value="Viaje a la playa" change="60% completado" icon={Target} />
+        <StatCard
+          label="Disponible"
+          value={balanceVisible ? '₡425.000' : '••••••'}
+          change="Balance actual"
+          icon={Wallet}
+          tone="mint"
+          action={<button className="stat-eye" type="button" onClick={() => setBalanceVisible((value) => !value)} aria-label={balanceVisible ? 'Ocultar balance' : 'Mostrar balance'}>{balanceVisible ? <Eye size={15} /> : <EyeOff size={15} />}</button>}
+        />
+        <StatCard label="Gastos del mes" value="₡187.350" change="12% vs. mes anterior" icon={ArrowDownLeft} positive={false} tone="green" />
+        <StatCard label="Ingresos del mes" value="₡620.000" change="3% vs. mes anterior" icon={ArrowUpRight} tone="lilac" />
+        <StatCard label="Meta en curso" value="Viaje a la playa" change="60% completado" icon={Target} tone="cream" />
       </div>
 
       <div className="dashboard-grid">
         <div className="main-col">
           <div className="top-panels">
-            <SectionCard title="Resumen del mes" subtitle={monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)}>
+            <SectionCard title="Resumen del mes" subtitle={formattedMonth} className="summary-card">
               <div className="summary">
                 <DonutChart segments={['#285E45 0 36%', '#A9D29A 36% 54%', '#6c8e79 54% 66%', '#dbe8d8 66% 100%']} />
                 <div className="legend">
@@ -50,7 +61,7 @@ export default function Dashboard() {
               </div>
             </SectionCard>
 
-            <SectionCard title="Presupuesto mensual" action={<Link className="small-link" to="/presupuestos">Ver detalle →</Link>}>
+            <SectionCard title="Presupuesto mensual" action={<Link className="small-link" to="/presupuestos">Ver detalle →</Link>} className="budget-card">
               <div className="budget-total"><strong>₡300.000</strong><span>Presupuesto total</span></div>
               <ProgressBar value={62} />
               <div className="budget-note"><span>₡187.350 gastado</span><span>₡112.650 disponible</span></div>
@@ -58,18 +69,20 @@ export default function Dashboard() {
           </div>
 
           <div className="bottom-panels">
-            <SectionCard title="Últimos movimientos" action={<Link className="small-link" to="/movimientos">Ver todos →</Link>}>
+            <SectionCard title="Últimos movimientos" action={<Link className="small-link" to="/movimientos">Ver todos →</Link>} className="movements-card">
               <MovementRow name="Walmart" category="Alimentación · Tarjeta" date="Hoy" amount="₡15.500" />
               <MovementRow name="ICE" category="Servicios" date="Ayer" amount="₡28.350" />
               <MovementRow name="Salario" category="Ingreso" date="3 nov" amount="₡620.000" type="income" />
             </SectionCard>
 
-            <SectionCard title="Accesos rápidos">
+            <SectionCard title="Accesos rápidos" className="quick-card">
               <div className="quick-grid">
                 <Quick icon={Plus} label="Agregar movimiento" to="/movimientos" />
                 <Quick icon={Mail} label="Enviar correo" to="/correo" />
                 <Quick icon={ReceiptText} label="Pagar servicio" to="/servicios" />
+                <Quick icon={HandCoins} label="Registrar deuda" to="/deudas" />
                 <Quick icon={Target} label="Nueva meta" to="/metas" />
+                <Quick icon={BarChart3} label="Ver reportes" to="/reportes" />
               </div>
             </SectionCard>
           </div>
@@ -77,10 +90,6 @@ export default function Dashboard() {
 
         <div className="side-col">
           <VeraCard />
-          <SectionCard title="Evolución mensual">
-            <MiniChart values={[40, 52, 46, 70, 82]} />
-            <div className="chart-labels"><span>Jul</span><span>Ago</span><span>Sep</span><span>Oct</span><span>Nov</span></div>
-          </SectionCard>
         </div>
       </div>
 

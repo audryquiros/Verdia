@@ -30,6 +30,7 @@ export default function Topbar({ onMenu }) {
   const initials = displayName.split(' ').map((part) => part[0]).slice(0, 2).join('').toUpperCase();
   const avatarUrl = user?.foto_url || null;
   const [title, subtitle] = sectionInfo[location.pathname] || ['Verdia', 'Tu espacio financiero.'];
+  const isDashboard = location.pathname === '/inicio';
   const currentDate = new Intl.DateTimeFormat('es-CR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date());
 
   useEffect(() => {
@@ -53,18 +54,17 @@ export default function Topbar({ onMenu }) {
   }
 
   return (
-    <header className="topbar">
+    <header className={`topbar ${isDashboard ? 'topbar-dashboard' : ''}`}>
       <button className="menu-btn" onClick={onMenu} aria-label="Abrir menú">
         <Menu size={21} />
       </button>
 
-      <div className="top-context">
-        <strong>{title}</strong>
-        <span>{subtitle}</span>
+      <div className={`top-context ${isDashboard ? 'top-context-dashboard' : ''}`}>
+        {!isDashboard && <><strong>{title}</strong><span>{subtitle}</span></>}
       </div>
 
       <div className="topbar-spacer" />
-      <div className="top-period">{currentDate}</div>
+      <div className={`top-period ${isDashboard ? 'top-period-dashboard' : ''}`}>{!isDashboard && currentDate}</div>
       <button className="icon-btn" aria-label="Notificaciones">
         <Bell size={18} />
       </button>
