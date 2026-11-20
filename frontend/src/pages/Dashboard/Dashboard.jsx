@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Wallet, ArrowDownLeft, ArrowUpRight, Target, Plus, Mail, ReceiptText, HandCoins, BarChart3, Eye, EyeOff, Send } from 'lucide-react';
+import { Wallet, ArrowDownLeft, ArrowUpRight, Target, Plus, Mail, ReceiptText, HandCoins, BarChart3, Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getSession } from '../../services/auth.js';
 import StatCard from '../../components/StatCard/StatCard.jsx';
@@ -8,6 +8,7 @@ import MovementRow from '../../components/MovementRow/MovementRow.jsx';
 import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
 import DonutChart from '../../components/DonutChart/DonutChart.jsx';
 import VeraCard from '../../components/VeraCard/VeraCard.jsx';
+import CustomSelect from '../../components/CustomSelect/CustomSelect.jsx';
 import MobileBottomNav from '../../components/MobileBottomNav/MobileBottomNav.jsx';
 import './Dashboard.css';
 
@@ -18,6 +19,7 @@ export default function Dashboard() {
   const [balanceVisible, setBalanceVisible] = useState(true);
   const monthLabel = useMemo(() => new Intl.DateTimeFormat('es-CR', { month: 'long', year: 'numeric' }).format(new Date()), []);
   const formattedMonth = monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1);
+  const [selectedPeriod, setSelectedPeriod] = useState(formattedMonth);
 
   return (
     <div className="dashboard">
@@ -48,15 +50,15 @@ export default function Dashboard() {
       <div className="dashboard-grid">
         <div className="main-col">
           <div className="top-panels">
-            <SectionCard title="Resumen del mes" subtitle={formattedMonth} className="summary-card">
+            <SectionCard title={<><BarChart3 className="summary-title-icon" size={16} strokeWidth={2.4} />Resumen del mes</>} action={<CustomSelect className="month-filter-wrap" ariaLabel="Filtrar por mes y año" value={selectedPeriod} onChange={setSelectedPeriod} options={["Noviembre de 2026","Octubre de 2026","Septiembre de 2026","Agosto de 2026","Julio de 2026","Junio de 2026","Mayo de 2026","Abril de 2026","Marzo de 2026","Febrero de 2026","Enero de 2026"]} />} className="summary-card">
               <div className="summary">
-                <DonutChart segments={['#285E45 0 36%', '#A9D29A 36% 54%', '#6c8e79 54% 66%', '#dbe8d8 66% 100%']} />
+                <DonutChart segments={['#285E45 0 35.64%', '#7B61C9 35.64% 53.46%', '#F4B183 53.46% 71.28%', '#58C7D9 71.28% 83.17%', '#A9D29A 83.17% 100%']} />
                 <div className="legend">
                   <Legend color="#285E45" name="Alimentación" value="₡67.500" percent="36%" />
-                  <Legend color="#A9D29A" name="Transporte" value="₡33.000" percent="18%" />
-                  <Legend color="#6c8e79" name="Servicios" value="₡33.000" percent="18%" />
-                  <Legend color="#dbe8d8" name="Entretenimiento" value="₡22.500" percent="12%" />
-                  <Legend color="#e8f0e7" name="Otros" value="₡31.350" percent="17%" />
+                  <Legend color="#7B61C9" name="Transporte" value="₡33.000" percent="18%" />
+                  <Legend color="#F4B183" name="Servicios" value="₡33.000" percent="18%" />
+                  <Legend color="#58C7D9" name="Entretenimiento" value="₡22.500" percent="12%" />
+                  <Legend color="#A9D29A" name="Otros" value="₡31.350" percent="17%" />
                 </div>
               </div>
             </SectionCard>

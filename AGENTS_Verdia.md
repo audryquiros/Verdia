@@ -189,3 +189,6 @@ La prioridad es:
 
 **hacer exactamente el cambio solicitado y preservar todo lo que ya
 estaba correcto.**
+
+### Selectores desplegables
+Los dropdowns nuevos del dashboard deben reutilizar el componente `frontend/src/components/CustomSelect/CustomSelect.jsx` y sus estilos, en lugar de usar directamente el `<select>` nativo, cuando el diseño requiera el estilo visual de Verdia. El objetivo es mantener una apariencia consistente entre filtros de mes/año y futuros selectores. El componente debe conservar accesibilidad básica, cierre con Escape y cierre al hacer clic fuera.
