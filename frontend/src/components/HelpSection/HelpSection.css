@@ -82,11 +82,92 @@
   font-size: 12px;
 }
 
-.help-contact div span {
+.help-contact-copy span {
   margin-top: 4px;
   color: #64736c;
   font-size: 10px;
   line-height: 1.45;
+}
+
+.help-guide {
+  margin-top: 14px;
+  padding: 18px 19px 20px;
+  border: 1px solid rgba(40, 94, 69, .10);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 14px 36px rgba(35, 60, 47, .07);
+  animation: helpGuideIn .22s ease both;
+}
+
+.help-guide-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 15px;
+}
+
+.help-guide-head > span {
+  color: var(--forest);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+
+.help-guide-head button {
+  border: 0;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: var(--sage);
+  color: var(--forest);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.help-guide-head button:hover {
+  background: #d8e7d4;
+}
+
+.help-guide-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.help-guide-steps > div {
+  min-width: 0;
+  padding: 12px 11px;
+  border-radius: 14px;
+  background: #f3f6ef;
+}
+
+.help-guide-steps b {
+  display: block;
+  margin-bottom: 5px;
+  color: #8aa58f;
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+.help-guide-steps strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #17372a;
+  font-size: 12px;
+}
+
+.help-guide-steps p {
+  margin: 0;
+  color: #64736c;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+@keyframes helpGuideIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .help-faq {
@@ -190,6 +271,10 @@
     min-height: 62px;
     padding: 0 18px;
     font-size: 13px;
+  }
+
+  .help-guide-steps {
+    grid-template-columns: 1fr;
   }
 
   .help-answer {

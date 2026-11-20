@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight, ChevronDown, MessageCircleQuestion } from 'lucide-react';
+import { ArrowRight, ChevronDown, MessageCircleQuestion } from 'lucide-react';
 import './HelpSection.css';
 
 const QUESTIONS = [
@@ -27,6 +27,7 @@ const QUESTIONS = [
 
 export default function HelpSection() {
   const [openIndex, setOpenIndex] = useState(0);
+  const [showGuide, setShowGuide] = useState(false);
 
   function toggle(index) {
     setOpenIndex((current) => (current === index ? -1 : index));
@@ -43,16 +44,50 @@ export default function HelpSection() {
             de tu experiencia.
           </p>
 
-          <div className="help-contact">
+          <button
+            type="button"
+            className="help-contact"
+            onClick={() => setShowGuide((current) => !current)}
+            aria-expanded={showGuide}
+            aria-controls="verdia-guide"
+          >
             <span className="help-contact-icon" aria-hidden="true">
               <MessageCircleQuestion size={20} strokeWidth={1.8} />
             </span>
-            <div>
-              <strong>¿No encuentras lo que buscas?</strong>
-              <span>Podemos ayudarte a entender cómo funciona Verdia.</span>
+            <span className="help-contact-copy">
+              <strong>¿Quieres conocer cómo funciona Verdia?</strong>
+              <span>Te mostramos lo esencial en unos pasos.</span>
+            </span>
+            <span className={`help-contact-arrow ${showGuide ? 'is-open' : ''}`} aria-hidden="true">
+              <ArrowRight size={18} strokeWidth={1.9} />
+            </span>
+          </button>
+
+          {showGuide && (
+            <div id="verdia-guide" className="help-guide">
+              <div className="help-guide-head">
+                <span>ASÍ FUNCIONA VERDIA</span>
+                <button type="button" onClick={() => setShowGuide(false)}>Cerrar</button>
+              </div>
+              <div className="help-guide-steps">
+                <div>
+                  <b>01</b>
+                  <strong>Organiza</strong>
+                  <p>Reúne tus movimientos y tu información financiera en un solo lugar.</p>
+                </div>
+                <div>
+                  <b>02</b>
+                  <strong>Entiende</strong>
+                  <p>Visualiza en qué estás gastando, tus metas y lo que está pasando con tu dinero.</p>
+                </div>
+                <div>
+                  <b>03</b>
+                  <strong>Decide</strong>
+                  <p>Vera puede ayudarte a analizar y proponer; tú mantienes la decisión final.</p>
+                </div>
+              </div>
             </div>
-            <ArrowUpRight size={18} strokeWidth={1.9} aria-hidden="true" />
-          </div>
+          )}
         </div>
 
         <div className="help-faq" aria-label="Preguntas frecuentes">
