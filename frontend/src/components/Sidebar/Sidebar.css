@@ -37,7 +37,7 @@
   position:relative;
   z-index:2;
 }
-.sidebar-logo{display:block;width:128px;height:auto;object-fit:contain}
+.sidebar-logo{display:block;width:155px;height:auto;object-fit:contain}
 .mobile-close{display:none;background:transparent;border:0;color:#fff}
 .sidebar-nav{
   display:flex;
