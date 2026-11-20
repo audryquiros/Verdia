@@ -1,4 +1,6 @@
 .shell{min-height:100vh;background:var(--cream)}
-.shell-main{margin-left:240px;min-height:100vh;position:relative}
-.content{padding:12px 30px 46px;max-width:1540px;margin:0 auto}
+.shell-main{margin-left:240px;min-height:100vh;position:relative;overflow:visible}
+.shell-main:has(.dashboard)::after{content:"";position:absolute;right:-40px;bottom:-90px;width:620px;height:920px;background:url("../../assets/landing/botanical/enredadera-recorrido.svg") no-repeat right bottom/contain;opacity:.18;pointer-events:none;z-index:0}.content{padding:12px 30px 46px;max-width:1540px;margin:0 auto;position:relative;z-index:1}
 @media(max-width:850px){.shell-main{margin-left:0}.content{padding:18px 16px 82px}}
+
+@media(min-width:851px){.content:has(.dashboard){padding-bottom:0}.shell-main:has(.dashboard){overflow:hidden}}
