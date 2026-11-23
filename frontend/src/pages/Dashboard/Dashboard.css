@@ -329,3 +329,204 @@
   .dashboard .welcome h1{font-size:29px}
   .dashboard .welcome p{font-size:10px}
 }
+
+
+/* =========================================================
+   DASHBOARD — ajuste de escala y distribución visual
+   Solo afecta la página Dashboard. No modifica componentes
+   compartidos ni la página Movimientos.
+   ========================================================= */
+
+@media (min-width: 1101px){
+  .dashboard{
+    padding-top:27px;
+  }
+
+  /* Los cuatro indicadores superiores conservan su distribución,
+     pero ganan presencia visual como en el mockup. */
+  .stats-grid{
+    gap:14px;
+  }
+  .stats-grid .stat-card{
+    min-height:78px;
+  }
+  .stats-grid .stat-card .stat-copy span{
+    font-size:11px;
+  }
+  .stats-grid .stat-card .stat-copy strong{
+    font-size:28px;
+  }
+  .stats-grid .stat-card:nth-child(4) .stat-copy strong{
+    font-size:20px;
+  }
+  .stats-grid .stat-card:nth-child(4) .stat-progress-value{
+    font-size:10px;
+  }
+
+  /* Paneles principales: más aire y una escala más cercana al mockup. */
+  .dashboard-grid{
+    gap:16px;
+    margin-top:14px;
+  }
+  .top-panels,
+  .bottom-panels{
+    gap:16px;
+  }
+
+  .summary-card .section-card,
+  .budget-card .section-card{
+    padding:18px 18px;
+  }
+
+  .summary-card .section-title,
+  .budget-card .section-title,
+  .movements-card .section-title,
+  .quick-card .section-title{
+    margin-bottom:12px;
+  }
+
+  .summary-card .section-title h2,
+  .budget-card .section-title h2,
+  .movements-card .section-title h2,
+  .quick-card .section-title h2{
+    font-size:20px;
+  }
+
+  .summary-card .summary{
+    gap:20px;
+  }
+  .summary-card .donut{
+    width:146px;
+    height:146px;
+  }
+  .summary-card .donut>div{
+    width:88px;
+    height:88px;
+  }
+  .summary-card .donut strong{
+    font-size:16px;
+  }
+  .legend-row{
+    grid-template-columns:10px minmax(0,1fr) 36px 82px;
+    gap:7px;
+    margin:7px 0;
+    font-size:12px;
+  }
+  .legend-row i{
+    width:9px;
+    height:9px;
+  }
+  .legend-row b{
+    font-size:10px;
+  }
+  .legend-row strong{
+    font-size:12px;
+  }
+
+  .budget-total{
+    margin:5px 0 16px;
+  }
+  .budget-total strong{
+    font-size:44px;
+  }
+  .budget-total span{
+    font-size:12px;
+  }
+  .budget-card .progress{
+    height:10px;
+  }
+  .budget-note{
+    font-size:11px;
+    margin-top:8px;
+  }
+  .budget-detail-btn{
+    height:38px;
+    margin-top:14px;
+    border-radius:11px;
+    font-size:12px;
+  }
+
+  /* Área inferior: aprovecha mejor el espacio vertical y se acerca
+     a la proporción del mockup. */
+  .bottom-panels{
+    flex:1 1 auto;
+    min-height:250px;
+  }
+  .movements-card{
+    height:100%!important;
+  }
+  .quick-card{
+    height:100%;
+  }
+
+  .movements-card .movement-row{
+    padding:14px 0;
+  }
+  .movements-card .movement-info strong{
+    font-size:15px;
+  }
+  .movements-card .movement-info span{
+    font-size:10px;
+  }
+  .movements-card .movement-amount{
+    font-size:15px;
+  }
+
+  .quick-grid{
+    gap:10px;
+  }
+  .quick{
+    min-height:66px;
+    padding:9px 8px;
+    border-radius:13px;
+  }
+  .quick span{
+    width:32px;
+    height:32px;
+    border-radius:10px;
+    margin-bottom:5px;
+  }
+  .quick small{
+    font-size:10.5px;
+  }
+
+  /* Vera mantiene su posición y estructura; solo gana escala
+     tipográfica para que no quede visualmente pequeña frente
+     a los demás paneles. */
+  .dashboard-grid .side-col .vera-card{
+    min-height:100%;
+  }
+  .vera-head strong{
+    font-size:21px;
+  }
+  .vera-head span{
+    font-size:11px;
+  }
+  .vera-message p{
+    font-size:12px;
+  }
+  .vera-transaction strong{
+    font-size:13px;
+  }
+  .vera-transaction span{
+    font-size:10px;
+  }
+  .vera-question{
+    font-size:10px;
+  }
+  .vera-actions .btn{
+    min-height:42px;
+    font-size:11px;
+  }
+  .vera-input input{
+    font-size:12px;
+  }
+}
+
+/* En pantallas medianas se mantiene la escala existente para evitar
+   romper la distribución responsive. */
+@media (max-width:1100px){
+  .stats-grid .stat-card .stat-copy strong{
+    font-size:24px;
+  }
+}
