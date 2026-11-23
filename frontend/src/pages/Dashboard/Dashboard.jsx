@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Wallet, ArrowDownLeft, ArrowUpRight, Target, Plus, Mail, ReceiptText, HandCoins, BarChart3, Eye, EyeOff } from 'lucide-react';
+import { Wallet, ArrowDownLeft, ArrowUpRight, Target, Plus, Mail, ReceiptText, HandCoins, BarChart3, Eye, EyeOff, ArrowLeftRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getSession } from '../../services/auth.js';
 import StatCard from '../../components/StatCard/StatCard.jsx';
@@ -72,10 +72,10 @@ export default function Dashboard() {
           </div>
 
           <div className="bottom-panels">
-            <SectionCard title="Últimos movimientos" action={<Link className="small-link" to="/movimientos">Ver todos →</Link>} className="movements-card">
-              <MovementRow name="Walmart" category="Alimentación · Tarjeta" date="Hoy" amount="₡15.500" />
-              <MovementRow name="ICE" category="Servicios" date="Ayer" amount="₡28.350" />
-              <MovementRow name="Salario" category="Ingreso" date="3 nov" amount="₡620.000" type="income" />
+            <SectionCard title={<><ArrowLeftRight className="movements-title-icon" size={20} strokeWidth={2.4} />Últimos movimientos</>} action={<Link className="small-link" to="/movimientos">Ver todos →</Link>} className="movements-card">
+              <MovementRow compact name="Walmart" category="Alimentación · Tarjeta" date="Hoy" amount="₡15.500" />
+              <MovementRow compact name="ICE" category="Servicios" date="Ayer" amount="₡28.350" />
+              <MovementRow compact name="Salario" category="Ingreso" date="3 nov" amount="₡620.000" type="income" />
             </SectionCard>
 
             <SectionCard title="Accesos rápidos" className="quick-card">

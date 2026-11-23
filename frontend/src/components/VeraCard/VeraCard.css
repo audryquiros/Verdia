@@ -1,3 +1,150 @@
-.vera-card{padding:12px;overflow:hidden;position:relative;background:#fff}.vera-card:after{content:"";position:absolute;width:94px;height:94px;right:-48px;top:-36px;border-radius:50%;background:rgba(169,210,154,.28)}
-.vera-head{display:flex;align-items:center;gap:8px;position:relative;z-index:1}.vera-head strong{font-size:13px}.vera-head span{display:block;font-size:8px;color:var(--muted);margin-top:2px}.vera-bot{width:42px;height:42px;border-radius:13px;background:#DFF0DC;color:var(--forest);display:grid;place-items:center;position:relative;z-index:1}
-.vera-bubble{background:#F5F8F3;border:1px solid var(--line);border-radius:12px;padding:9px;margin-top:9px;font-size:8.5px;position:relative;z-index:1}.vera-bubble p{margin:0 0 4px}.vera-bubble strong{display:block;font-size:9px}.vera-bubble span{display:block;color:var(--muted);font-size:7.5px}.vera-actions{display:flex;gap:4px;margin-top:8px;position:relative;z-index:1}.vera-actions .btn{flex:1;min-height:30px;padding:0 6px;font-size:8px}.vera-input{display:flex;align-items:center;gap:5px;margin-top:9px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:4px 5px 4px 9px;position:relative;z-index:1}.vera-input input{border:0;outline:0;min-width:0;width:100%;font-family:var(--font-body);font-size:8.5px;color:var(--graphite);background:transparent}.vera-input input::placeholder{color:#87938D}.vera-input button{border:0;background:transparent;color:var(--forest);display:grid;place-items:center;cursor:pointer;padding:5px}
+.vera-card{
+  padding:14px;
+  height:100%;
+  min-height:0;
+  box-sizing:border-box;
+  overflow:hidden;
+  position:relative;
+  background:#fff;
+}
+.vera-card:after{
+  content:"";
+  position:absolute;
+  width:112px;
+  height:112px;
+  right:-56px;
+  top:-44px;
+  border-radius:50%;
+  background:rgba(169,210,154,.28);
+}
+
+.vera-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  position:relative;
+  z-index:1;
+}
+.vera-head-copy{min-width:0}
+.vera-head strong{
+  display:block;
+  font-family:var(--font-heading);
+  font-size:19px;
+  line-height:1.05;
+  letter-spacing:-.02em;
+}
+.vera-head span{
+  display:block;
+  font-size:10px;
+  color:var(--muted);
+  margin-top:5px;
+}
+.vera-bot{
+  width:68px;
+  height:68px;
+  border-radius:18px;
+  background:#DFF0DC;
+  display:grid;
+  place-items:center;
+  position:relative;
+  z-index:1;
+  flex:0 0 auto;
+  overflow:hidden;
+}
+.vera-bot img{
+  width:78px;
+  height:78px;
+  object-fit:contain;
+  display:block;
+  transform:translateY(3px);
+}
+
+.vera-message{
+  background:#F5F8F3;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:12px 13px;
+  margin-top:13px;
+  position:relative;
+  z-index:1;
+}
+.vera-message p{
+  margin:0 0 8px;
+  font-size:11px;
+  line-height:1.35;
+}
+.vera-transaction{
+  background:#fff;
+  border:1px solid var(--line-soft);
+  border-radius:11px;
+  padding:8px 9px;
+}
+.vera-transaction strong{
+  display:block;
+  font-size:12px;
+  line-height:1.15;
+}
+.vera-transaction span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+}
+.vera-question{
+  display:inline-flex;
+  margin-top:7px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:#EAF5E7;
+  color:var(--graphite);
+  font-size:10px;
+  line-height:1;
+}
+
+.vera-actions{
+  display:flex;
+  gap:6px;
+  margin-top:12px;
+  position:relative;
+  z-index:1;
+}
+.vera-actions .btn{
+  flex:1;
+  min-height:39px;
+  padding:0 7px;
+  font-size:10px;
+  white-space:nowrap;
+}
+
+.vera-input{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-top:auto;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:13px;
+  padding:6px 6px 6px 12px;
+  position:relative;
+  z-index:1;
+}
+.vera-input input{
+  border:0;
+  outline:0;
+  min-width:0;
+  width:100%;
+  font-family:var(--font-body);
+  font-size:11px;
+  color:var(--graphite);
+  background:transparent;
+}
+.vera-input input::placeholder{color:#87938D}
+.vera-input button{
+  border:0;
+  background:transparent;
+  color:var(--forest);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  padding:6px;
+}

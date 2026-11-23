@@ -1,3 +1,13 @@
 .movement-row{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid #EDF1ED}.movement-row:last-child{border-bottom:0}
 .movement-icon{width:28px;height:28px;border-radius:8px;background:#F3E9E4;color:#9C6252;display:grid;place-items:center;flex:0 0 auto}.movement-icon.income{background:#E7F4E6;color:#267F4B}
 .movement-info{flex:1;display:flex;flex-direction:column;min-width:0}.movement-info strong{font-size:9px}.movement-info span{font-size:7px;color:var(--muted);margin-top:2px}.movement-amount{font-size:9px;color:#B24B44}.movement-amount.income{color:#278149}
+
+/* Dashboard compact movement rows — tuned to the reference mockup. */
+.movement-row--compact{gap:10px;padding:11px 0}
+.movement-row--compact .movement-icon{width:32px;height:32px;border-radius:9px}
+.movement-row--compact .movement-info strong{font-size:13px;line-height:1.1}
+.movement-row--compact .movement-info span{font-size:9px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.movement-meta{min-width:74px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px}
+.movement-meta .movement-amount{font-size:13px;line-height:1.1}
+.movement-meta span{font-size:8px;color:var(--muted);line-height:1}
+.movement-meta.income span{color:var(--muted)}
