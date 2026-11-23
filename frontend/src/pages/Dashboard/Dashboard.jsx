@@ -63,10 +63,11 @@ export default function Dashboard() {
               </div>
             </SectionCard>
 
-            <SectionCard title="Presupuesto mensual" action={<Link className="small-link" to="/presupuestos">Ver detalle →</Link>} className="budget-card">
+            <SectionCard title={<><Target className="budget-title-icon" size={18} strokeWidth={2.2} />Presupuesto mensual</>} className="budget-card">
               <div className="budget-total"><strong>₡300.000</strong><span>Presupuesto total</span></div>
               <ProgressBar value={62} />
               <div className="budget-note"><span>₡187.350 gastado</span><span>₡112.650 disponible</span></div>
+              <Link className="budget-detail-btn" to="/presupuestos">Ver detalle <span>→</span></Link>
             </SectionCard>
           </div>
 
