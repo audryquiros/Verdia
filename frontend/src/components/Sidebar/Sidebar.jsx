@@ -32,7 +32,6 @@ export default function Sidebar({ open, onClose }) {
           </NavLink>
         ))}
       </nav>
-      <div className="sidebar-vine-bottom" aria-hidden="true" />
     </aside>
   );
 }

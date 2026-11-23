@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Wallet, ArrowDownLeft, ArrowUpRight, Target, Plus, Mail, ReceiptText, HandCoins, BarChart3, Eye, EyeOff, ArrowLeftRight } from 'lucide-react';
+import { Wallet, ArrowDown, ArrowUp, Target, Plus, Mail, ReceiptText, HandCoins, BarChart3, Eye, EyeOff, ArrowLeftRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getSession } from '../../services/auth.js';
 import StatCard from '../../components/StatCard/StatCard.jsx';
@@ -37,14 +37,13 @@ export default function Dashboard() {
         <StatCard
           label="Disponible"
           value={balanceVisible ? '₡425.000' : '••••••'}
-          change="Balance actual"
           icon={Wallet}
           tone="mint"
           action={<button className="stat-eye" type="button" onClick={() => setBalanceVisible((value) => !value)} aria-label={balanceVisible ? 'Ocultar balance' : 'Mostrar balance'}>{balanceVisible ? <Eye size={15} /> : <EyeOff size={15} />}</button>}
         />
-        <StatCard label="Gastos del mes" value="₡187.350" change="12% vs. mes anterior" icon={ArrowDownLeft} positive={false} tone="green" />
-        <StatCard label="Ingresos del mes" value="₡620.000" change="3% vs. mes anterior" icon={ArrowUpRight} tone="lilac" />
-        <StatCard label="Meta en curso" value="Viaje a la playa" change="60% completado" icon={Target} tone="cream" />
+        <StatCard label="Gastos del mes" value="₡187.350" change="12%" changeBubble positive={false} changeIcon={ArrowDown} icon={ArrowDown} tone="green" />
+        <StatCard label="Ingresos del mes" value="₡620.000" change="3%" changeBubble changeIcon={ArrowUp} icon={ArrowUp} tone="lilac" />
+        <StatCard label="Meta en curso" value="Viaje a la playa" icon={Target} tone="cream" progress={60} />
       </div>
 
       <div className="dashboard-grid">
