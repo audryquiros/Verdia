@@ -373,6 +373,13 @@
     gap:16px;
   }
 
+  /* Paso 1 — Resumen del mes:
+     darle más ancho al card para que el gráfico y la leyenda
+     respiren mejor, sin modificar todavía los demás cards. */
+  .top-panels{
+    grid-template-columns:1.18fr .82fr;
+  }
+
   .summary-card .section-card,
   .budget-card .section-card{
     padding:18px 18px;
@@ -392,8 +399,59 @@
     font-size:20px;
   }
 
+  /* Paso 2 — Resumen del mes: más altura y mejor centrado interno.
+     Solo afecta este card; los demás paneles conservan su altura actual. */
+  .top-panels{
+    height:220px;
+    flex-basis:220px;
+    align-items:start;
+  }
+  .summary-card{
+    height:220px!important;
+  }
+  /* Paso 3 — Presupuesto mensual: igualar la altura del card
+     y distribuir su contenido dentro del nuevo espacio. */
+  .budget-card{
+    height:220px!important;
+  }
+  .budget-card .section-card{
+    height:100%;
+    box-sizing:border-box;
+  }
+  .budget-card .section-title{
+    margin-bottom:12px;
+  }
+  .budget-total{
+    margin:6px 0 17px;
+  }
+  .budget-total strong{
+    font-size:44px;
+  }
+  .budget-total span{
+    font-size:12px;
+    line-height:1.25;
+    max-width:92px;
+  }
+  .budget-card .progress{
+    height:10px;
+  }
+  .budget-note{
+    font-size:11px;
+    margin-top:8px;
+  }
+  .budget-detail-btn{
+    height:38px;
+    margin-top:14px;
+    border-radius:11px;
+    font-size:12px;
+  }
   .summary-card .summary{
     gap:20px;
+    height:calc(100% - 31px);
+    align-items:center;
+  }
+  .summary-card .legend{
+    transform:translateY(7px);
   }
   .summary-card .donut{
     width:146px;
@@ -446,30 +504,56 @@
     font-size:12px;
   }
 
-  /* Área inferior: aprovecha mejor el espacio vertical y se acerca
-     a la proporción del mockup. */
+  /* Área inferior — reducir la altura y acercar Últimos movimientos
+     a la proporción compacta del mockup. */
   .bottom-panels{
-    flex:1 1 auto;
-    min-height:250px;
+    flex:0 0 250px;
+    min-height:0;
   }
-  .movements-card{
-    height:100%!important;
-  }
+  .movements-card,
   .quick-card{
-    height:100%;
+    height:250px!important;
   }
 
+  .movements-card .section-card{
+    padding:18px 18px;
+  }
+  .movements-card .section-title{
+    margin-bottom:10px;
+  }
   .movements-card .movement-row{
-    padding:14px 0;
+    padding:10px 0;
+  }
+  .movements-card .movement-row--compact{
+    gap:10px;
+  }
+  .movements-card .movement-icon{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+  }
+  .movements-card .movement-icon svg{
+    width:15px;
+    height:15px;
   }
   .movements-card .movement-info strong{
-    font-size:15px;
+    font-size:14px;
+    line-height:1.1;
   }
   .movements-card .movement-info span{
-    font-size:10px;
+    font-size:9px;
+    margin-top:3px;
   }
-  .movements-card .movement-amount{
-    font-size:15px;
+  .movements-card .movement-meta{
+    min-width:78px;
+    gap:3px;
+  }
+  .movements-card .movement-meta .movement-amount{
+    font-size:14px;
+    line-height:1.1;
+  }
+  .movements-card .movement-meta span{
+    font-size:8px;
   }
 
   .quick-grid{
@@ -529,4 +613,13 @@
   .stats-grid .stat-card .stat-copy strong{
     font-size:24px;
   }
+}
+
+/* Últimos movimientos — alinear monto y fecha al extremo derecho del card. */
+.movements-card .movement-row--compact .movement-meta{
+  margin-left:auto;
+  min-width:90px;
+  text-align:right;
+  align-items:flex-end;
+  flex:0 0 90px;
 }
