@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Bot, Check, PenLine, X, Send, FileText } from 'lucide-react';
 import SectionCard from '../../components/SectionCard/SectionCard.jsx';
+import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import { queryRag } from '../../services/rag.js';
 import './Vera.css';
 
@@ -36,9 +37,7 @@ export default function Vera() {
 
   return (
     <div className="vera-page">
-      <div className="page-head">
-        <div><h1>Vera ✨</h1><p>Tu asistente financiera.</p></div>
-      </div>
+      <PageHeader />
 
       <div className="vera-layout">
         <SectionCard title="Vera con conocimiento documental" subtitle="Google Drive + MySQL">
