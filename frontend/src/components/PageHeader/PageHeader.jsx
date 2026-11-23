@@ -77,8 +77,11 @@ export default function PageHeader({ action = null }) {
             aria-expanded={menuOpen}
             aria-label={`Abrir menú de ${displayName}`}
           >
-            <span className="page-header-avatar">
-              {avatarUrl ? <img src={avatarUrl} alt="" /> : initials}
+            <span className="page-header-avatar-wrap">
+              <span className="page-header-avatar">
+                {avatarUrl ? <img src={avatarUrl} alt="" /> : initials}
+              </span>
+              <span className="page-header-avatar-name">{displayName}</span>
             </span>
             <ChevronDown size={15} className="page-header-chevron" />
           </button>
