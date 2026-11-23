@@ -1,9 +1,11 @@
-import { Plus, Search, Filter, ShoppingBag, ReceiptText, ArrowDownLeft, Car } from 'lucide-react';
+import { useState } from 'react';
+import { Plus, Search, ShoppingBag, ReceiptText, ArrowDownLeft, Car } from 'lucide-react';
 import SectionCard from '../../components/SectionCard/SectionCard.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import MovementRow from '../../components/MovementRow/MovementRow.jsx';
 import CustomSelect from '../../components/CustomSelect/CustomSelect.jsx';
 import '../SimplePage.css';
+import './Movements.css';
 
 const periods = [
   'Noviembre de 2026',
@@ -20,18 +22,22 @@ const periods = [
 ];
 
 export default function Movements() {
+  const [searchOpen, setSearchOpen] = useState(false);
+
   return (
     <div className="simple-page movements-page">
-      <PageHeader
+      <PageHeader />
+
+      <SectionCard
+        title={null}
+        className="movements-page-card"
         action={
           <button className="btn btn-primary movements-new-button">
-            <Plus size={18} />
+            <Plus size={20} />
             Nuevo movimiento
           </button>
         }
-      />
-
-      <SectionCard title="Movimientos" className="movements-card">
+      >
         <div className="movements-toolbar">
           <div className="filters">
             <button className="filter active">Todos</button>
@@ -47,13 +53,21 @@ export default function Movements() {
               onChange={() => {}}
               options={periods}
             />
-            <div className="search">
-              <Search size={17} />
-              <input placeholder="Buscar" aria-label="Buscar movimientos" />
-            </div>
-            <button className="icon-filter" aria-label="Filtrar movimientos">
-              <Filter size={18} />
-            </button>
+            {searchOpen ? (
+              <div className="search-expanded">
+                <Search size={18} aria-hidden="true" />
+                <input autoFocus placeholder="Buscar" aria-label="Buscar movimientos" />
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="search-toggle"
+                aria-label="Buscar movimientos"
+                onClick={() => setSearchOpen(true)}
+              >
+                <Search size={20} />
+              </button>
+            )}
           </div>
         </div>
 
