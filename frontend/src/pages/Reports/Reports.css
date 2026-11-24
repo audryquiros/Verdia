@@ -390,3 +390,540 @@
     height: 140px;
   }
 }
+
+
+/* Evolución del gasto — vista general + filtro por categoría.
+   El gráfico muestra una sola serie: "Todas" o la categoría seleccionada.
+   El color siempre reutiliza el color definido para esa categoría. */
+.evolution-card .section-title {
+  margin-bottom: 2px;
+}
+
+.evolution-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  margin: -2px 0 4px;
+}
+
+.evolution-controls label {
+  color: var(--muted);
+  font: 650 10px var(--font-body);
+}
+
+.report-category-select {
+  width: 176px;
+}
+
+.report-category-select .custom-select-trigger {
+  height: 36px;
+  min-height: 36px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #fff;
+  color: var(--graphite);
+  font: 750 10px var(--font-body);
+}
+
+.report-category-select .custom-select-menu {
+  min-width: 176px;
+}
+
+.monthly-content {
+  height: 210px;
+}
+
+.spending-chart.single-category-chart {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 8px;
+  height: 164px;
+  margin-top: 2px;
+}
+
+.single-category-chart .chart-main {
+  position: relative;
+  min-width: 0;
+  height: 164px;
+  padding: 0 4px;
+}
+
+.single-category-chart .chart-gridlines {
+  position: absolute;
+  inset: 4px 4px 31px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.single-category-chart .chart-gridlines span {
+  display: block;
+  height: 1px;
+  background: #e7eee5;
+}
+
+.single-category-chart .spending-line {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 100%;
+  height: 134px;
+  overflow: visible;
+}
+
+.single-category-chart .spending-area {
+  fill: url(#spendingFill);
+}
+
+.single-category-chart .spending-path {
+  fill: none;
+  stroke: var(--chart-color, var(--forest));
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.single-category-chart .spending-line circle {
+  fill: #fff;
+  stroke: var(--chart-color, var(--forest));
+  stroke-width: 3;
+}
+
+.single-category-chart .chart-values {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  font: 700 9px var(--font-body);
+  color: var(--muted);
+  text-align: center;
+}
+
+.single-category-chart .chart-values span {
+  transform: translateY(-1px);
+}
+
+.single-category-chart .chart-labels {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  font: 650 10px var(--font-body);
+  color: var(--graphite);
+  text-align: center;
+}
+
+.single-category-chart .chart-y-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px 0 27px;
+  font: 600 9px var(--font-body);
+  color: var(--muted);
+  text-align: right;
+}
+
+.evolution-summary {
+  margin-top: 5px;
+  padding-left: 50px;
+}
+
+.evolution-summary div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.evolution-summary strong {
+  color: var(--chart-color, var(--forest));
+}
+
+.evolution-summary p strong {
+  color: var(--graphite);
+  font-weight: 800;
+}
+
+.evolution-summary p span {
+  font-weight: 500;
+}
+
+@media(max-width:650px) {
+  .evolution-controls {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .report-category-select {
+    width: 100%;
+  }
+
+  .report-category-select .custom-select-menu {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .monthly-content {
+    height: 205px;
+  }
+
+  .spending-chart.single-category-chart {
+    grid-template-columns: 34px 1fr;
+    height: 160px;
+  }
+
+  .single-category-chart .chart-main {
+    height: 160px;
+  }
+
+  .single-category-chart .spending-line {
+    height: 130px;
+  }
+
+  .evolution-summary {
+    padding-left: 42px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .evolution-summary p {
+    text-align: left;
+  }
+}
+
+/* --- Layout final del mockup para Evolución del gasto --- */
+.evolution-card {
+  min-height: 330px;
+  padding: 24px 26px 22px;
+}
+
+.evolution-card .section-title {
+  margin: 0;
+}
+
+.evolution-card .section-title h2 {
+  font-size: 24px;
+  line-height: 1.08;
+}
+
+.evolution-card .section-title p {
+  margin-top: 5px;
+}
+
+.evolution-card .evolution-controls {
+  position: absolute;
+  top: 24px;
+  right: 26px;
+  margin: 0;
+  gap: 8px;
+}
+
+.evolution-card {
+  position: relative;
+}
+
+.evolution-card .evolution-controls label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--graphite);
+}
+
+.evolution-card .report-category-select {
+  width: 170px;
+}
+
+.evolution-card .report-category-select .custom-select-trigger {
+  height: 40px;
+  min-height: 40px;
+  border-radius: 12px;
+  padding: 0 12px;
+  font-size: 11px;
+}
+
+.evolution-card .monthly-content {
+  height: 245px;
+  margin-top: 16px;
+}
+
+.evolution-card .spending-chart {
+  height: 190px;
+  grid-template-columns: 44px 1fr;
+  gap: 9px;
+  margin-top: 0;
+}
+
+.evolution-card .chart-y-labels {
+  padding: 7px 0 30px;
+  font-size: 10px;
+}
+
+.evolution-card .chart-main {
+  height: 190px;
+  padding: 0 4px;
+}
+
+.evolution-card .chart-gridlines {
+  inset: 7px 4px 34px 0;
+}
+
+.evolution-card .spending-line {
+  top: 7px;
+  height: 151px;
+}
+
+.evolution-card .chart-values {
+  top: -1px;
+  font-size: 10px;
+}
+
+.evolution-card .chart-labels {
+  bottom: 0;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.evolution-card .spending-summary {
+  margin-top: 5px;
+  padding-left: 53px;
+}
+
+.evolution-card .spending-summary strong {
+  font-size: 16px;
+}
+
+.evolution-card .spending-summary span,
+.evolution-card .spending-summary p {
+  font-size: 10px;
+}
+
+@media (max-width: 900px) {
+  .evolution-card .evolution-controls {
+    position: static;
+    justify-content: flex-end;
+    margin: 8px 0 2px;
+  }
+}
+
+@media (max-width: 650px) {
+  .evolution-card {
+    min-height: 0;
+    padding: 20px 16px;
+  }
+
+  .evolution-card .evolution-controls {
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  .evolution-card .report-category-select {
+    width: 100%;
+  }
+
+  .evolution-card .monthly-content {
+    height: 225px;
+  }
+
+  .evolution-card .spending-chart {
+    height: 175px;
+    grid-template-columns: 34px 1fr;
+  }
+
+  .evolution-card .chart-main {
+    height: 175px;
+  }
+
+  .evolution-card .spending-line {
+    height: 140px;
+  }
+
+  .evolution-card .spending-summary {
+    padding-left: 42px;
+  }
+}
+
+
+/* Ajuste final del card Evolución del gasto: control alineado a la derecha y resumen distribuido. */
+.evolution-card {
+  position: relative;
+}
+
+.evolution-card .evolution-controls {
+  position: absolute;
+  top: 29px;
+  right: 26px;
+  z-index: 2;
+  margin: 0;
+  justify-content: flex-end;
+}
+
+.evolution-card .evolution-controls label {
+  color: var(--graphite);
+  font-weight: 650;
+}
+
+.evolution-card .monthly-content {
+  height: 222px;
+}
+
+.evolution-card .spending-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  margin-top: 7px;
+  padding-left: 50px;
+}
+
+.evolution-card .evolution-total {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  min-width: 0;
+}
+
+.evolution-card .evolution-total strong {
+  white-space: nowrap;
+}
+
+.evolution-card .evolution-total span {
+  white-space: nowrap;
+}
+
+.evolution-card .evolution-peak {
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
+  font: 500 9px var(--font-body);
+  color: var(--muted);
+}
+
+.evolution-card .evolution-peak strong {
+  color: var(--graphite);
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .evolution-card .evolution-controls {
+    position: static;
+    margin: 8px 0 4px;
+    justify-content: flex-end;
+  }
+
+  .evolution-card .spending-summary {
+    grid-template-columns: 1fr auto;
+    padding-left: 42px;
+  }
+
+  .evolution-card .evolution-peak {
+    text-align: right;
+  }
+}
+
+@media (max-width: 650px) {
+  .evolution-card .evolution-controls {
+    justify-content: flex-start;
+  }
+
+  .evolution-card .spending-summary {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding-left: 42px;
+  }
+
+  .evolution-card .evolution-peak {
+    text-align: left;
+  }
+}
+
+/* Ajuste final del card Evolución del gasto: controles y resumen en esquinas. */
+.evolution-card {
+  position: relative;
+}
+
+.evolution-card .evolution-controls {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  margin: 0;
+  z-index: 2;
+}
+
+.evolution-card .evolution-controls label {
+  color: var(--graphite);
+  font-weight: 700;
+}
+
+.evolution-card .monthly-content {
+  width: 100%;
+}
+
+.evolution-card .spending-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 24px;
+  margin-top: 7px;
+  padding-left: 50px;
+  padding-right: 0;
+}
+
+.evolution-card .evolution-total {
+  min-width: 0;
+  justify-content: flex-start;
+}
+
+.evolution-card .evolution-peak {
+  min-width: 0;
+  justify-self: end;
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: 650px) {
+  .evolution-card .evolution-controls {
+    position: static;
+    justify-content: flex-end;
+    margin: 8px 0 4px;
+  }
+
+  .evolution-card .spending-summary {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-left: 42px;
+  }
+
+  .evolution-card .evolution-peak {
+    justify-self: start;
+    text-align: left;
+    white-space: normal;
+  }
+}
+
+/* Corrección final: el filtro debe quedar pegado al extremo derecho del contenido del card. */
+.evolution-card .evolution-controls {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  left: auto;
+  width: max-content;
+  margin: 0;
+  justify-content: flex-end;
+}
+
+.evolution-card .evolution-controls label {
+  margin: 0;
+}
+
+@media (max-width: 650px) {
+  .evolution-card .evolution-controls {
+    position: static;
+    width: auto;
+    justify-content: flex-end;
+    margin: 8px 0 4px;
+  }
+}

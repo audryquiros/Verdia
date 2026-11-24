@@ -34,9 +34,28 @@ const weekLabels = ['1–7 días', '8–14 días', '15–21 días', '22–28 dí
 
 export default function Reports() {
   const [period, setPeriod] = useState('Noviembre de 2026');
-  const allWeeklyValues = Object.values(categoryWeeklySpending).flat();
-  const maxWeeklyValue = Math.max(20, Math.ceil(Math.max(...allWeeklyValues) / 10) * 10);
+  const [selectedCategory, setSelectedCategory] = useState('Todas');
+
+  const selectedCategoryData = selectedCategory === 'Todas'
+    ? null
+    : categories.find((category) => category.name === selectedCategory);
+
+  const chartValues = selectedCategory === 'Todas'
+    ? weekLabels.map((_, index) =>
+        Object.values(categoryWeeklySpending).reduce((total, values) => total + values[index], 0)
+      )
+    : categoryWeeklySpending[selectedCategory];
+
+  const chartColor = selectedCategoryData?.color ?? '#285E45';
+  const maxWeeklyValue = Math.max(20, Math.ceil(Math.max(...chartValues) / 10) * 10);
   const chartScaleLabels = [maxWeeklyValue, Math.round(maxWeeklyValue * 2 / 3), Math.round(maxWeeklyValue / 3), 0];
+
+  const selectedTotal = selectedCategory === 'Todas'
+    ? 187350
+    : Number(selectedCategoryData?.value.replace(/[₡.]/g, '') || 0);
+
+  const selectedPeak = Math.max(...chartValues);
+  const peakIndex = chartValues.indexOf(selectedPeak);
 
   return (
     <div className="simple-page reports-page">
@@ -98,55 +117,88 @@ export default function Reports() {
         <SectionCard
           className="reports-card evolution-card"
           title="Evolución del gasto"
-          subtitle={`Observa cómo evolucionó tu gasto por categoría durante ${period.toLowerCase()}.`}
+          subtitle={`Observa cómo evolucionó tu gasto${selectedCategory === 'Todas' ? '' : ` en ${selectedCategory.toLowerCase()}`} durante ${period.toLowerCase()}.`}
         >
-          <div className="evolution-legend" aria-label="Categorías del gráfico">
-            {categories.map((category) => (
-              <span key={category.name} className="evolution-legend-item">
-                <span className="evolution-legend-dot" style={{ background: category.color }} />
-                {category.name}
-              </span>
-            ))}
+          <div className="evolution-controls">
+            <label htmlFor="report-category-select">Categoría</label>
+            <CustomSelect
+              className="report-category-select"
+              ariaLabel="Filtrar evolución del gasto por categoría"
+              value={selectedCategory}
+              onChange={setSelectedCategory}
+              options={['Todas', ...categories.map((category) => category.name)]}
+            />
           </div>
 
           <div className="monthly-content">
-            <div className="spending-chart multi-category-chart" aria-label={`Evolución semanal de gastos por categoría durante ${period}`}>
+            <div
+              className="spending-chart single-category-chart"
+              style={{ '--chart-color': chartColor }}
+              aria-label={`Evolución semanal de gastos ${selectedCategory === 'Todas' ? 'totales' : `de ${selectedCategory}`} durante ${period}`}
+            >
               <div className="chart-y-labels" aria-hidden="true">
                 {chartScaleLabels.map((value) => <span key={value}>₡{value}k</span>)}
               </div>
+
               <div className="chart-main">
                 <div className="chart-gridlines" aria-hidden="true">
                   <span></span><span></span><span></span><span></span>
                 </div>
-                <svg className="spending-line multi-line" viewBox="0 0 500 170" preserveAspectRatio="none" role="img" aria-label="Gastos semanales por categoría">
-                  {categories.map((category) => {
-                    const values = categoryWeeklySpending[category.name];
+
+                <svg
+                  className="spending-line"
+                  viewBox="0 0 500 170"
+                  preserveAspectRatio="none"
+                  role="img"
+                  aria-label={`Gasto por semana: ${chartValues.join(', ')} mil colones`}
+                >
+                  <defs>
+                    <linearGradient id="spendingFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor={chartColor} stopOpacity="0.18" />
+                      <stop offset="100%" stopColor={chartColor} stopOpacity="0.02" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    className="spending-area"
+                    d={buildAreaPath(chartValues, maxWeeklyValue)}
+                  />
+                  <path
+                    className="spending-path"
+                    d={buildLinePath(chartValues, maxWeeklyValue)}
+                  />
+                  {chartValues.map((value, index) => {
+                    const point = getChartPoint(index, value, chartValues.length, maxWeeklyValue);
                     return (
-                      <g key={category.name}>
-                        <path
-                          className="spending-path"
-                          d={buildLinePath(values, maxWeeklyValue)}
-                          stroke={category.color}
-                        />
-                        {values.map((value, index) => {
-                          const point = getChartPoint(index, value, values.length, maxWeeklyValue);
-                          return <circle key={`${category.name}-${index}`} cx={point.x} cy={point.y} r="4" stroke={category.color} />;
-                        })}
-                      </g>
+                      <circle
+                        key={`${selectedCategory}-${index}`}
+                        cx={point.x}
+                        cy={point.y}
+                        r="4.5"
+                      />
                     );
                   })}
                 </svg>
+
+                <div className="chart-values">
+                  {chartValues.map((value, index) => (
+                    <span key={`${selectedCategory}-value-${index}`}>₡{value}.000</span>
+                  ))}
+                </div>
+
                 <div className="chart-labels">
                   {weekLabels.map((label) => <span key={label}>{label}</span>)}
                 </div>
               </div>
             </div>
+
             <div className="spending-summary evolution-summary">
-              <div>
-                <strong>₡187.350</strong>
-                <span>Gasto total del periodo</span>
+              <div className="evolution-total">
+                <strong>₡{selectedTotal.toLocaleString('es-CR')}</strong>
+                <span>{selectedCategory === 'Todas' ? 'Gasto total del periodo' : `Gasto en ${selectedCategory.toLowerCase()}`}</span>
               </div>
-              <p>Vista de ejemplo mientras conectamos los datos reales.</p>
+              <p className="evolution-peak">
+                Mayor gasto: <strong>{weekLabels[peakIndex]}</strong>
+              </p>
             </div>
           </div>
         </SectionCard>
