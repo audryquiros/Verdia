@@ -1,0 +1,285 @@
+
+/* En Presupuestos, los controles de vista y creación pasan a una segunda fila,
+   debajo de notificaciones y perfil. El cambio queda aislado de las demás pantallas. */
+.budgets-page .page-header {
+  position: relative;
+  min-height: 158px;
+  align-items: flex-start;
+}
+
+.budgets-page .page-header-actions {
+  position: static;
+  align-self: flex-start;
+  padding-top: 0;
+}
+
+.budgets-page .budgets-page-actions {
+  position: absolute;
+  right: 0;
+  top: 92px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+
+.budgets-page .budget-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.budgets-page .budget-view-toggle button {
+  width: 34px;
+  height: 32px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+  transition: background 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+
+.budgets-page .budget-view-toggle button:hover {
+  color: var(--forest);
+  transform: translateY(-1px);
+}
+
+.budgets-page .budget-view-toggle button.active {
+  background: var(--forest);
+  color: #fff;
+}
+
+/* Vista lista: esta es la composición más cercana al mockup. */
+.budgets-page .budget-list {
+  overflow: hidden;
+  padding: 7px 16px;
+}
+
+.budgets-page .budget-list-item {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  min-height: 108px;
+  padding: 15px 8px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.budgets-page .budget-list-item:last-child {
+  border-bottom: 0;
+}
+
+.budgets-page .budget-list-content {
+  min-width: 0;
+}
+
+.budgets-page .budget-list-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.budgets-page .budget-list-title-row h2 {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.budgets-page .budget-list-title-row strong {
+  color: var(--forest);
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.budgets-page .budget-list-values {
+  margin: 5px 0 9px;
+  color: var(--forest);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.budgets-page .budget-list .progress-wrap {
+  width: 100%;
+}
+
+.budgets-page .budget-list .progress {
+  height: 8px;
+}
+
+/* Colores de categoría: mantienen la identidad Verdia sin convertir la pantalla en un arcoíris. */
+.budgets-page .budget-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+}
+
+.budgets-page .budget-icon-green {
+  background: #E4F2D9;
+  color: #2D7A50;
+}
+
+.budgets-page .budget-icon-purple {
+  background: #EEE9FF;
+  color: #7359C9;
+}
+
+.budgets-page .budget-icon-coral {
+  background: #FBE9E1;
+  color: #C46A4F;
+}
+
+/* Vista cards */
+.budgets-page .budget-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.budgets-page .budget-card {
+  min-height: 190px;
+  padding: 25px 25px 23px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.budgets-page .budget-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.budgets-page .budget-card-title {
+  min-width: 0;
+  flex: 1;
+  padding-top: 1px;
+}
+
+.budgets-page .budget-card-title h2 {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.budgets-page .budget-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0 9px;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.budgets-page .budget-line span {
+  color: var(--muted);
+}
+
+.budgets-page .budget-line strong {
+  color: var(--forest);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.budgets-page .budget-card-green {
+  border-top: 3px solid #A9D29A;
+}
+
+.budgets-page .budget-card-purple {
+  border-top: 3px solid #B7A8EC;
+}
+
+.budgets-page .budget-card-coral {
+  border-top: 3px solid #F0B39A;
+}
+
+.budgets-page .budget-card .progress-wrap {
+  width: 100%;
+}
+
+.budgets-page .budget-card .progress {
+  height: 8px;
+}
+
+@media (max-width: 1000px) {
+  .budgets-page .budget-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .budgets-page .page-header {
+    min-height: 118px;
+  }
+
+  .budgets-page .budgets-page-actions {
+    top: 70px;
+    right: 0;
+    gap: 7px;
+  }
+
+  .budgets-page .budget-view-toggle {
+    display: none;
+  }
+
+  .budgets-page .budget-list {
+    padding: 4px 12px;
+  }
+
+  .budgets-page .budget-list-item {
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 12px;
+    min-height: 100px;
+    padding: 14px 5px;
+  }
+
+  .budgets-page .budget-list-title-row h2 {
+    font-size: 17px;
+  }
+
+  .budgets-page .budget-list-title-row strong {
+    font-size: 12px;
+  }
+
+  .budgets-page .budget-list-values {
+    font-size: 10px;
+  }
+
+  .budgets-page .budget-icon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .budgets-page .budget-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .budgets-page .budget-card {
+    min-height: 175px;
+  }
+
+  .budgets-page .budget-card-title h2 {
+    font-size: 22px;
+  }
+}
