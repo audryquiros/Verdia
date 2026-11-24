@@ -6,8 +6,8 @@
   align-items: flex-start;
 }
 
-/* La acción de Deudas se divide visualmente: crear debajo del título y
-   selector de vista debajo de perfil/notificaciones. */
+/* Los controles quedan en una segunda fila: crear debajo del título y
+   selector debajo del perfil, ambos alineados horizontalmente. */
 .debts-page .page-header-actions {
   align-self: flex-start;
   padding-top: 0;
@@ -25,46 +25,13 @@
   z-index: 2;
 }
 
-.debts-page .debt-view-toggle {
+.debts-page .view-switcher {
   position: absolute;
   right: 0;
   top: 106px;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 3px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.86);
   z-index: 2;
 }
 
-.debts-page .debt-view-toggle button {
-  min-width: 76px;
-  height: 32px;
-  padding: 0 11px;
-  border: 0;
-  border-radius: 9px;
-  background: transparent;
-  color: var(--muted);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 750;
-  transition: background-color .16s ease, color .16s ease, transform .16s ease;
-}
-
-.debts-page .debt-view-toggle button:hover {
-  color: var(--forest);
-  transform: translateY(-1px);
-}
-
-.debts-page .debt-view-toggle button.active {
-  background: var(--forest);
-  color: #fff;
-}
 
 /* Vista lista: ocupa todo el ancho disponible. */
 .debts-page .debt-list-card {
@@ -296,18 +263,6 @@
     top: 88px;
   }
 
-  .debts-page .debt-view-toggle {
-    top: 88px;
-  }
-
-  .debts-page .debt-view-toggle button {
-    min-width: 38px;
-    padding: 0 8px;
-  }
-
-  .debts-page .debt-view-toggle button span {
-    display: none;
-  }
 
   .debts-page .debt-list-card {
     padding: 8px;

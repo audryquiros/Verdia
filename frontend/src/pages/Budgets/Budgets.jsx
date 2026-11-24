@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Car, Gamepad2, LayoutGrid, List, Plus, Utensils } from 'lucide-react';
+import { Car, Gamepad2, Plus, Utensils } from 'lucide-react';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
+import ViewSwitcher from '../../components/ViewSwitcher/ViewSwitcher.jsx';
 import '../SimplePage.css';
 import './Budgets.css';
 
@@ -91,38 +92,27 @@ function BudgetCards({ items }) {
 }
 
 export default function Budgets() {
-  const [view, setView] = useState('list');
+  const [view, setView] = useState('cards');
 
   return (
     <div className="simple-page budgets-page">
       <PageHeader
         action={
           <div className="budgets-page-actions">
-            <div className="budget-view-toggle" role="group" aria-label="Vista de presupuestos">
-              <button
-                type="button"
-                className={view === 'list' ? 'active' : ''}
-                onClick={() => setView('list')}
-                aria-label="Vista de lista"
-                aria-pressed={view === 'list'}
-              >
-                <List size={17} />
-              </button>
-              <button
-                type="button"
-                className={view === 'cards' ? 'active' : ''}
-                onClick={() => setView('cards')}
-                aria-label="Vista de tarjetas"
-                aria-pressed={view === 'cards'}
-              >
-                <LayoutGrid size={17} />
-              </button>
-            </div>
-
             <button className="btn btn-primary">
               <Plus size={16} />
               Nuevo presupuesto
             </button>
+
+            <ViewSwitcher
+              value={view}
+              onChange={setView}
+              ariaLabel="Vista de presupuestos"
+              options={[
+                { value: 'cards', label: 'Cards' },
+                { value: 'list', label: 'Lista' },
+              ]}
+            />
           </div>
         }
       />

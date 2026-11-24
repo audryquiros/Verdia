@@ -3,7 +3,7 @@
    debajo de notificaciones y perfil. El cambio queda aislado de las demás pantallas. */
 .budgets-page .page-header {
   position: relative;
-  min-height: 158px;
+  min-height: 182px;
   align-items: flex-start;
 }
 
@@ -14,47 +14,25 @@
 }
 
 .budgets-page .budgets-page-actions {
+  position: static;
+  display: contents;
+}
+
+.budgets-page .budgets-page-actions > .btn {
+  position: absolute;
+  left: 0;
+  top: 116px;
+  z-index: 2;
+}
+
+.budgets-page .view-switcher {
   position: absolute;
   right: 0;
-  top: 92px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  top: 116px;
   z-index: 2;
 }
 
 
-.budgets-page .budget-view-toggle {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px;
-  gap: 2px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.82);
-}
-
-.budgets-page .budget-view-toggle button {
-  width: 34px;
-  height: 32px;
-  border: 0;
-  border-radius: 9px;
-  background: transparent;
-  color: var(--muted);
-  display: grid;
-  place-items: center;
-  transition: background 0.16s ease, color 0.16s ease, transform 0.16s ease;
-}
-
-.budgets-page .budget-view-toggle button:hover {
-  color: var(--forest);
-  transform: translateY(-1px);
-}
-
-.budgets-page .budget-view-toggle button.active {
-  background: var(--forest);
-  color: #fff;
-}
 
 /* Vista lista: esta es la composición más cercana al mockup. */
 .budgets-page .budget-list {
@@ -229,17 +207,15 @@
 
 @media (max-width: 650px) {
   .budgets-page .page-header {
-    min-height: 118px;
+    min-height: 136px;
   }
 
-  .budgets-page .budgets-page-actions {
-    top: 70px;
-    right: 0;
-    gap: 7px;
+  .budgets-page .budgets-page-actions > .btn {
+    top: 82px;
   }
 
-  .budgets-page .budget-view-toggle {
-    display: none;
+  .budgets-page .view-switcher {
+    top: 82px;
   }
 
   .budgets-page .budget-list {

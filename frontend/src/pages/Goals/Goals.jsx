@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Laptop, LayoutGrid, List, Plane, Plus } from 'lucide-react';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
+import ViewSwitcher from '../../components/ViewSwitcher/ViewSwitcher.jsx';
 import '../SimplePage.css';
 import './Goals.css';
 
@@ -89,7 +90,7 @@ function GoalCards({ items }) {
 }
 
 export default function Goals() {
-  const [view, setView] = useState('list');
+  const [view, setView] = useState('cards');
 
   return (
     <div className="simple-page goals-page">
@@ -101,28 +102,15 @@ export default function Goals() {
               Nueva meta
             </button>
 
-            <div className="goal-view-toggle" role="group" aria-label="Vista de metas">
-              <button
-                type="button"
-                className={view === 'list' ? 'active' : ''}
-                onClick={() => setView('list')}
-                aria-label="Vista de lista"
-                aria-pressed={view === 'list'}
-              >
-                <List size={17} />
-                <span>Lista</span>
-              </button>
-              <button
-                type="button"
-                className={view === 'cards' ? 'active' : ''}
-                onClick={() => setView('cards')}
-                aria-label="Vista de tarjetas"
-                aria-pressed={view === 'cards'}
-              >
-                <LayoutGrid size={17} />
-                <span>Cards</span>
-              </button>
-            </div>
+            <ViewSwitcher
+              value={view}
+              onChange={setView}
+              ariaLabel="Vista de metas"
+              options={[
+                { value: 'cards', label: 'Cards' },
+                { value: 'list', label: 'Lista' },
+              ]}
+            />
           </div>
         }
       />

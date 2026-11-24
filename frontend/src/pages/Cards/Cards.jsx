@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Plus, Eye, ArrowRight, CreditCard, List, LayoutGrid } from 'lucide-react';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
+import ViewSwitcher from '../../components/ViewSwitcher/ViewSwitcher.jsx';
 import './Cards.css';
 
 const CARD_DESIGNS = {
@@ -157,35 +158,16 @@ export default function Cards() {
 
       <div className="cards-toolbar">
         <button className="btn btn-primary cards-register-btn"><Plus size={16} /> Registrar tarjeta</button>
-        <div className="cards-view-switcher" role="tablist" aria-label="Vista de tarjetas">
-          <button
-            className={view === 'wallet' ? 'active' : ''}
-            onClick={() => setView('wallet')}
-            role="tab"
-            aria-selected={view === 'wallet'}
-            title="Vista wallet"
-          >
-            <CreditCard size={16} /> Wallet
-          </button>
-          <button
-            className={view === 'cards' ? 'active' : ''}
-            onClick={() => setView('cards')}
-            role="tab"
-            aria-selected={view === 'cards'}
-            title="Vista cards"
-          >
-            <LayoutGrid size={16} /> Cards
-          </button>
-          <button
-            className={view === 'list' ? 'active' : ''}
-            onClick={() => setView('list')}
-            role="tab"
-            aria-selected={view === 'list'}
-            title="Vista lista"
-          >
-            <List size={16} /> Lista
-          </button>
-        </div>
+        <ViewSwitcher
+          value={view}
+          onChange={setView}
+          ariaLabel="Vista de tarjetas"
+          options={[
+            { value: 'wallet', label: 'Wallet', icon: CreditCard },
+            { value: 'cards', label: 'Cards' },
+            { value: 'list', label: 'Lista' },
+          ]}
+        />
       </div>
 
       {view === 'wallet' && <WalletView card={activeCard} />}

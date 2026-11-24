@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { CreditCard, HandCoins, LayoutGrid, List, Plus } from 'lucide-react';
+import { CreditCard, HandCoins, Plus } from 'lucide-react';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
+import ViewSwitcher from '../../components/ViewSwitcher/ViewSwitcher.jsx';
 import '../SimplePage.css';
 import './Debts.css';
 
@@ -89,7 +90,7 @@ function DebtCards({ items }) {
 }
 
 export default function Debts() {
-  const [view, setView] = useState('list');
+  const [view, setView] = useState('cards');
 
   return (
     <div className="simple-page debts-page">
@@ -100,28 +101,15 @@ export default function Debts() {
               <Plus size={16} />
               Nueva deuda
             </button>
-            <div className="debt-view-toggle" role="group" aria-label="Vista de deudas">
-              <button
-                type="button"
-                className={view === 'list' ? 'active' : ''}
-                onClick={() => setView('list')}
-                aria-label="Vista de lista"
-                aria-pressed={view === 'list'}
-              >
-                <List size={17} />
-                <span>Lista</span>
-              </button>
-              <button
-                type="button"
-                className={view === 'cards' ? 'active' : ''}
-                onClick={() => setView('cards')}
-                aria-label="Vista de tarjetas"
-                aria-pressed={view === 'cards'}
-              >
-                <LayoutGrid size={17} />
-                <span>Cards</span>
-              </button>
-            </div>
+            <ViewSwitcher
+              value={view}
+              onChange={setView}
+              ariaLabel="Vista de deudas"
+              options={[
+                { value: 'cards', label: 'Cards' },
+                { value: 'list', label: 'Lista' },
+              ]}
+            />
           </div>
         }
       />

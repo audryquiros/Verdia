@@ -12,41 +12,6 @@
   flex: 0 0 auto;
 }
 
-.cards-page .cards-view-switcher {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-}
-
-.cards-page .cards-view-switcher button {
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  border-radius: 9px;
-  padding: 8px 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 9px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.cards-page .cards-view-switcher button.active {
-  color: #fff;
-  background: var(--forest);
-}
-
-.cards-page .wallet-view,
-.cards-page .cards-view,
-.cards-page .list-view {
-  width: 100%;
-}
-
 /* La tarjeta y sus datos forman una sola unidad visual. */
 .cards-page .wallet-card-shell,
 .cards-page .card-format {
@@ -393,14 +358,6 @@
     justify-content: center;
   }
 
-  .cards-page .cards-view-switcher {
-    width: 100%;
-  }
-
-  .cards-page .cards-view-switcher button {
-    flex: 1;
-    justify-content: center;
-  }
 
   .cards-page .wallet-card-shell {
     padding: 10px;
