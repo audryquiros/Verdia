@@ -1,0 +1,458 @@
+.services-page {
+  padding-bottom: 56px;
+}
+
+.services-page .section-card {
+  padding: 24px 20px 25px;
+}
+
+.services-page .section-title {
+  margin-bottom: 20px;
+}
+
+.services-page .section-title h2 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.services-page .service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.services-page .service-item {
+  min-height: 82px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 14px;
+  padding: 14px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--graphite);
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+.services-page .service-item:hover {
+  border-color: #c8d9c9;
+  box-shadow: 0 8px 22px rgba(38, 52, 43, 0.06);
+  transform: translateY(-1px);
+}
+
+.services-page .service-item-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+}
+
+.services-page .service-item strong {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.services-page .service-item-electricity .service-item-icon {
+  color: #d99519;
+  background: #fff4dc;
+}
+
+.services-page .service-item-water .service-item-icon {
+  color: #3f82c7;
+  background: #e8f3ff;
+}
+
+.services-page .service-item-internet .service-item-icon {
+  color: #4e9a6d;
+  background: #eaf6ec;
+}
+
+.services-page .service-item-phone .service-item-icon {
+  color: #7d61d7;
+  background: #f0eaff;
+}
+
+.services-page .service-item-tv .service-item-icon {
+  color: #8b63cf;
+  background: #f1eaff;
+}
+
+.services-page .service-item-other .service-item-icon {
+  color: var(--forest);
+  background: #eef5ec;
+}
+
+.services-support {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  padding: 24px 26px;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.5fr);
+  gap: 28px;
+  box-shadow: 0 10px 30px rgba(38, 52, 43, 0.035);
+}
+
+.services-support-copy {
+  align-self: center;
+  max-width: 390px;
+}
+
+.services-support-kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--forest);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.services-support-copy h2 {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 25px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.services-support-copy p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.services-guide {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.services-guide-item {
+  min-height: 132px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fbfcf9;
+  padding: 16px;
+}
+
+.services-guide-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  color: var(--forest);
+  background: #eaf3e7;
+  margin-bottom: 11px;
+}
+
+.services-guide-item h3 {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.services-guide-item p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+@media (max-width: 1050px) {
+  .services-support {
+    grid-template-columns: 1fr;
+  }
+
+  .services-support-copy {
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 900px) {
+  .services-page .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-guide {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .services-page .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .services-page .service-item {
+    min-height: 76px;
+    padding: 12px 10px;
+    gap: 9px;
+  }
+
+  .services-page .service-item-icon {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .services-page .service-item strong {
+    font-size: 11px;
+  }
+
+  .services-support {
+    padding: 20px 18px;
+  }
+}
+
+.services-lower-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 16px;
+}
+
+.services-panel {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  padding: 22px 24px;
+  box-shadow: 0 10px 30px rgba(38, 52, 43, 0.035);
+}
+
+.services-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.services-panel-kicker {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--forest);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.services-panel h2 {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.services-example-badge {
+  flex: 0 0 auto;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #eef5ec;
+  color: var(--forest);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.services-payment-list {
+  display: grid;
+  gap: 8px;
+}
+
+.services-payment-item {
+  min-height: 62px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fbfcf9;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.services-payment-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+}
+
+.services-payment-icon-electricity {
+  color: #d99519;
+  background: #fff4dc;
+}
+
+.services-payment-icon-internet {
+  color: #4e9a6d;
+  background: #eaf6ec;
+}
+
+.services-payment-icon-water {
+  color: #3f82c7;
+  background: #e8f3ff;
+}
+
+.services-payment-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.services-payment-main h3 {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.services-payment-main span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+}
+
+.services-payment-item > strong {
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.services-panel-link {
+  margin-top: 13px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--forest);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.services-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.services-panel-header-icon {
+  color: var(--forest);
+  margin-top: 4px;
+}
+
+.services-action-list {
+  display: grid;
+  gap: 8px;
+}
+
+.services-action-item {
+  width: 100%;
+  min-height: 62px;
+  padding: 10px 11px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fbfcf9;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-align: left;
+  color: var(--graphite);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+
+.services-action-item:hover {
+  border-color: #c8d9c9;
+  box-shadow: 0 8px 22px rgba(38, 52, 43, 0.06);
+  transform: translateY(-1px);
+}
+
+.services-action-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  color: var(--forest);
+  background: #eaf3e7;
+}
+
+.services-action-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.services-action-copy strong {
+  display: block;
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.services-action-copy small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.services-action-arrow {
+  flex: 0 0 auto;
+  color: #7b8b80;
+}
+
+@media (max-width: 1050px) {
+  .services-lower-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .services-panel {
+    padding: 19px 17px;
+  }
+
+  .services-panel h2 {
+    font-size: 20px;
+  }
+
+  .services-payment-item > strong {
+    font-size: 14px;
+  }
+}
