@@ -75,6 +75,7 @@ export default function Dashboard() {
               <MovementRow compact name="Walmart" category="Alimentación · Tarjeta" date="Hoy" amount="₡15.500" />
               <MovementRow compact name="ICE" category="Servicios" date="Ayer" amount="₡28.350" />
               <MovementRow compact name="Salario" category="Ingreso" date="3 nov" amount="₡620.000" type="income" />
+              <MovementRow compact name="Uber" category="Transporte" date="2 nov" amount="₡6.200" />
             </SectionCard>
 
             <SectionCard title="Accesos rápidos" className="quick-card">

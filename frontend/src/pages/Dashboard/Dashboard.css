@@ -507,12 +507,12 @@
   /* Área inferior — reducir la altura y acercar Últimos movimientos
      a la proporción compacta del mockup. */
   .bottom-panels{
-    flex:0 0 250px;
+    flex:0 0 300px;
     min-height:0;
   }
   .movements-card,
   .quick-card{
-    height:250px!important;
+    height:300px!important;
   }
 
   .movements-card .section-card{
@@ -622,4 +622,63 @@
   text-align:right;
   align-items:flex-end;
   flex:0 0 90px;
+}
+
+
+/* =========================================================
+   DASHBOARD — Accesos rápidos
+   Ajuste visual aislado del card para acercarlo al mockup.
+   ========================================================= */
+@media (min-width: 1101px){
+  .quick-card{
+    height:300px!important;
+    align-self:flex-start;
+  }
+
+  .quick-card .section-title{
+    margin-bottom:12px;
+  }
+
+  .quick-card .section-title h2{
+    font-size:20px;
+  }
+
+  .quick-card .quick-grid{
+    gap:10px;
+  }
+
+  .quick-card .quick{
+    min-height:60px;
+    padding:8px 8px;
+    border-radius:13px;
+  }
+
+  .quick-card .quick span{
+    width:32px;
+    height:32px;
+    border-radius:10px;
+    margin-bottom:5px;
+  }
+
+  .quick-card .quick span svg{
+    width:17px;
+    height:17px;
+  }
+
+  .quick-card .quick small{
+    font-size:10.5px;
+    line-height:1.15;
+  }
+}
+
+/* Dashboard — Vera debe terminar exactamente a la misma altura
+   que el card de Accesos rápidos.
+   Altura = fila superior (190) + separación (14) + Accesos rápidos (300).
+   No modifica el contenido interno de Vera. */
+@media (min-width: 1101px){
+  .dashboard-grid .side-col .vera-card{
+    height:504px;
+    min-height:504px;
+    max-height:504px;
+  }
 }
