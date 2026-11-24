@@ -1,0 +1,444 @@
+/* Estilos exclusivos de la pantalla Tarjetas. No modifica las demás páginas. */
+
+.cards-page .cards-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.cards-page .cards-register-btn {
+  flex: 0 0 auto;
+}
+
+.cards-page .cards-view-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.cards-page .cards-view-switcher button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 9px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cards-page .cards-view-switcher button.active {
+  color: #fff;
+  background: var(--forest);
+}
+
+.cards-page .wallet-view,
+.cards-page .cards-view,
+.cards-page .list-view {
+  width: 100%;
+}
+
+/* La tarjeta y sus datos forman una sola unidad visual. */
+.cards-page .wallet-card-shell,
+.cards-page .card-format {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 16px 34px rgba(38, 52, 43, 0.07);
+}
+
+.cards-page .wallet-card-shell {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.cards-page .card-format {
+  min-width: 0;
+}
+
+.cards-page .cards-view {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cards-page .credit-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 292px;
+  border-radius: 18px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  box-shadow: 0 18px 34px rgba(38, 52, 43, 0.14);
+  isolation: isolate;
+}
+
+.cards-page .wallet-card-shell .credit-card {
+  min-height: 300px;
+}
+
+.cards-page .credit-card__decoration {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  right: -90px;
+  bottom: -115px;
+  opacity: 0.18;
+  background: rgba(255, 255, 255, 0.35);
+  z-index: -1;
+}
+
+.cards-page .credit-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cards-page .credit-card__brand {
+  font-size: 1.35rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.cards-page .credit-card__type {
+  font-size: 0.82rem;
+  opacity: 0.92;
+}
+
+.cards-page .credit-card__number {
+  font-size: 1.9rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.cards-page .card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  font-size: 0.78rem;
+}
+
+.cards-page .card-bottom span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cards-page .card-bottom span:last-child {
+  text-align: right;
+}
+
+.cards-page .card-bottom small {
+  font-size: 0.72rem;
+  opacity: 0.82;
+}
+
+.cards-page .card-bottom b {
+  font-size: 1rem;
+}
+
+/* Información debajo de la tarjeta, pero dentro del mismo contenedor. */
+.cards-page .card-info {
+  padding: 6px 24px 24px;
+}
+
+.cards-page .card-info__rows {
+  border-top: 1px solid var(--line);
+}
+
+.cards-page .detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 42px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 9px;
+}
+
+.cards-page .detail-row:last-child {
+  border-bottom: 0;
+}
+
+.cards-page .detail-row b {
+  color: var(--graphite);
+}
+
+/* Botones centrados como en el mockup. */
+.cards-page .actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.cards-page .actions .btn {
+  min-width: 150px;
+  justify-content: center;
+}
+
+/* VISA */
+.cards-page .card-brand-visa {
+  background:
+    radial-gradient(circle at 85% 18%, rgba(255,255,255,.18) 0 12%, transparent 13%),
+    linear-gradient(135deg, #5133b7 0%, #7455d5 55%, #8b70e6 100%);
+}
+
+.cards-page .card-brand-visa .credit-card__decoration {
+  width: 270px;
+  height: 270px;
+  right: -125px;
+  top: -145px;
+  bottom: auto;
+}
+
+/* Mastercard */
+.cards-page .card-brand-mastercard {
+  background: linear-gradient(135deg, #8e242b 0%, #c84538 52%, #e66b3d 100%);
+}
+
+.cards-page .card-brand-mastercard .credit-card__decoration {
+  width: 150px;
+  height: 150px;
+  right: 28px;
+  bottom: 28px;
+  background:
+    radial-gradient(circle at 35% 50%, rgba(255, 190, 60, .92) 0 37%, transparent 38%),
+    radial-gradient(circle at 65% 50%, rgba(245, 65, 55, .92) 0 37%, transparent 38%);
+  opacity: 0.9;
+  border-radius: 0;
+}
+
+/* American Express */
+.cards-page .card-brand-amex {
+  background: linear-gradient(135deg, #075b91 0%, #087fba 52%, #35a8d2 100%);
+}
+
+.cards-page .card-brand-amex .credit-card__decoration {
+  width: 180px;
+  height: 180px;
+  right: -45px;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%) rotate(45deg);
+  border-radius: 28px;
+  border: 2px solid rgba(255,255,255,.55);
+  background: transparent;
+  opacity: 0.65;
+}
+
+/* Discover */
+.cards-page .card-brand-discover {
+  background: linear-gradient(135deg, #a94f18 0%, #d96b22 52%, #f19a3b 100%);
+}
+
+.cards-page .card-brand-discover .credit-card__decoration {
+  width: 210px;
+  height: 210px;
+  right: -70px;
+  bottom: -105px;
+  background: radial-gradient(circle, rgba(255,255,255,.65) 0 30%, rgba(255,255,255,.15) 31% 55%, transparent 56%);
+}
+
+.cards-page .card-brand-default {
+  background: linear-gradient(135deg, #285e45 0%, #3d7b5d 100%);
+}
+
+/* Vista lista */
+.cards-page .list-view {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(38, 52, 43, 0.06);
+}
+
+.cards-page .cards-list-head,
+.cards-page .card-list-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.7fr) minmax(130px, .8fr) minmax(110px, .65fr) minmax(190px, 1fr);
+  align-items: center;
+  gap: 18px;
+}
+
+.cards-page .cards-list-head {
+  min-height: 42px;
+  padding: 0 20px;
+  background: #f7f9f5;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.cards-page .card-list-row {
+  min-height: 82px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--line);
+  font-size: 9px;
+}
+
+.cards-page .card-list-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cards-page .card-list-mark {
+  width: 76px;
+  height: 44px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  box-shadow: 0 7px 14px rgba(38, 52, 43, 0.12);
+}
+
+.cards-page .card-list-mark.card-brand-visa {
+  background: linear-gradient(135deg, #5133b7, #8b70e6);
+}
+
+.cards-page .card-list-mark.card-brand-mastercard {
+  background: linear-gradient(135deg, #8e242b, #e66b3d);
+}
+
+.cards-page .card-list-mark.card-brand-amex {
+  background: linear-gradient(135deg, #075b91, #35a8d2);
+}
+
+.cards-page .card-list-mark.card-brand-discover {
+  background: linear-gradient(135deg, #a94f18, #f19a3b);
+}
+
+.cards-page .card-list-mark.card-brand-default {
+  background: linear-gradient(135deg, #285e45, #3d7b5d);
+}
+
+.cards-page .card-list-identity > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.cards-page .card-list-identity span {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.cards-page .card-list-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.cards-page .card-list-actions .btn {
+  min-height: 32px;
+  padding: 7px 11px;
+  font-size: 8px;
+}
+
+@media (max-width: 900px) {
+  .cards-page .cards-view {
+    grid-template-columns: 1fr;
+  }
+
+  .cards-page .cards-list-head {
+    display: none;
+  }
+
+  .cards-page .card-list-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .cards-page .card-list-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 650px) {
+  .cards-page .cards-toolbar {
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .cards-page .cards-register-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .cards-page .cards-view-switcher {
+    width: 100%;
+  }
+
+  .cards-page .cards-view-switcher button {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .cards-page .wallet-card-shell {
+    padding: 10px;
+    border-radius: 18px;
+  }
+
+  .cards-page .credit-card,
+  .cards-page .wallet-card-shell .credit-card {
+    min-height: 250px;
+    padding: 24px;
+  }
+
+  .cards-page .credit-card__number {
+    font-size: 1.55rem;
+  }
+
+  .cards-page .card-info {
+    padding: 4px 14px 16px;
+  }
+
+  .cards-page .actions {
+    flex-direction: column;
+  }
+
+  .cards-page .actions .btn {
+    width: 100%;
+  }
+
+  .cards-page .card-list-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cards-page .card-list-actions {
+    justify-content: stretch;
+  }
+
+  .cards-page .card-list-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
