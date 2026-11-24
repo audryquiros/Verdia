@@ -1,7 +1,133 @@
-import {Plus,Plane,Laptop} from 'lucide-react';
-import SectionCard from '../../components/SectionCard/SectionCard.jsx';
+import { useState } from 'react';
+import { Laptop, LayoutGrid, List, Plane, Plus } from 'lucide-react';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
 import '../SimplePage.css';
-export default function Goals(){return <div className="simple-page"><PageHeader action={<button className="btn btn-primary"><Plus size={16}/> Nueva meta</button>} /><div className="goal-grid"><Goal title="Viaje a la playa" amount="₡600.000" saved="₡360.000" value={60} icon={Plane}/><Goal title="Laptop" amount="₡600.000" saved="₡250.000" value={42} icon={Laptop}/></div></div>}
-function Goal({title,amount,saved,value,icon:Icon}){return <SectionCard title={title}><div className="goal-visual"><div className="goal-icon"><Icon size={23}/></div><div><strong>{saved}</strong><span>de {amount}</span></div></div><ProgressBar value={value}/><div className="debt-foot"><span>{value}%</span><span>completado</span></div></SectionCard>}
+import './Goals.css';
+
+const goals = [
+  {
+    title: 'Viaje a la playa',
+    amount: '₡600.000',
+    saved: '₡360.000',
+    value: 60,
+    variant: 'green',
+    icon: Plane,
+  },
+  {
+    title: 'Laptop',
+    amount: '₡600.000',
+    saved: '₡250.000',
+    value: 42,
+    variant: 'purple',
+    icon: Laptop,
+  },
+];
+
+function GoalIcon({ Icon, variant }) {
+  return (
+    <div className={`goal-item-icon goal-item-icon-${variant}`} aria-hidden="true">
+      <Icon size={22} strokeWidth={2} />
+    </div>
+  );
+}
+
+function GoalList({ items }) {
+  return (
+    <section className="goals-list-card card">
+      <div className="goals-list">
+        {items.map((goal) => (
+          <article className={`goal-item goal-item-${goal.variant}`} key={goal.title}>
+            <GoalIcon Icon={goal.icon} variant={goal.variant} />
+
+            <div className="goal-item-main">
+              <div className="goal-item-heading">
+                <div>
+                  <h2>{goal.title}</h2>
+                  <p>{goal.saved} de {goal.amount}</p>
+                </div>
+                <strong>{goal.value}%</strong>
+              </div>
+
+              <div className="goal-item-progress">
+                <ProgressBar value={goal.value} />
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function GoalCards({ items }) {
+  return (
+    <section className="goals-cards-grid">
+      {items.map((goal) => (
+        <article className={`goal-card card goal-card-${goal.variant}`} key={goal.title}>
+          <div className="goal-card-top">
+            <GoalIcon Icon={goal.icon} variant={goal.variant} />
+            <span>{goal.value}%</span>
+          </div>
+
+          <div className="goal-card-content">
+            <h2>{goal.title}</h2>
+            <div className="goal-card-amount">
+              <strong>{goal.saved}</strong>
+              <span>de {goal.amount}</span>
+            </div>
+            <ProgressBar value={goal.value} />
+            <div className="goal-card-foot">
+              <span>{goal.value}%</span>
+              <span>completado</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </section>
+  );
+}
+
+export default function Goals() {
+  const [view, setView] = useState('list');
+
+  return (
+    <div className="simple-page goals-page">
+      <PageHeader
+        action={
+          <div className="goals-page-actions">
+            <button className="btn btn-primary goals-new-button">
+              <Plus size={16} />
+              Nueva meta
+            </button>
+
+            <div className="goal-view-toggle" role="group" aria-label="Vista de metas">
+              <button
+                type="button"
+                className={view === 'list' ? 'active' : ''}
+                onClick={() => setView('list')}
+                aria-label="Vista de lista"
+                aria-pressed={view === 'list'}
+              >
+                <List size={17} />
+                <span>Lista</span>
+              </button>
+              <button
+                type="button"
+                className={view === 'cards' ? 'active' : ''}
+                onClick={() => setView('cards')}
+                aria-label="Vista de tarjetas"
+                aria-pressed={view === 'cards'}
+              >
+                <LayoutGrid size={17} />
+                <span>Cards</span>
+              </button>
+            </div>
+          </div>
+        }
+      />
+
+      {view === 'list' ? <GoalList items={goals} /> : <GoalCards items={goals} />}
+    </div>
+  );
+}

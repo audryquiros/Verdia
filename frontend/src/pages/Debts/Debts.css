@@ -1,0 +1,366 @@
+/* Estilos exclusivos de Deudas. No modifican las demás pantallas. */
+
+.debts-page .page-header {
+  position: relative;
+  min-height: 158px;
+  align-items: flex-start;
+}
+
+/* La acción de Deudas se divide visualmente: crear debajo del título y
+   selector de vista debajo de perfil/notificaciones. */
+.debts-page .page-header-actions {
+  align-self: flex-start;
+  padding-top: 0;
+}
+
+.debts-page .debts-page-actions {
+  position: static;
+  display: contents;
+}
+
+.debts-page .debts-new-button {
+  position: absolute;
+  left: 0;
+  top: 106px;
+  z-index: 2;
+}
+
+.debts-page .debt-view-toggle {
+  position: absolute;
+  right: 0;
+  top: 106px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.86);
+  z-index: 2;
+}
+
+.debts-page .debt-view-toggle button {
+  min-width: 76px;
+  height: 32px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 750;
+  transition: background-color .16s ease, color .16s ease, transform .16s ease;
+}
+
+.debts-page .debt-view-toggle button:hover {
+  color: var(--forest);
+  transform: translateY(-1px);
+}
+
+.debts-page .debt-view-toggle button.active {
+  background: var(--forest);
+  color: #fff;
+}
+
+/* Vista lista: ocupa todo el ancho disponible. */
+.debts-page .debt-list-card {
+  width: 100%;
+  max-width: none;
+  padding: 12px 16px;
+  overflow: hidden;
+}
+
+.debts-page .debt-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.debts-page .debt-item {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  min-height: 150px;
+  padding: 22px 20px;
+  border-radius: 18px;
+}
+
+.debts-page .debt-item + .debt-item {
+  margin-top: 10px;
+}
+
+.debts-page .debt-item-green {
+  background: linear-gradient(90deg, #f3faee 0%, #ffffff 76%);
+}
+
+.debts-page .debt-item-purple {
+  background: linear-gradient(90deg, #f7f2ff 0%, #ffffff 76%);
+}
+
+.debts-page .debt-item-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+}
+
+.debts-page .debt-item-icon-green {
+  color: var(--forest);
+  background: #e3f3dd;
+}
+
+.debts-page .debt-item-icon-purple {
+  color: #6747d6;
+  background: #eee8ff;
+}
+
+.debts-page .debt-item-main {
+  min-width: 0;
+}
+
+.debts-page .debt-item-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.debts-page .debt-item-heading h2 {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.debts-page .debt-item-heading p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.debts-page .debt-item-heading strong {
+  flex: 0 0 auto;
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 21px;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.debts-page .debt-item-progress {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 19px;
+}
+
+.debts-page .debt-item-progress .progress-wrap {
+  flex: 1;
+}
+
+.debts-page .debt-item-progress .progress {
+  height: 9px;
+}
+
+.debts-page .debt-item-green .progress span {
+  background: var(--forest);
+}
+
+.debts-page .debt-item-purple .progress span {
+  background: #6747d6;
+}
+
+.debts-page .debt-item-progress > span {
+  width: 42px;
+  color: var(--forest);
+  font-size: 11px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.debts-page .debt-item-purple .debt-item-progress > span {
+  color: #6747d6;
+}
+
+/* Vista cards: dos tarjetas amplias para aprovechar el espacio horizontal. */
+.debts-page .debt-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+.debts-page .debt-card {
+  min-height: 245px;
+  padding: 25px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.debts-page .debt-card-green {
+  background: linear-gradient(145deg, #f4faef 0%, #ffffff 68%);
+  border-top: 4px solid #a9d29a;
+}
+
+.debts-page .debt-card-purple {
+  background: linear-gradient(145deg, #f8f3ff 0%, #ffffff 68%);
+  border-top: 4px solid #b7a8ec;
+}
+
+.debts-page .debt-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.debts-page .debt-card-progress-label {
+  color: var(--forest);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.debts-page .debt-card-purple .debt-card-progress-label {
+  color: #6747d6;
+}
+
+.debts-page .debt-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.debts-page .debt-card-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.debts-page .debt-card-title-row h2 {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.debts-page .debt-card-title-row p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.debts-page .debt-card-title-row strong {
+  color: var(--graphite);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.debts-page .debt-card .progress {
+  height: 9px;
+}
+
+.debts-page .debt-card-green .progress span {
+  background: var(--forest);
+}
+
+.debts-page .debt-card-purple .progress span {
+  background: #6747d6;
+}
+
+@media (max-width: 900px) {
+  .debts-page .debt-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .debts-page .page-header {
+    min-height: 124px;
+  }
+
+  .debts-page .debts-new-button {
+    top: 88px;
+  }
+
+  .debts-page .debt-view-toggle {
+    top: 88px;
+  }
+
+  .debts-page .debt-view-toggle button {
+    min-width: 38px;
+    padding: 0 8px;
+  }
+
+  .debts-page .debt-view-toggle button span {
+    display: none;
+  }
+
+  .debts-page .debt-list-card {
+    padding: 8px;
+  }
+
+  .debts-page .debt-item {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 12px;
+    min-height: 126px;
+    padding: 17px 13px;
+  }
+
+  .debts-page .debt-item-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .debts-page .debt-item-heading {
+    gap: 12px;
+  }
+
+  .debts-page .debt-item-heading h2 {
+    font-size: 17px;
+  }
+
+  .debts-page .debt-item-heading strong {
+    font-size: 17px;
+  }
+
+  .debts-page .debt-item-heading p {
+    font-size: 9px;
+  }
+
+  .debts-page .debt-item-progress {
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .debts-page .debt-item-progress > span {
+    font-size: 10px;
+  }
+
+  .debts-page .debt-card {
+    min-height: 210px;
+    padding: 20px;
+  }
+
+  .debts-page .debt-card-title-row h2 {
+    font-size: 20px;
+  }
+
+  .debts-page .debt-card-title-row strong {
+    font-size: 18px;
+  }
+}
