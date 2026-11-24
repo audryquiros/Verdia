@@ -36,7 +36,7 @@
 .help-intro h2 {
   margin: 0;
   color: #15271f;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(38px, 4vw, 54px);
   line-height: 1.02;
   letter-spacing: -.05em;
@@ -120,7 +120,7 @@
   border-radius: 999px;
   background: var(--sage);
   color: var(--forest);
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 10px;
   font-weight: 800;
   cursor: pointer;
@@ -195,7 +195,7 @@
   background: transparent;
   color: #17372a;
   text-align: left;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 800;
   cursor: pointer;

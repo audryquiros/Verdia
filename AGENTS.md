@@ -119,8 +119,8 @@ No cambiar su estructura, tamaños ni tipografía salvo que el usuario lo solici
 ### Tipografía
 
 La identidad aprobada utiliza:
-- Manrope para títulos y cifras;
-- DM Sans para interfaz y contenido;
+- Outfit para títulos y destacados;
+- Nunito Sans para interfaz y contenido;
 - Outfit ExtraBold para el wordmark cuando corresponda.
 
 No sustituir familias tipográficas ni cambiar tamaños globales por iniciativa propia.

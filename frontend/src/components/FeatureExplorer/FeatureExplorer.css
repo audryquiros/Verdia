@@ -33,7 +33,7 @@
 .feature-explorer-heading h2 {
   margin: 0;
   color: #15271f;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(34px, 3.5vw, 48px);
   line-height: 1.02;
   letter-spacing: -.045em;
@@ -80,7 +80,7 @@
   background: transparent;
   color: #52625a;
   text-align: left;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
@@ -142,7 +142,7 @@
 .feature-demo-copy h3 {
   margin: 0;
   color: #17372a;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(28px, 3vw, 40px);
   line-height: 1.03;
   letter-spacing: -.035em;
@@ -193,7 +193,7 @@
   display: block;
   margin-top: 4px;
   color: #17372a;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-heading);
   font-size: 25px;
 }
 
@@ -354,7 +354,7 @@
 
 .card-summary strong {
   color: #17372a;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-heading);
   font-size: 24px;
 }
 

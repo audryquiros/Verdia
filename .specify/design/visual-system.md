@@ -10,8 +10,8 @@
 
 ## Tipografía
 - Outfit ExtraBold: logo/wordmark.
-- Manrope: títulos y cifras.
-- DM Sans: interfaz y contenido.
+- Outfit: títulos y destacados.
+- Nunito Sans: texto, interfaz y contenido.
 
 ## Principios
 - natural;
