@@ -927,3 +927,45 @@
     margin: 8px 0 4px;
   }
 }
+
+/* Ajuste estructural: el filtro forma parte del encabezado del card.
+   Así queda alineado al extremo derecho real del contenido, sin offsets absolutos. */
+.evolution-card .section-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.evolution-card .section-title > div:first-child {
+  min-width: 0;
+}
+
+.evolution-card .section-title > .evolution-controls {
+  position: static;
+  inset: auto;
+  width: max-content;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.evolution-card .evolution-controls label {
+  margin: 0;
+}
+
+@media (max-width: 650px) {
+  .evolution-card .section-title {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .evolution-card .section-title > .evolution-controls {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

@@ -118,18 +118,19 @@ export default function Reports() {
           className="reports-card evolution-card"
           title="Evolución del gasto"
           subtitle={`Observa cómo evolucionó tu gasto${selectedCategory === 'Todas' ? '' : ` en ${selectedCategory.toLowerCase()}`} durante ${period.toLowerCase()}.`}
+          action={
+            <div className="evolution-controls">
+              <label htmlFor="report-category-select">Categoría</label>
+              <CustomSelect
+                className="report-category-select"
+                ariaLabel="Filtrar evolución del gasto por categoría"
+                value={selectedCategory}
+                onChange={setSelectedCategory}
+                options={['Todas', ...categories.map((category) => category.name)]}
+              />
+            </div>
+          }
         >
-          <div className="evolution-controls">
-            <label htmlFor="report-category-select">Categoría</label>
-            <CustomSelect
-              className="report-category-select"
-              ariaLabel="Filtrar evolución del gasto por categoría"
-              value={selectedCategory}
-              onChange={setSelectedCategory}
-              options={['Todas', ...categories.map((category) => category.name)]}
-            />
-          </div>
-
           <div className="monthly-content">
             <div
               className="spending-chart single-category-chart"
