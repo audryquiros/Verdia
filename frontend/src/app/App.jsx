@@ -29,6 +29,7 @@ import { getSession } from '../services/auth.js';
 import AppShell from '../components/AppShell/AppShell.jsx';
 import AdminShell from '../components/AdminShell/AdminShell.jsx';
 import { isAuthenticated } from '../services/auth.js';
+import { FinanceDataProvider } from '../context/FinanceDataContext.jsx';
 
 function ProtectedRoute({ children }) {
   return isAuthenticated() ? children : <Navigate to="/login" replace />;
@@ -44,7 +45,7 @@ function UserRoute({ children }) {
 
 export default function App() {
   return (
-    <>
+    <FinanceDataProvider>
       <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
@@ -78,6 +79,6 @@ export default function App() {
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </>
+    </FinanceDataProvider>
   );
 }

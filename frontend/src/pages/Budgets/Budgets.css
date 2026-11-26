@@ -259,3 +259,4 @@
     font-size: 22px;
   }
 }
+.inline-actions{display:flex;gap:3px;margin-left:auto}.budget-card-top{display:flex;align-items:flex-start;gap:10px}.budget-card-top .inline-actions{margin-left:auto}

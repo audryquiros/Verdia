@@ -1,120 +1,21 @@
 import { useState } from 'react';
-import { CreditCard, HandCoins, Plus } from 'lucide-react';
+import { CreditCard, HandCoins, Plus, Pencil, Trash2 } from 'lucide-react';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
 import ViewSwitcher from '../../components/ViewSwitcher/ViewSwitcher.jsx';
+import Modal from '../../components/Modal/Modal.jsx';
+import { formatMoney, useFinanceData } from '../../context/FinanceDataContext.jsx';
 import '../SimplePage.css';
 import './Debts.css';
 
-const debts = [
-  {
-    title: 'Préstamo personal',
-    amount: '₡850.000',
-    detail: 'Faltan 6 meses',
-    value: 42,
-    variant: 'green',
-    icon: HandCoins,
-  },
-  {
-    title: 'Tarjeta de crédito',
-    amount: '₡120.000',
-    detail: 'Fecha de pago: 05 dic',
-    value: 60,
-    variant: 'purple',
-    icon: CreditCard,
-  },
-];
-
-function DebtIcon({ Icon, variant }) {
-  return (
-    <div className={`debt-item-icon debt-item-icon-${variant}`} aria-hidden="true">
-      <Icon size={20} strokeWidth={2} />
-    </div>
-  );
-}
-
-function DebtList({ items }) {
-  return (
-    <section className="debt-list-card card">
-      <div className="debt-list">
-        {items.map((debt) => (
-          <article className={`debt-item debt-item-${debt.variant}`} key={debt.title}>
-            <DebtIcon Icon={debt.icon} variant={debt.variant} />
-
-            <div className="debt-item-main">
-              <div className="debt-item-heading">
-                <div>
-                  <h2>{debt.title}</h2>
-                  <p>{debt.detail}</p>
-                </div>
-                <strong>{debt.amount}</strong>
-              </div>
-
-              <div className="debt-item-progress">
-                <ProgressBar value={debt.value} />
-                <span>{debt.value}%</span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function DebtCards({ items }) {
-  return (
-    <section className="debt-cards-grid">
-      {items.map((debt) => (
-        <article className={`debt-card card debt-card-${debt.variant}`} key={debt.title}>
-          <div className="debt-card-top">
-            <DebtIcon Icon={debt.icon} variant={debt.variant} />
-            <span className="debt-card-progress-label">{debt.value}%</span>
-          </div>
-
-          <div className="debt-card-content">
-            <div className="debt-card-title-row">
-              <div>
-                <h2>{debt.title}</h2>
-                <p>{debt.detail}</p>
-              </div>
-              <strong>{debt.amount}</strong>
-            </div>
-
-            <ProgressBar value={debt.value} />
-          </div>
-        </article>
-      ))}
-    </section>
-  );
-}
-
-export default function Debts() {
-  const [view, setView] = useState('cards');
-
-  return (
-    <div className="simple-page debts-page">
-      <PageHeader
-        action={
-          <div className="debts-page-actions">
-            <button className="btn btn-primary debts-new-button">
-              <Plus size={16} />
-              Nueva deuda
-            </button>
-            <ViewSwitcher
-              value={view}
-              onChange={setView}
-              ariaLabel="Vista de deudas"
-              options={[
-                { value: 'cards', label: 'Cards' },
-                { value: 'list', label: 'Lista' },
-              ]}
-            />
-          </div>
-        }
-      />
-
-      {view === 'list' ? <DebtList items={debts} /> : <DebtCards items={debts} />}
-    </div>
-  );
+const emptyForm={title:'',total:'',remaining:'',detail:'',direction:'owed'};
+const IconFor=({title})=>/tarjeta/i.test(title)?<CreditCard size={20}/>:<HandCoins size={20}/>;
+export default function Debts(){
+ const {data,addDebt,updateDebt,removeDebt}=useFinanceData();const [view,setView]=useState('cards');const [modal,setModal]=useState(null);const [form,setForm]=useState(emptyForm);
+ const openCreate=()=>{setForm(emptyForm);setModal({mode:'create'});};const openEdit=d=>{setForm(d);setModal({mode:'edit',id:d.id});};const submit=e=>{e.preventDefault();const payload={...form,total:Number(form.total),remaining:Number(form.remaining)};if(!payload.title||payload.total<=0)return;modal.mode==='create'?addDebt(payload):updateDebt(modal.id,payload);setModal(null);};
+ const items=data.debts.map(d=>({...d,value:d.total?Math.min(100,Math.round((1-d.remaining/d.total)*100)):0}));
+ return <div className="simple-page debts-page"><PageHeader action={<div className="debts-page-actions"><button className="btn btn-primary" onClick={openCreate}><Plus size={16}/>Nueva deuda</button><ViewSwitcher value={view} onChange={setView} ariaLabel="Vista de deudas" options={[{value:'cards',label:'Cards'},{value:'list',label:'Lista'}]}/></div>}/>
+ {view==='list'?<section className="debt-list-card card"><div className="debt-list">{items.map(d=><article className="debt-item" key={d.id}><div className="debt-item-icon debt-item-icon-green"><IconFor title={d.title}/></div><div className="debt-item-main"><div className="debt-item-heading"><div><h2>{d.title}</h2><p>{d.detail}</p></div><strong>{formatMoney(d.remaining)}</strong></div><div className="debt-item-progress"><ProgressBar value={d.value}/><span>{d.value}%</span></div></div><div className="inline-actions"><button className="icon-btn" onClick={()=>openEdit(d)} aria-label="Editar deuda"><Pencil size={15}/></button><button className="icon-btn icon-btn-danger" onClick={()=>removeDebt(d.id)} aria-label="Eliminar deuda"><Trash2 size={15}/></button></div></article>)}</div></section>:<section className="debt-cards-grid">{items.map(d=><article className="debt-card card" key={d.id}><div className="debt-card-top"><div className="debt-item-icon debt-item-icon-green"><IconFor title={d.title}/></div><span className="debt-card-progress-label">{d.value}%</span></div><div className="debt-card-content"><div className="debt-card-title-row"><div><h2>{d.title}</h2><p>{d.detail}</p></div><strong>{formatMoney(d.remaining)}</strong></div><ProgressBar value={d.value}/><div className="goal-title-actions"><small>Pagado: {formatMoney(d.total-d.remaining)}</small><div className="inline-actions"><button className="icon-btn" onClick={()=>openEdit(d)} aria-label="Editar deuda"><Pencil size={15}/></button><button className="icon-btn icon-btn-danger" onClick={()=>removeDebt(d.id)} aria-label="Eliminar deuda"><Trash2 size={15}/></button></div></div></div></article>)}</section>}
+ {modal&&<Modal title={modal.mode==='create'?'Nueva deuda':'Editar deuda'} description="Registra una obligación sin confundirla con dinero disponible." onClose={()=>setModal(null)}><form onSubmit={submit}><div className="form-grid"><div className="form-field form-field-full"><label htmlFor="debt-title">Nombre</label><input id="debt-title" value={form.title} onChange={e=>setForm({...form,title:e.target.value})} placeholder="Ej. Préstamo personal" required/></div><div className="form-field"><label htmlFor="debt-total">Monto original</label><input id="debt-total" type="number" min="0" value={form.total} onChange={e=>setForm({...form,total:e.target.value})} required/></div><div className="form-field"><label htmlFor="debt-remaining">Saldo pendiente</label><input id="debt-remaining" type="number" min="0" value={form.remaining} onChange={e=>setForm({...form,remaining:e.target.value})} required/></div><div className="form-field"><label htmlFor="debt-direction">Dirección</label><select id="debt-direction" value={form.direction} onChange={e=>setForm({...form,direction:e.target.value})}><option value="owed">Yo debo</option><option value="receivable">Me deben</option></select></div><div className="form-field"><label htmlFor="debt-detail">Detalle</label><input id="debt-detail" value={form.detail} onChange={e=>setForm({...form,detail:e.target.value})} placeholder="Ej. Fecha de pago: 05 dic"/></div></div><div className="modal-actions"><button type="button" className="btn btn-outline" onClick={()=>setModal(null)}>Cancelar</button><button className="btn btn-primary">Guardar deuda</button></div></form></Modal>}
+ </div>;
 }

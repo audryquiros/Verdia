@@ -14,6 +14,7 @@ export default function MovementRow({
   date,
   amount,
   type = 'expense',
+  status = 'confirmed',
   compact = false,
   icon,
   categoryTone,
@@ -59,6 +60,11 @@ export default function MovementRow({
           <Icon size={15} />
         </span>
         <span>{category}</span>
+      </div>
+
+      <div className={`movement-status movement-status--${status}`} role="cell">
+        <span className="movement-status-dot" aria-hidden="true" />
+        <span>{status === 'planned' ? 'Planificado' : 'Confirmado'}</span>
       </div>
 
       <strong className={`movement-amount ${income ? 'income' : ''}`} role="cell">

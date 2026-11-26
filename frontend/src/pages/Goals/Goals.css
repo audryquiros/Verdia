@@ -289,3 +289,4 @@
     padding: 22px;
   }
 }
+.goal-title-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}.goal-title-actions h2{min-width:0}

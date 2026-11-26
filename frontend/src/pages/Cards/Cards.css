@@ -399,3 +399,4 @@
     justify-content: center;
   }
 }
+.actions .icon-btn{margin-left:auto}.actions .icon-btn+.icon-btn{margin-left:0}

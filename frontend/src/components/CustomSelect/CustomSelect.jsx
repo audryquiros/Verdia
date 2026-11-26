@@ -2,55 +2,102 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import './CustomSelect.css';
 
+function normalizeOption(option) {
+  return typeof option === 'string' ? { value: option, label: option } : option;
+}
+
 export default function CustomSelect({ value, options, onChange, ariaLabel, className = '' }) {
   const [open, setOpen] = useState(false);
+  const [menuPosition, setMenuPosition] = useState(null);
   const rootRef = useRef(null);
+  const triggerRef = useRef(null);
+  const normalizedOptions = options.map(normalizeOption);
+  const selected = normalizedOptions.find((option) => option.value === value);
+
+  const updateMenuPosition = () => {
+    const rect = triggerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    const estimatedHeight = Math.min(normalizedOptions.length * 40 + 12, 260);
+    const viewportPadding = 12;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const opensUp = spaceBelow < estimatedHeight + viewportPadding && rect.top > spaceBelow;
+    const height = Math.min(estimatedHeight, opensUp ? rect.top - viewportPadding : window.innerHeight - rect.bottom - viewportPadding);
+
+    setMenuPosition({
+      top: opensUp ? Math.max(viewportPadding, rect.top - height - 6) : rect.bottom + 6,
+      left: rect.left,
+      width: rect.width,
+      maxHeight: Math.max(120, height),
+    });
+  };
 
   useEffect(() => {
     const handlePointerDown = (event) => {
       if (!rootRef.current?.contains(event.target)) setOpen(false);
     };
-    document.addEventListener('mousedown', handlePointerDown);
-    return () => document.removeEventListener('mousedown', handlePointerDown);
-  }, []);
-
-  useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') setOpen(false);
     };
+    document.addEventListener('mousedown', handlePointerDown);
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    updateMenuPosition();
+    const handleViewportChange = () => updateMenuPosition();
+    window.addEventListener('resize', handleViewportChange);
+    window.addEventListener('scroll', handleViewportChange, true);
+    return () => {
+      window.removeEventListener('resize', handleViewportChange);
+      window.removeEventListener('scroll', handleViewportChange, true);
+    };
+  }, [open, normalizedOptions.length]);
+
+  const toggleOpen = () => {
+    setOpen((current) => !current);
+  };
 
   return (
     <div ref={rootRef} className={`custom-select ${open ? 'is-open' : ''} ${className}`}>
       <button
+        ref={triggerRef}
         type="button"
         className="custom-select-trigger"
         aria-label={ariaLabel}
         aria-haspopup="listbox"
         aria-expanded={open}
-        onClick={() => setOpen((current) => !current)}
+        onClick={toggleOpen}
       >
-        <span>{value}</span>
+        <span>{selected?.label ?? value}</span>
         <ChevronDown aria-hidden="true" />
       </button>
 
-      {open && (
-        <div className="custom-select-menu" role="listbox" aria-label={ariaLabel}>
-          {options.map((option) => (
+      {open && menuPosition && (
+        <div
+          className="custom-select-menu custom-select-menu-fixed"
+          role="listbox"
+          aria-label={ariaLabel}
+          style={{ top: menuPosition.top, left: menuPosition.left, width: menuPosition.width, maxHeight: menuPosition.maxHeight }}
+        >
+          {normalizedOptions.map((option) => (
             <button
-              key={option}
+              key={option.value}
               type="button"
               role="option"
-              aria-selected={option === value}
-              className={`custom-select-option ${option === value ? 'is-selected' : ''}`}
+              aria-selected={option.value === value}
+              className={`custom-select-option ${option.value === value ? 'is-selected' : ''}`}
               onClick={() => {
-                onChange(option);
+                onChange(option.value);
                 setOpen(false);
               }}
             >
-              {option}
+              {option.label}
             </button>
           ))}
         </div>
