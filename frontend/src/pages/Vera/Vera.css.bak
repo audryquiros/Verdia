@@ -1,0 +1,76 @@
+.vera-page{width:100%}
+
+.vera-layout{width:100%;max-width:none;display:flex;flex-direction:column}
+
+.vera-chat-card{width:100%;box-sizing:border-box;padding:30px 34px 34px}
+
+.vera-conversation{min-height:500px;margin-top:8px;padding:48px 56px;border:1px solid var(--line);border-radius:24px;background:#f8fbf7;display:flex;flex-direction:column;justify-content:center;gap:22px;overflow:hidden}
+
+.vera-welcome{display:flex;align-items:center;gap:46px;max-width:1080px;width:100%;margin:0 auto}
+.vera-welcome-visual{width:260px;height:260px;border-radius:52px;background:linear-gradient(145deg,#e4f3df 0%,#f7fbf5 100%);display:grid;place-items:center;flex:0 0 auto;overflow:hidden}
+.vera-welcome-visual img{width:315px;height:315px;object-fit:contain;transform:translateY(10px);transition:transform .25s ease,opacity .2s ease}
+.vera-welcome-visual img[src*="pensando"]{transform:translateY(10px) scale(.96)}
+.vera-welcome-visual img[src*="analizando"]{transform:translateY(10px) scale(.98)}
+.vera-welcome-copy{display:flex;align-items:flex-start;max-width:680px}
+.vera-welcome strong{display:block;font-family:var(--font-heading);font-size:36px;line-height:1.12;letter-spacing:-.025em}
+.vera-welcome p{margin:12px 0 0;color:var(--muted);font-size:19px;line-height:1.55;max-width:650px}
+
+.vera-message-row{display:flex;align-items:flex-end;gap:12px;width:100%}
+.vera-message-row.user{justify-content:flex-end}
+.vera-message-row.vera{justify-content:flex-start}
+
+.vera-user-message{max-width:62%;padding:14px 18px;border-radius:18px 18px 5px 18px;background:#dff1d8;color:var(--graphite);font-size:15px;line-height:1.5}
+.vera-user-message p,.vera-answer p{margin:0}
+
+.vera-mini-avatar{width:48px;height:48px;border-radius:14px;background:#e4f1df;overflow:hidden;flex:0 0 auto}
+.vera-mini-avatar img{width:54px;height:54px;object-fit:contain}
+
+.vera-answer{max-width:70%;background:#fff;border:1px solid var(--line);border-radius:18px 18px 18px 5px;padding:14px 18px}
+.vera-answer strong{display:block;color:var(--forest);font-size:14px;margin-bottom:5px}
+.vera-answer p{font-size:15px;line-height:1.55;white-space:pre-wrap}
+
+.vera-loading{background:#fff;border:1px solid var(--line);border-radius:17px 17px 17px 5px;padding:12px 16px}
+.vera-loading span{display:block;font-size:13px;color:var(--muted)}
+.vera-dots{display:flex;gap:5px;margin:8px 0 0 4px}
+.vera-dots i{width:6px;height:6px;border-radius:50%;background:#8eb88a;animation:veraPulse 1.1s infinite ease-in-out}
+.vera-dots i:nth-child(2){animation-delay:.15s}.vera-dots i:nth-child(3){animation-delay:.3s}
+@keyframes veraPulse{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-2px)}}
+
+.vera-proposal{align-self:flex-start;width:min(650px,78%);margin-left:60px;background:#eef1f0;border:1px solid #e1e6e3;border-radius:18px;padding:17px 19px}
+.vera-proposal-label{display:block;font-size:13px;font-weight:800;color:var(--graphite);margin-bottom:8px}
+.vera-proposal ul{margin:0;padding-left:19px;font-size:13px;line-height:1.75;color:var(--graphite)}
+.vera-proposal ul b{font-weight:800}
+.vera-question{font-size:13px;font-weight:700;margin:9px 0 13px}
+
+.vera-actions{display:flex;flex-wrap:wrap;gap:9px}
+.vera-actions .btn{min-height:40px;padding:0 16px;border-radius:10px;font-size:12px}
+
+.vera-state-success,.vera-state-info,.vera-state-cancelled{margin:9px 0 0;font-size:12px;line-height:1.45}
+.vera-state-success{color:#276d4f}.vera-state-info{color:#6b725f}.vera-state-cancelled{color:#a34a42}
+
+.vera-error-message{align-self:flex-start;max-width:70%;display:flex;flex-direction:column;gap:5px;padding:13px 15px;border:1px solid #f0d4d0;border-radius:14px;background:#fff7f6;font-size:12px}
+.vera-error-message strong{color:#9d3b32}.vera-error-message span{color:var(--muted)}
+
+.vera-examples{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:16px}
+.vera-examples>span{color:var(--muted);font-size:14px;margin-right:3px}
+.vera-examples button{border:1px solid var(--line);background:#fff;color:var(--graphite);border-radius:999px;padding:10px 15px;font-size:13px;transition:.15s ease;cursor:pointer}
+.vera-examples button:hover{border-color:#b9d0bc;background:#f6faf4}
+
+.vera-input{display:flex;align-items:center;gap:10px;margin-top:16px;border:1px solid var(--line);background:#fff;border-radius:17px;padding:9px 10px 9px 18px}
+.vera-input input{border:0;outline:0;min-width:0;width:100%;font-family:var(--font-body);font-size:16px;color:var(--graphite);background:transparent}
+.vera-input input::placeholder{color:#87938d}
+.vera-input button{width:48px;height:48px;border:0;border-radius:12px;background:var(--forest);color:#fff;display:grid;place-items:center;cursor:pointer;flex:0 0 auto}
+.vera-input button:disabled{opacity:.45;cursor:not-allowed}
+
+@media(max-width:760px){
+  .vera-chat-card{padding:20px 16px 24px}
+  .vera-conversation{min-height:430px;padding:28px 20px}
+  .vera-welcome{gap:20px;flex-direction:column;align-items:flex-start;text-align:left}
+  .vera-welcome-visual{width:190px;height:190px;border-radius:38px}
+  .vera-welcome-visual img{width:230px;height:230px}
+  .vera-welcome-copy{max-width:100%}
+  .vera-welcome strong{font-size:28px}
+  .vera-welcome p{font-size:16px}
+  .vera-user-message,.vera-answer,.vera-error-message{max-width:88%}
+  .vera-proposal{width:88%;margin-left:0}
+}
