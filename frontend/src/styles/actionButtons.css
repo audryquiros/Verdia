@@ -79,6 +79,12 @@
 .action-hover-button.action-confirm {
   --action-hover-width: 104px;
 }
+.action-hover-button.action-confirm:hover,
+.action-hover-button.action-confirm:focus-visible {
+  border-color: rgba(40,94,69,.22);
+  background: #E7F4E6;
+  color: var(--forest);
+}
 .action-hover-button.action-edit {
   --action-hover-width: 86px;
 }
@@ -115,8 +121,10 @@
   min-width: 0;
 }
 
-/* Cuentas usa el mismo patrón sin importar si está en cards o lista. */
-.accounts-page .account-actions .action-hover-button {
+/* Cuentas: el mismo efecto se aplica explícitamente a cards y lista.
+   El estado natural conserva el icono centrado; al hover el botón se expande
+   y revela su etiqueta sin alterar la estructura de la tarjeta. */
+.accounts-page .account-grid .account-actions .action-hover-button {
   width: 34px;
   min-width: 34px;
   min-height: 34px;
@@ -124,8 +132,8 @@
   flex: 0 0 34px;
 }
 
-.accounts-page .account-grid.list-view .account-actions .action-hover-button:hover,
-.accounts-page .account-grid.list-view .account-actions .action-hover-button:focus-visible {
+.accounts-page .account-grid .account-actions .action-hover-button:hover,
+.accounts-page .account-grid .account-actions .action-hover-button:focus-visible {
   width: var(--action-hover-width, 86px);
   min-width: var(--action-hover-width, 86px);
   flex-basis: var(--action-hover-width, 86px);

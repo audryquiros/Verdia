@@ -178,7 +178,7 @@ export default function Accounts() {
                   <div className="account-financial-row">
                     <div className="account-balance">{formatMoney(balance, account.currency)}</div>
                     <div className="account-actions">
-                      <button className="icon-button icon-button-with-label action-reactivate" onClick={() => reactivateAccount(account.id)} aria-label={`Reactivar ${account.name}`}><RotateCcw size={16} /><span>Reactivar</span></button>
+                      <button className="action-hover-button action-reactivate" onClick={() => reactivateAccount(account.id)} aria-label={`Reactivar ${account.name}`}><RotateCcw size={16} /><span>Reactivar</span></button>
                     </div>
                   </div>
                 </article>
@@ -193,10 +193,10 @@ export default function Accounts() {
                 <div className="account-financial-row">
                   <div className="account-balance">{formatMoney(balance, account.currency)}</div>
                   <div className="account-actions">
-                    <button className="icon-button icon-button-with-label action-edit" onClick={() => openEdit(account)} aria-label={`Editar ${account.name}`}><Pencil size={16} /><span>Editar</span></button>
-                    <button className="icon-button icon-button-with-label action-adjust" onClick={() => openAdjustment(account)} aria-label={`Ajustar saldo de ${account.name}`}><SlidersHorizontal size={16} /><span>Ajustar saldo</span></button>
-                    {canArchive && <button className="icon-button icon-button-with-label action-archive" onClick={() => archiveAccount(account.id)} aria-label={`Archivar ${account.name}`}><Archive size={16} /><span>Archivar</span></button>}
-                    {!hasMovements && <button className="icon-button icon-button-with-label icon-button-danger action-delete" onClick={() => deleteSelectedAccount(account)} aria-label={`Eliminar ${account.name}`}><Trash2 size={16} /><span>Eliminar</span></button>}
+                    <button className="action-hover-button action-edit" onClick={() => openEdit(account)} aria-label={`Editar ${account.name}`}><Pencil size={16} /><span>Editar</span></button>
+                    <button className="action-hover-button action-adjust" onClick={() => openAdjustment(account)} aria-label={`Ajustar saldo de ${account.name}`}><SlidersHorizontal size={16} /><span>Ajustar saldo</span></button>
+                    {canArchive && <button className="action-hover-button action-archive" onClick={() => archiveAccount(account.id)} aria-label={`Archivar ${account.name}`}><Archive size={16} /><span>Archivar</span></button>}
+                    {!hasMovements && <button className="action-hover-button action-danger action-delete" onClick={() => deleteSelectedAccount(account)} aria-label={`Eliminar ${account.name}`}><Trash2 size={16} /><span>Eliminar</span></button>}
                   </div>
                 </div>
               </article>

@@ -488,7 +488,8 @@
   line-height: 1.45;
 }
 
-/* Acciones compactas: el texto se revela al pasar el cursor, igual que el menú de perfil. */
+/* Acciones de movimientos: el comportamiento visual proviene del patrón global
+   .action-hover-button. Este bloque solo conserva el espacio de layout de la tabla. */
 .movements-page-card .movement-actions {
   display: flex;
   align-items: center;
@@ -498,143 +499,9 @@
   padding-right: 0;
 }
 
-.movements-page-card .movement-action {
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
-  padding: 0 !important;
-  box-sizing: border-box;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #fff;
-  color: var(--graphite);
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  justify-items: center;
-  text-align: center;
-  gap: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  cursor: pointer;
-  font: 750 11px/1 var(--font-body);
-  transition: width .22s ease, background-color .18s ease, border-color .18s ease, color .18s ease, padding .22s ease, gap .22s ease, justify-content .22s ease;
-}
-
-.movements-page-card .movement-action svg {
-  display: block;
-  width: 15px;
-  height: 15px;
-  margin: 0 !important;
-  justify-self: center;
-  align-self: center;
-  stroke-width: 1.9;
-}
-
-.movements-page-card .movement-action {
-  line-height: 0;
-  vertical-align: middle;
-}
-
-.movements-page-card .movement-action span {
-  line-height: 1;
-}
-
-.movements-page-card .movement-action span {
-  width: 0;
-  max-width: 0;
-  opacity: 0;
-  transform: translateX(-6px);
-  overflow: hidden;
-  transition: width .22s ease, max-width .22s ease, opacity .16s ease, transform .22s ease;
-}
-
-.movements-page-card .movement-action:hover,
-.movements-page-card .movement-action:focus-visible {
-  width: 86px;
-  padding: 0 10px !important;
-  justify-content: flex-start !important;
-  gap: 7px;
-  border-color: var(--soft-green);
-  background: #F3F6EF;
-  color: var(--forest);
-}
-
-.movements-page-card .movement-action:hover span,
-.movements-page-card .movement-action:focus-visible span {
-  width: auto;
-  max-width: 60px;
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.movements-page-card .movement-action-confirm:hover,
-.movements-page-card .movement-action-confirm:focus-visible {
-  width: 104px;
-  padding: 0 10px !important;
-  justify-content: flex-start !important;
-  border-color: rgba(40,94,69,.22);
-  background: #E7F4E6;
-  color: var(--forest);
-}
-
-.movements-page-card .movement-action-danger:hover,
-.movements-page-card .movement-action-danger:focus-visible {
-  width: 92px;
-  padding: 0 10px !important;
-  justify-content: flex-start !important;
-  border-color: rgba(178,75,68,.18);
-  background: #FBEAEA;
-  color: var(--danger);
-}
-
-.movements-page-card .movement-action:focus-visible {
-  outline: 3px solid rgba(169,210,154,.34);
-  outline-offset: 2px;
-}
-
 /* La fila reserva espacio para las acciones sin apretar el monto. */
 .movements-page-card .movement-row-wrapper {
   grid-template-columns: minmax(0, 1fr) 230px;
-}
-
-/* Los overlays se pintan sobre el modal/formulario y no quedan recortados por el layout. */
-.movements-page-card .modal-select,
-.movements-page-card .date-picker {
-  z-index: 100;
-}
-
-@media (max-width: 1000px) {
-  .movements-page-card .movement-row-wrapper {
-    grid-template-columns: minmax(0, 1fr) 220px;
-  }
-}
-
-@media (max-width: 760px) {
-  .movements-page-card .movement-row-wrapper {
-    grid-template-columns: minmax(0, 1fr) 205px;
-  }
-}
-
-@media (max-width: 650px) {
-  .movements-page-card .movement-row-wrapper {
-    grid-template-columns: minmax(0, 1fr) 130px;
-  }
-
-  .movements-page-card .movement-action:hover,
-  .movements-page-card .movement-action:focus-visible {
-    width: 78px;
-  }
-
-  .movements-page-card .movement-action-confirm:hover,
-  .movements-page-card .movement-action-confirm:focus-visible {
-    width: 94px;
-  }
-
-  .movements-page-card .movement-action-danger:hover,
-  .movements-page-card .movement-action-danger:focus-visible {
-    width: 84px;
-  }
 }
 
 .movements-page-card .movement-status--canceled{background:#F1F3F1;color:#6F7B73}.movements-page-card .movement-status--voided{background:#FBEAEA;color:#A24A44}.movements-page-card .movement-status--overdue{background:#FFF0E4;color:#A85E24}.movement-action-status{font-size:10px;color:var(--muted);white-space:nowrap}
@@ -898,8 +765,7 @@
 }
 
 
-/* Acciones: usar el mismo patrón global de Verdia. El grupo reserva el ancho máximo
-   para que la expansión no empuje ni recorte los botones durante la transición. */
+/* El grupo reserva ancho para la expansión de los botones sin mover el contenido. */
 .movements-page-card .movement-actions {
   width: 300px;
   min-width: 300px;
@@ -912,17 +778,6 @@
 }
 .movements-page-card .movement-row-wrapper {
   grid-template-columns: minmax(0, 1fr) 300px;
-}
-.movements-page-card .movement-action.action-hover-button {
-  width: 34px;
-  min-width: 34px;
-  flex: 0 0 34px;
-}
-.movements-page-card .movement-action.action-hover-button:hover,
-.movements-page-card .movement-action.action-hover-button:focus-visible {
-  width: var(--action-hover-width, 86px);
-  min-width: var(--action-hover-width, 86px);
-  flex-basis: var(--action-hover-width, 86px);
 }
 @media (max-width: 1000px) {
   .movements-page-card .movement-actions {
@@ -949,5 +804,14 @@
   }
   .movements-page-card .movement-row-wrapper {
     grid-template-columns: minmax(0, 1fr) 130px;
+  }
+  .movements-page-card .movement-action.action-confirm {
+    --action-hover-width: 94px;
+  }
+  .movements-page-card .movement-action.action-edit {
+    --action-hover-width: 78px;
+  }
+  .movements-page-card .movement-action.action-danger {
+    --action-hover-width: 84px;
   }
 }
