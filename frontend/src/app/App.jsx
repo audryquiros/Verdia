@@ -4,6 +4,7 @@ import Login from '../pages/Login/Login.jsx';
 import Register from '../pages/Register/Register.jsx';
 import Dashboard from '../pages/Dashboard/Dashboard.jsx';
 import Movements from '../pages/Movements/Movements.jsx';
+import Accounts from '../pages/Accounts/Accounts.jsx';
 import Budgets from '../pages/Budgets/Budgets.jsx';
 import Cards from '../pages/Cards/Cards.jsx';
 import Debts from '../pages/Debts/Debts.jsx';
@@ -53,6 +54,7 @@ export default function App() {
       <Route element={<ProtectedRoute><UserRoute><AppShell /></UserRoute></ProtectedRoute>}>
         <Route path="/inicio" element={<Dashboard />} />
         <Route path="/movimientos" element={<Movements />} />
+        <Route path="/cuentas" element={<Accounts />} />
         <Route path="/presupuestos" element={<Budgets />} />
         <Route path="/tarjetas" element={<Cards />} />
         <Route path="/deudas" element={<Debts />} />

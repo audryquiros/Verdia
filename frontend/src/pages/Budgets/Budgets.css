@@ -179,16 +179,8 @@
   white-space: nowrap;
 }
 
-.budgets-page .budget-card-green {
-  border-top: 3px solid #A9D29A;
-}
-
-.budgets-page .budget-card-purple {
-  border-top: 3px solid #B7A8EC;
-}
-
-.budgets-page .budget-card-coral {
-  border-top: 3px solid #F0B39A;
+.budgets-page .budget-card {
+  border-top: 3px solid var(--category-border, var(--line));
 }
 
 .budgets-page .budget-card .progress-wrap {
@@ -260,3 +252,4 @@
   }
 }
 .inline-actions{display:flex;gap:3px;margin-left:auto}.budget-card-top{display:flex;align-items:flex-start;gap:10px}.budget-card-top .inline-actions{margin-left:auto}
+.budget-derived{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:8px;color:var(--muted)}.budget-derived strong{color:var(--graphite);font-weight:750}.budget-list-values{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}

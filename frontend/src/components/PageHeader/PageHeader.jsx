@@ -6,6 +6,7 @@ import './PageHeader.css';
 
 const sectionInfo = {
   '/movimientos': ['Movimientos', 'Registra y controla tus ingresos y gastos.'],
+  '/cuentas': ['Cuentas', 'Tu dinero real parte de los saldos iniciales y de los movimientos confirmados.'],
   '/presupuestos': ['Presupuestos', 'Define límites de gasto y controla tu progreso.'],
   '/tarjetas': ['Tarjetas', 'Controla tus tarjetas y sus movimientos.'],
   '/deudas': ['Deudas', 'Administra tus deudas y mantén el control.'],

@@ -6,3 +6,38 @@
 .modal-close{width:36px;height:36px;border:1px solid var(--line);background:#fff;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
 .modal-body{padding:22px 26px 26px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.form-field{display:grid;gap:7px}.form-field-full{grid-column:1/-1}.form-field label{font-size:12px;font-weight:800;color:var(--graphite)}.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;color:var(--graphite);outline:none}.form-field textarea{min-height:88px;resize:vertical}.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--forest);box-shadow:0 0 0 3px rgba(40,94,69,.09)}.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line-soft)}
 @media(max-width:650px){.modal-backdrop{padding:10px}.modal-header,.modal-body{padding-left:18px;padding-right:18px}.form-grid{grid-template-columns:1fr}.form-field-full{grid-column:auto}.modal-shell{max-height:94vh}}
+
+.modal-small {
+  width: min(100%, 560px);
+}
+
+.modal-small .modal-header {
+  padding: 28px 30px 20px;
+}
+
+.modal-small .modal-header h2 {
+  font-size: 26px;
+  line-height: 1.15;
+}
+
+.modal-small .modal-header p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.modal-small .modal-body {
+  padding: 24px 30px 30px;
+}
+
+@media (max-width: 650px) {
+  .modal-small {
+    width: 100%;
+  }
+
+  .modal-small .modal-header,
+  .modal-small .modal-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

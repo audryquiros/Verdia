@@ -38,8 +38,8 @@
 }
 
 .view-switcher-option.active {
-  width: 76px;
-  min-width: 76px;
+  width: 92px;
+  min-width: 92px;
   background: var(--forest);
   color: #fff;
 }
@@ -62,8 +62,8 @@
 }
 
 .view-switcher-option.active .view-switcher-label {
-  width: 38px;
-  max-width: 42px;
+  width: 54px;
+  max-width: 58px;
   opacity: 1;
   transform: translateX(0);
 }

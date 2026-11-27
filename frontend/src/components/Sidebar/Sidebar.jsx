@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Home, ArrowLeftRight, WalletCards, CreditCard, HandCoins, Target, ReceiptText, BarChart3, Bot, X } from 'lucide-react';
+import { Home, ArrowLeftRight, Wallet, WalletCards, CreditCard, HandCoins, Target, ReceiptText, BarChart3, Bot, X } from 'lucide-react';
 import sidebarLogo from '../../assets/brand/logos/verdia-sidebar-logo.png';
 import './Sidebar.css';
 
 const items = [
   ['/inicio', 'Inicio', Home],
   ['/movimientos', 'Movimientos', ArrowLeftRight],
+  ['/cuentas', 'Cuentas', Wallet],
   ['/presupuestos', 'Presupuestos', WalletCards],
   ['/tarjetas', 'Tarjetas', CreditCard],
   ['/deudas', 'Deudas', HandCoins],

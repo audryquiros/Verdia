@@ -18,15 +18,17 @@ export default function MovementRow({
   compact = false,
   icon,
   categoryTone,
+  categoryVisual,
 }) {
   const income = type === 'income';
   const Icon = icon || defaultIcons[category] || Wallet;
   const tone = categoryTone || (income ? 'income' : 'expense');
+  const statusLabel = status === 'planned' ? 'Planificado' : status === 'canceled' ? 'Cancelado' : status === 'voided' ? 'Anulado' : status === 'overdue' ? 'Vencido' : 'Confirmado';
 
   if (compact) {
     return (
       <div className={`movement-row movement-row--compact ${income ? 'is-income' : ''}`}>
-        <div className={`movement-icon ${income ? 'income' : ''}`}>
+        <div className={`movement-icon ${income ? 'income' : ''}`} style={!income && categoryVisual ? { background: categoryVisual.background, color: categoryVisual.color } : undefined}>
           <Icon size={15} />
         </div>
         <div className="movement-info">
@@ -46,7 +48,7 @@ export default function MovementRow({
       <span className="movement-date" role="cell">{date}</span>
 
       <div className="movement-description" role="cell">
-        <div className={`movement-icon ${income ? 'income' : ''}`}>
+        <div className={`movement-icon ${income ? 'income' : ''}`} style={!income && categoryVisual ? { background: categoryVisual.background, color: categoryVisual.color } : undefined}>
           <Icon size={18} />
         </div>
         <div className="movement-info">
@@ -56,7 +58,7 @@ export default function MovementRow({
       </div>
 
       <div className="movement-category" role="cell">
-        <span className={`category-badge category-badge--${tone}`}>
+        <span className={`category-badge category-badge--${tone}`} style={!income && categoryVisual ? { background: categoryVisual.background, color: categoryVisual.color } : undefined}>
           <Icon size={15} />
         </span>
         <span>{category}</span>
@@ -64,7 +66,7 @@ export default function MovementRow({
 
       <div className={`movement-status movement-status--${status}`} role="cell">
         <span className="movement-status-dot" aria-hidden="true" />
-        <span>{status === 'planned' ? 'Planificado' : 'Confirmado'}</span>
+        <span>{statusLabel}</span>
       </div>
 
       <strong className={`movement-amount ${income ? 'income' : ''}`} role="cell">

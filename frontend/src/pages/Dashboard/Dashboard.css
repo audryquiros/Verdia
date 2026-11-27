@@ -1,6 +1,15 @@
+
+.dashboard-currency{margin:0 0 14px;padding:14px 18px;display:flex;align-items:center;gap:12px;border-radius:16px;background:linear-gradient(135deg,#fff,#F8FBF7);border:1px solid var(--line);box-shadow:0 8px 24px rgba(40,94,69,.045)}
+.dashboard-currency-icon{width:38px;height:38px;border-radius:11px;background:var(--sage);color:var(--forest);display:grid;place-items:center;flex:none}
+.dashboard-currency div:nth-child(2){min-width:0;display:flex;flex-direction:column}
+.dashboard-currency span{font-size:10px;color:var(--muted);font-weight:700}
+.dashboard-currency strong{font-family:var(--font-heading);font-size:24px;line-height:1.05;letter-spacing:-.035em;color:var(--graphite);margin-top:3px}
+.dashboard-currency small{font-size:9px;color:var(--muted);margin-top:3px}
+.dashboard-currency a{margin-left:auto;color:var(--forest);font-size:10px;font-weight:800;white-space:nowrap}
+@media(max-width:650px){.dashboard-currency{padding:12px 14px}.dashboard-currency strong{font-size:21px}.dashboard-currency a{font-size:9px}}
 .dashboard{position:relative;height:calc(100vh - 12px);min-height:0;padding:27px 0 0;overflow:visible;box-shadow:none}.dashboard > *{position:relative;z-index:1}
-.welcome{display:flex;justify-content:space-between;align-items:flex-start;margin:0 0 14px;min-height:64px;padding-top:4px;padding-right:0}.welcome h1{font-size:30px;margin:0 0 3px;letter-spacing:-.045em;line-height:1.05}.welcome p{margin:0;color:var(--muted);font-size:10px}.month{background:#fff;border:1px solid var(--line);padding:9px 12px;border-radius:12px;font-size:10px;color:var(--muted);font-family:var(--font-body);cursor:pointer}.month span{margin-left:4px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(300px,.8fr);gap:14px;margin-top:12px;min-height:0;height:calc(100% - 160px)}.main-col,.side-col{display:flex;flex-direction:column;gap:14px;min-height:0}.top-panels,.bottom-panels{display:grid;grid-template-columns:1.08fr .92fr;gap:14px;min-height:0}
+.welcome{display:flex;justify-content:space-between;align-items:flex-start;margin:0 0 14px;min-height:64px;padding-top:4px}.welcome h1{font-size:30px;margin:0 0 3px;letter-spacing:-.045em;line-height:1.05}.welcome p{margin:0;color:var(--muted);font-size:10px}.month{background:#fff;border:1px solid var(--line);padding:9px 12px;border-radius:12px;font-size:10px;color:var(--muted);font-family:var(--font-body);cursor:pointer}.month span{margin-left:4px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(300px,.8fr);gap:14px;margin-top:12px;min-height:0;height:calc(100% - 232px)}.main-col,.side-col{display:flex;flex-direction:column;gap:14px;min-height:0}.top-panels,.bottom-panels{display:grid;grid-template-columns:1.08fr .92fr;gap:14px;min-height:0}
 .top-panels{flex:0 0 190px}
 .bottom-panels{flex:0 0 230px}
 .summary-card,.budget-card,.movements-card,.quick-card{min-height:0;height:100%}.summary-card .section-card,.budget-card .section-card{min-height:0}.summary{display:flex;align-items:center;gap:14px}.summary-card .section-card{padding:12px 13px}.summary-card .section-title,.budget-card .section-title,.movements-card .section-title,.quick-card .section-title{margin-bottom:8px}.summary-card .section-title h2,.budget-card .section-title h2,.movements-card .section-title h2,.quick-card .section-title h2{font-size:15px}.summary-card .section-title h2{display:flex;align-items:center;gap:8px;white-space:nowrap}.summary-card .section-title p{font-size:9px}.summary-card .section-title > div:first-child{display:flex;align-items:center;gap:12px}.summary-title-icon{color:var(--forest);flex:0 0 auto;display:inline-block;transform:none}
@@ -16,9 +25,6 @@
 @media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,1fr)}.dashboard-grid{grid-template-columns:1fr;height:auto}.top-panels,.bottom-panels{grid-template-columns:1fr 1fr}.side-col{order:-1;display:block}.side-col .vera-card{max-width:none}}
 @media(max-width:720px){.welcome{align-items:flex-start;gap:10px}.welcome h1{font-size:25px}.welcome p{font-size:9px}.month{font-size:9px}.stats-grid{grid-template-columns:1fr 1fr}.top-panels,.bottom-panels{grid-template-columns:1fr}.summary{flex-direction:column}.legend{width:100%}.quick-grid{grid-template-columns:1fr 1fr}}
 
-/* Dashboard reference: the top row is greeting + account controls; no period selector. */
-.dashboard .welcome .month{display:none}
-@media(max-width:850px){.dashboard .welcome{padding-right:0}}
 
 /* Disponible — ajuste puntual al mockup, sin alterar los demás indicadores. */
 .stats-grid .stat-card:first-child{
@@ -681,4 +687,380 @@
     min-height:504px;
     max-height:504px;
   }
+}
+
+
+/* Dashboard: reserva espacio para los controles flotantes de notificaciones y perfil.
+   El filtro de mes queda visualmente antes de esos controles y ya no queda debajo de ellos. */
+.dashboard .month-filter-wrap{
+  position:relative;
+  z-index:30;
+  flex:0 0 auto;
+}
+.dashboard .month-filter-wrap .custom-select-trigger{
+  min-width:205px;
+}
+
+@media(max-width:1100px){
+  .welcome{
+    padding-right:190px;
+  }
+}
+
+@media(max-width:850px){
+  .welcome{
+    padding-right:0;
+  }
+  .dashboard .month-filter-wrap .custom-select-trigger{
+    min-width:170px;
+  }
+}
+
+/* Corrección del filtro de periodo del Dashboard.
+   El encabezado debe estar por encima del Topbar para que el menú abierto
+   no quede atrapado detrás de notificaciones/perfil. El menú mantiene
+   exactamente el ancho del botón y no puede expandirse horizontalmente. */
+.dashboard .welcome{
+  position:relative;
+  z-index:40;
+}
+
+.dashboard .month-filter-wrap{
+  position:relative;
+  z-index:100;
+  width:205px;
+  min-width:205px;
+  max-width:205px;
+}
+
+.dashboard .month-filter-wrap .custom-select-trigger{
+  width:205px;
+  min-width:205px;
+  max-width:205px;
+  box-sizing:border-box;
+}
+
+.dashboard .month-filter-wrap .custom-select-menu-fixed{
+  width:205px !important;
+  min-width:205px !important;
+  max-width:205px !important;
+  box-sizing:border-box;
+  z-index:10000 !important;
+}
+
+@media(max-width:850px){
+  .dashboard .month-filter-wrap{
+    width:170px;
+    min-width:170px;
+    max-width:170px;
+  }
+  .dashboard .month-filter-wrap .custom-select-trigger,
+  .dashboard .month-filter-wrap .custom-select-menu-fixed{
+    width:170px !important;
+    min-width:170px !important;
+    max-width:170px !important;
+  }
+}
+
+
+/* Filtro de periodo: pertenece al encabezado del Dashboard.
+   Se mantiene separado del Topbar para que el perfil y las notificaciones
+   nunca puedan cubrirlo. */
+@media (min-width: 1101px){
+  .dashboard .welcome{
+    position:relative;
+    padding-right:310px;
+  }
+
+  .dashboard .month-filter-wrap{
+    position:absolute;
+    top:4px;
+    right:285px;
+    width:205px;
+    min-width:205px;
+    max-width:205px;
+    z-index:1000;
+  }
+
+  .dashboard .month-filter-wrap .custom-select-trigger{
+    width:205px;
+    min-width:205px;
+    max-width:205px;
+    height:48px;
+    box-sizing:border-box;
+  }
+}
+
+@media (min-width: 851px) and (max-width: 1100px){
+  .dashboard .welcome{
+    position:relative;
+    padding-right:240px;
+  }
+
+  .dashboard .month-filter-wrap{
+    position:absolute;
+    top:4px;
+    right:215px;
+    width:190px;
+    min-width:190px;
+    max-width:190px;
+    z-index:1000;
+  }
+
+  .dashboard .month-filter-wrap .custom-select-trigger{
+    width:190px;
+    min-width:190px;
+    max-width:190px;
+  }
+}
+
+@media (max-width: 850px){
+  .dashboard .welcome{
+    position:relative;
+    padding-right:0;
+    flex-wrap:wrap;
+  }
+
+  .dashboard .month-filter-wrap{
+    position:relative;
+    top:auto;
+    right:auto;
+    width:170px;
+    min-width:170px;
+    max-width:170px;
+    margin-left:auto;
+    z-index:1000;
+  }
+
+  .dashboard .month-filter-wrap .custom-select-trigger{
+    width:170px;
+    min-width:170px;
+    max-width:170px;
+  }
+}
+
+/* El saludo y el filtro pertenecen al Dashboard. El Topbar solo reserva el área superior derecha para notificaciones/perfil. */
+.dashboard .welcome{position:relative;z-index:110;min-height:64px;}
+.dashboard .month-filter-wrap{position:absolute;top:7px;right:285px;width:255px;min-width:255px;max-width:255px;z-index:120;}
+.dashboard .month-filter-wrap .custom-select-trigger{width:255px;min-width:255px;max-width:255px;box-sizing:border-box;}
+.dashboard .month-filter-wrap .custom-select-menu-fixed{width:255px !important;min-width:255px !important;max-width:255px !important;box-sizing:border-box;z-index:10000 !important;}
+@media (min-width:851px) and (max-width:1100px){
+  .dashboard .month-filter-wrap{top:7px;right:220px;width:210px;min-width:210px;max-width:210px;}
+  .dashboard .month-filter-wrap .custom-select-trigger,.dashboard .month-filter-wrap .custom-select-menu-fixed{width:210px !important;min-width:210px !important;max-width:210px !important;}
+}
+@media(max-width:850px){
+  .dashboard .welcome{padding-right:0;flex-wrap:wrap;}
+  .dashboard .month-filter-wrap{position:relative;top:auto;right:auto;width:210px;min-width:210px;max-width:210px;margin-left:auto;z-index:120;}
+  .dashboard .month-filter-wrap .custom-select-trigger,.dashboard .month-filter-wrap .custom-select-menu-fixed{width:210px !important;min-width:210px !important;max-width:210px !important;}
+}
+
+/* Ajuste visual Verdia: cards blancos con mayor transparencia y fondo botánico visible. */
+.dashboard .section-card,
+.dashboard .dashboard-currency,
+.dashboard .vera-card {
+  background: rgba(255, 255, 255, .70) !important;
+  border-color: rgba(210, 224, 211, .78);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* El saldo en USD ocupa directamente el cuarto indicador superior. */
+.stats-grid .stat-card:nth-child(4) {
+  position: relative;
+}
+.dashboard-usd-link {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  min-height: 30px;
+  padding: 0 13px;
+  border: 1px solid rgba(216, 167, 74, .35);
+  border-radius: 10px;
+  background: rgba(255, 250, 236, .68);
+  color: #8B6A1B;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  transition: background .16s ease, border-color .16s ease, transform .16s ease;
+}
+.dashboard-usd-link:hover {
+  background: rgba(255, 244, 217, .95);
+  border-color: rgba(216, 167, 74, .55);
+  transform: translateY(-50%) translateY(-1px);
+}
+
+/* Metas sustituye a Accesos rápidos y conserva la altura del card de movimientos. */
+.goals-dashboard-card {
+  min-height: 0 !important;
+  height: 100% !important;
+}
+.goals-dashboard-card .section-title {
+  margin-bottom: 9px;
+}
+.goals-dashboard-card .section-title h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.goals-title-icon {
+  color: var(--forest);
+  flex: 0 0 auto;
+}
+.goals-dashboard-list {
+  height: calc(100% - 34px);
+  max-height: 176px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(40, 94, 69, .25) transparent;
+}
+.goals-dashboard-list::-webkit-scrollbar { width: 7px; }
+.goals-dashboard-list::-webkit-scrollbar-track { background: transparent; }
+.goals-dashboard-list::-webkit-scrollbar-thumb { background: rgba(40, 94, 69, .25); border-radius: 999px; }
+.goal-dashboard-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 66px;
+  padding: 8px 9px;
+  margin-bottom: 7px;
+  border: 1px solid rgba(210, 224, 211, .78);
+  border-radius: 13px;
+  background: rgba(250, 253, 249, .62);
+}
+.goal-dashboard-item:last-child { margin-bottom: 0; }
+.goal-dashboard-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+.goal-dashboard-icon-green { background: #E7F2E4; color: var(--forest); }
+.goal-dashboard-icon-purple { background: #F0ECFF; color: #6E59B8; }
+.goal-dashboard-main { min-width: 0; flex: 1; }
+.goal-dashboard-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.goal-dashboard-heading strong { font-size: 10px; color: var(--graphite); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.goal-dashboard-heading span { font-size: 9px; font-weight: 800; color: var(--forest); flex: 0 0 auto; }
+.goal-dashboard-track { height: 6px; margin: 5px 0 4px; border-radius: 999px; background: #E3EAE2; overflow: hidden; }
+.goal-dashboard-fill { height: 100%; border-radius: 999px; background: var(--forest); }
+.goal-dashboard-item:nth-child(2n) .goal-dashboard-fill { background: #6E59B8; }
+.goal-dashboard-main small { display: block; font-size: 8px; color: var(--muted); }
+
+@media (max-width: 720px) {
+  .dashboard-usd-link { right: 10px; padding: 0 10px; }
+  .goals-dashboard-list { max-height: 190px; }
+}
+
+
+/* Orden superior aprobado: Saldo CRC · Saldo USD · Ingresos · Gastos.
+   Estos overrides neutralizan ajustes históricos basados en nth-child. */
+.stats-grid .stat-card:nth-child(2){
+  padding:11px 14px;
+  gap:11px;
+  min-height:70px;
+  box-shadow:0 7px 22px rgba(38,52,43,.055);
+}
+.stats-grid .stat-card:nth-child(2) .stat-icon{
+  width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.78);color:#8B6A1B;
+}
+.stats-grid .stat-card:nth-child(2) .stat-copy{flex:initial;min-width:0}
+.stats-grid .stat-card:nth-child(2) .stat-copy span{font-size:10px;line-height:1.1}
+.stats-grid .stat-card:nth-child(2) .stat-copy strong{font-size:17px;line-height:1.12}
+.stats-grid .stat-card:nth-child(2) .dashboard-usd-link{margin-left:auto}
+
+.stats-grid .stat-card:nth-child(3){
+  padding:11px 14px;gap:11px;min-height:70px;
+  box-shadow:0 7px 22px rgba(38,52,43,.055);
+}
+.stats-grid .stat-card:nth-child(3) .stat-icon{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.78);color:#6E59B8}
+.stats-grid .stat-card:nth-child(3) .stat-copy{flex:initial;min-width:0}
+.stats-grid .stat-card:nth-child(3) .stat-copy span{font-size:10px;line-height:1.1}
+.stats-grid .stat-card:nth-child(3) .stat-copy strong{font-size:19px;line-height:1.12}
+
+.stats-grid .stat-card:nth-child(4){
+  padding:11px 14px;gap:11px;min-height:70px;
+  box-shadow:0 7px 22px rgba(38,52,43,.055);
+}
+.stats-grid .stat-card:nth-child(4) .stat-icon{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.78);color:var(--forest)}
+.stats-grid .stat-card:nth-child(4) .stat-copy{flex:initial;min-width:0}
+.stats-grid .stat-card:nth-child(4) .stat-copy span{font-size:10px;line-height:1.1}
+.stats-grid .stat-card:nth-child(4) .stat-copy strong{font-size:19px;line-height:1.12}
+
+/* Indicadores superiores — todos comparten exactamente la misma estructura visual.
+   El color de fondo sigue diferenciando cada métrica, pero tamaño, marco,
+   icono, tipografía y espaciado siguen el patrón de Saldo en colones. */
+.stats-grid .stat-card,
+.stats-grid .stat-card:nth-child(2),
+.stats-grid .stat-card:nth-child(3),
+.stats-grid .stat-card:nth-child(4){
+  padding:7px 12px;
+  gap:12px;
+  min-height:70px;
+  box-shadow:inset 0 0 0 6px #fff, 0 7px 22px rgba(38,52,43,.055);
+}
+
+.stats-grid .stat-card .stat-icon,
+.stats-grid .stat-card:nth-child(2) .stat-icon,
+.stats-grid .stat-card:nth-child(3) .stat-icon,
+.stats-grid .stat-card:nth-child(4) .stat-icon{
+  width:46px;
+  height:46px;
+  border-radius:11px;
+  background:rgba(255,255,255,.78);
+}
+
+.stats-grid .stat-card .stat-icon svg,
+.stats-grid .stat-card:nth-child(2) .stat-icon svg,
+.stats-grid .stat-card:nth-child(3) .stat-icon svg,
+.stats-grid .stat-card:nth-child(4) .stat-icon svg{
+  width:19px;
+  height:19px;
+}
+
+.stats-grid .stat-card .stat-copy,
+.stats-grid .stat-card:nth-child(2) .stat-copy,
+.stats-grid .stat-card:nth-child(3) .stat-copy,
+.stats-grid .stat-card:nth-child(4) .stat-copy{
+  flex:1;
+  min-width:0;
+}
+
+.stats-grid .stat-card .stat-copy span,
+.stats-grid .stat-card:nth-child(2) .stat-copy span,
+.stats-grid .stat-card:nth-child(3) .stat-copy span,
+.stats-grid .stat-card:nth-child(4) .stat-copy span{
+  font-size:10px;
+  line-height:1.05;
+  font-weight:500;
+  color:#65736C;
+}
+
+.stats-grid .stat-card .stat-copy strong,
+.stats-grid .stat-card:nth-child(2) .stat-copy strong,
+.stats-grid .stat-card:nth-child(3) .stat-copy strong,
+.stats-grid .stat-card:nth-child(4) .stat-copy strong{
+  font-size:25px;
+  line-height:1.04;
+}
+
+/* Las acciones ocupan el mismo espacio lateral sin alterar el cuerpo del card. */
+.stats-grid .stat-card .dashboard-usd-link{
+  margin-left:auto;
+  flex:0 0 auto;
+}
+
+.stats-grid .stat-card .stat-eye{
+  right:9px;
+  padding:4px;
+}
+
+/* USD conserva su tono amarillo; solo adopta la misma escala interna. */
+.stats-grid .stat-card.stat-cream .stat-copy strong{
+  font-size:25px;
 }

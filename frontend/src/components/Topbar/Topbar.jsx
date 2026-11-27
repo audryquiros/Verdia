@@ -64,7 +64,7 @@ export default function Topbar({ onMenu }) {
       </div>
 
       <div className="topbar-spacer" />
-      <div className={`top-period ${isDashboard ? 'top-period-dashboard' : ''}`}>{!isDashboard && currentDate}</div>
+      {!isDashboard && <div className="top-period">{currentDate}</div>}
       <button className="icon-btn" aria-label="Notificaciones">
         <Bell size={18} />
       </button>

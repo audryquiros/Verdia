@@ -5,14 +5,15 @@ import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import CustomSelect from '../../components/CustomSelect/CustomSelect.jsx';
 import '../SimplePage.css';
 import './Reports.css';
+import { getCategoryColor } from '../../utils/categoryColors.js';
 
 const categories = [
-  { name: 'Alimentación', percent: '36%', value: '₡67.500', color: '#285E45' },
-  { name: 'Transporte', percent: '18%', value: '₡33.000', color: '#7fbd78' },
-  { name: 'Servicios', percent: '18%', value: '₡33.000', color: '#f0b084' },
-  { name: 'Entretenimiento', percent: '12%', value: '₡22.500', color: '#55bfd2' },
-  { name: 'Otros', percent: '17%', value: '₡31.350', color: '#a9d29a' },
-];
+  { name: 'Alimentación', percent: '36%', value: '₡67.500' },
+  { name: 'Transporte', percent: '18%', value: '₡33.000' },
+  { name: 'Servicios', percent: '18%', value: '₡33.000' },
+  { name: 'Entretenimiento', percent: '12%', value: '₡22.500' },
+  { name: 'Otros', percent: '17%', value: '₡31.350' },
+].map((category) => ({ ...category, color: getCategoryColor(category.name).color }));
 
 const periods = [
   'Noviembre de 2026',

@@ -24,10 +24,16 @@ export default function CustomSelect({ value, options, onChange, ariaLabel, clas
     const opensUp = spaceBelow < estimatedHeight + viewportPadding && rect.top > spaceBelow;
     const height = Math.min(estimatedHeight, opensUp ? rect.top - viewportPadding : window.innerHeight - rect.bottom - viewportPadding);
 
+    const menuWidth = Math.min(rect.width, window.innerWidth - viewportPadding * 2);
+    const left = Math.min(
+      Math.max(viewportPadding, rect.left),
+      window.innerWidth - viewportPadding - menuWidth
+    );
+
     setMenuPosition({
       top: opensUp ? Math.max(viewportPadding, rect.top - height - 6) : rect.bottom + 6,
-      left: rect.left,
-      width: rect.width,
+      left,
+      width: menuWidth,
       maxHeight: Math.max(120, height),
     });
   };
@@ -83,7 +89,7 @@ export default function CustomSelect({ value, options, onChange, ariaLabel, clas
           className="custom-select-menu custom-select-menu-fixed"
           role="listbox"
           aria-label={ariaLabel}
-          style={{ top: menuPosition.top, left: menuPosition.left, width: menuPosition.width, maxHeight: menuPosition.maxHeight }}
+          style={{ top: menuPosition.top, left: menuPosition.left, width: menuPosition.width, minWidth: menuPosition.width, maxWidth: menuPosition.width, maxHeight: menuPosition.maxHeight, '--custom-select-menu-width': `${menuPosition.width}px` }}
         >
           {normalizedOptions.map((option) => (
             <button
