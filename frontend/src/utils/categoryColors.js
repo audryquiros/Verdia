@@ -76,6 +76,16 @@ export const CATEGORY_COLORS = {
     background: '#EEEAFE',
     border: '#BBB2DF',
   },
+  'Intereses y comisiones': {
+    color: '#8A6B43',
+    background: '#F3ECE3',
+    border: '#D7C2A8',
+  },
+  'Ajustes de saldo': {
+    color: '#6F7C86',
+    background: '#EDF1F3',
+    border: '#C2CCD2',
+  },
   Otros: {
     color: '#65736C',
     background: '#EEF2EF',

@@ -98,6 +98,13 @@ export default function Movements() {
     const payload = { ...form, amount: Number(form.amount) };
     if (!payload.name.trim() || payload.amount <= 0) return;
     if (payload.type === 'transfer' && (!payload.originAccountId || !payload.destinationAccountId || payload.originAccountId === payload.destinationAccountId)) return;
+
+    const selectedAccountIds = [payload.originAccountId, payload.destinationAccountId].filter(Boolean);
+    const openingWarnings = selectedAccountIds
+      .map((accountId) => data.accounts.find((account) => account.id === accountId))
+      .filter((account) => account?.openingDate && payload.date < account.openingDate);
+    if (openingWarnings.length && !window.confirm(`La fecha del movimiento (${payload.date}) es anterior a la fecha de apertura de ${openingWarnings.map((account) => account.name).join(', ')}. Esto puede distorsionar el saldo. ¿Deseas continuar?`)) return;
+
     if (modal.mode === 'create') {
       addMovement(payload);
       showFeedback(payload.status === 'confirmed' ? `"${payload.name}" fue registrado correctamente.` : `"${payload.name}" fue guardado como planificado.`);

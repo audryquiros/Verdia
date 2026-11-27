@@ -43,5 +43,7 @@
 }
 
 @media(min-width:851px){
+  /* Solo Cuentas usa una vista de altura fija: el scroll vive dentro del listado de cuentas. */
   .content:has(.accounts-page){height:100vh;padding-bottom:0;overflow:hidden}
+  .shell-main:has(.accounts-page){overflow:hidden}
 }

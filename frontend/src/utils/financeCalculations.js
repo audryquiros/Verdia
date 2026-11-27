@@ -31,8 +31,15 @@ export function movementAffectsAccount(movement, accountId) {
   return 0;
 }
 
-export function calculateAccountBalance(account, movements) {
-  return money(account.initialBalance) + movements.reduce((total, movement) => total + movementAffectsAccount(movement, account.id), 0);
+export function calculateAccountBalance(account, movements, throughDate = null) {
+  const relevant = throughDate
+    ? movements.filter((movement) => movement.date && movement.date <= throughDate)
+    : movements;
+  return money(account.initialBalance) + relevant.reduce((total, movement) => total + movementAffectsAccount(movement, account.id), 0);
+}
+
+export function accountHasMovements(accountId, movements = []) {
+  return movements.some((movement) => movement.originAccountId === accountId || movement.destinationAccountId === accountId);
 }
 
 export function calculateSummary(data, periodKey = getCurrentPeriodKey()) {

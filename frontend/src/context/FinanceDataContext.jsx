@@ -1,13 +1,13 @@
 import { createContext, useContext, useMemo, useState } from 'react';
-import { calculateAccountBalance, calculateSummary } from '../utils/financeCalculations.js';
+import { accountHasMovements, calculateAccountBalance, calculateSummary } from '../utils/financeCalculations.js';
 
 const STORAGE_KEY = 'verdia.frontend.finance.v2';
 
 const initialData = {
   settings: { baseCurrency: 'CRC' },
   accounts: [
-    { id: 'a1', name: 'BAC Principal', type: 'bank', currency: 'CRC', initialBalance: 425000, archived: false },
-    { id: 'a2', name: 'Efectivo', type: 'cash', currency: 'CRC', initialBalance: 0, archived: false },
+    { id: 'a1', name: 'BAC Principal', type: 'bank', currency: 'CRC', initialBalance: 425000, openingDate: '2026-11-01', archived: false },
+    { id: 'a2', name: 'Efectivo', type: 'cash', currency: 'CRC', initialBalance: 0, openingDate: '2026-11-01', archived: false },
   ],
   movements: [
     { id: 'm1', date: '2026-11-09', name: 'Walmart', category: 'Alimentación', type: 'card_expense', amount: 15500, currency: 'CRC', status: 'confirmed', cardId: 'c1' },
@@ -33,18 +33,41 @@ const initialData = {
   ],
 };
 
+function inferOpeningDate(account, movements) {
+  const dates = movements
+    .filter((movement) => movement.originAccountId === account.id || movement.destinationAccountId === account.id)
+    .map((movement) => movement.date)
+    .filter(Boolean)
+    .sort();
+  return account.openingDate || dates[0] || new Date().toISOString().slice(0, 10);
+}
+
 function loadData() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('verdia.frontend.finance.v1');
     if (!raw) return initialData;
     const saved = JSON.parse(raw);
-    const legacyMovements = (saved.movements || []).map((movement) => ({
+    const savedMovements = saved.movements || initialData.movements;
+    const legacyMovements = savedMovements.map((movement) => ({
       ...movement,
       type: movement.type === 'expense' ? 'expense' : movement.type,
-      originAccountId: movement.type === 'expense' ? 'a1' : movement.originAccountId,
-      destinationAccountId: movement.type === 'income' ? 'a1' : movement.destinationAccountId,
+      originAccountId: movement.type === 'expense' ? (movement.originAccountId || 'a1') : movement.originAccountId,
+      destinationAccountId: movement.type === 'income' ? (movement.destinationAccountId || 'a1') : movement.destinationAccountId,
     }));
-    return { ...initialData, ...saved, settings: { ...initialData.settings, ...(saved.settings || {}) }, accounts: saved.accounts || initialData.accounts, movements: legacyMovements.length ? legacyMovements : initialData.movements, goals: (saved.goals || initialData.goals).map((goal) => ({ ...goal, category: goal.category || 'Otros' })), debts: (saved.debts || initialData.debts).map((debt) => ({ ...debt, category: debt.category || 'Otros' })) };
+    const accounts = (saved.accounts || initialData.accounts).map((account) => ({
+      ...account,
+      openingDate: inferOpeningDate(account, legacyMovements),
+      archived: Boolean(account.archived),
+    }));
+    return {
+      ...initialData,
+      ...saved,
+      settings: { ...initialData.settings, ...(saved.settings || {}) },
+      accounts,
+      movements: legacyMovements.length ? legacyMovements : initialData.movements,
+      goals: (saved.goals || initialData.goals).map((goal) => ({ ...goal, category: goal.category || 'Otros' })),
+      debts: (saved.debts || initialData.debts).map((debt) => ({ ...debt, category: debt.category || 'Otros' })),
+    };
   } catch {
     return initialData;
   }
@@ -71,16 +94,34 @@ export function FinanceDataProvider({ children }) {
   const api = useMemo(() => ({
     data,
     summary: calculateSummary(data),
-    getAccountBalance: (accountId) => {
+    getAccountBalance: (accountId, throughDate = null) => {
       const account = (data.accounts || []).find((item) => item.id === accountId);
-      return account ? calculateAccountBalance(account, data.movements || []) : 0;
+      return account ? calculateAccountBalance(account, data.movements || [], throughDate) : 0;
     },
-    addAccount: (account) => setData((current) => ({ ...current, accounts: [...(current.accounts || []), { ...account, id: uid('a'), archived: false }] })),
-    updateAccount: (id, account) => setData((current) => ({ ...current, accounts: current.accounts.map((item) => item.id === id ? { ...item, ...account } : item) })),
+    accountHasMovements: (accountId) => accountHasMovements(accountId, data.movements || []),
+    addAccount: (account) => setData((current) => ({ ...current, accounts: [...(current.accounts || []), { ...account, id: uid('a'), archived: false, openingDate: account.openingDate || today() }] })),
+    updateAccount: (id, account) => setData((current) => ({
+      ...current,
+      accounts: current.accounts.map((item) => {
+        if (item.id !== id) return item;
+        const hasMovements = accountHasMovements(id, current.movements || []);
+        return {
+          ...item,
+          ...account,
+          initialBalance: hasMovements ? item.initialBalance : account.initialBalance,
+          currency: hasMovements ? item.currency : account.currency,
+        };
+      }),
+    })),
     archiveAccount: (id) => setData((current) => {
       const account = current.accounts.find((item) => item.id === id);
       if (!account || Math.abs(calculateAccountBalance(account, current.movements || [])) > 0.000001) return current;
       return { ...current, accounts: current.accounts.map((item) => item.id === id ? { ...item, archived: true } : item) };
+    }),
+    reactivateAccount: (id) => setData((current) => ({ ...current, accounts: current.accounts.map((item) => item.id === id ? { ...item, archived: false } : item) })),
+    deleteAccount: (id) => setData((current) => {
+      if (accountHasMovements(id, current.movements || [])) return current;
+      return { ...current, accounts: current.accounts.filter((item) => item.id !== id) };
     }),
     addMovement: (movement) => setData((current) => ({ ...current, movements: [{ ...movement, id: movement.id || uid('m'), history: movement.history || [] }, ...(current.movements || [])] })),
     updateMovement: (id, movement) => setData((current) => ({ ...current, movements: current.movements.map((item) => item.id === id ? { ...item, ...movement, history: [...(item.history || []), { changedAt: today(), snapshot: item }] } : item) })),

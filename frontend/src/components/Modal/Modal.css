@@ -41,3 +41,58 @@
     padding-right: 20px;
   }
 }
+
+/* Modal de ajuste: más ancho para evitar scroll vertical en escritorio. */
+.modal-adjustment {
+  width: min(100%, 1040px);
+  max-height: calc(100vh - 32px);
+  overflow: hidden;
+}
+
+.modal-adjustment .modal-header {
+  padding: 22px 30px 14px;
+}
+
+.modal-adjustment .modal-header h2 {
+  font-size: 25px;
+}
+
+.modal-adjustment .modal-header p {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.modal-adjustment .modal-body {
+  padding: 18px 30px 22px;
+}
+
+.modal-adjustment .adjustment-grid {
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.modal-adjustment .adjustment-card {
+  padding: 12px 14px;
+}
+
+.modal-adjustment .adjustment-warning {
+  margin-bottom: 14px;
+}
+
+.modal-adjustment .adjustment-details-grid {
+  column-gap: 18px;
+  row-gap: 10px;
+}
+
+.modal-adjustment .modal-actions {
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
+@media (max-width: 800px) {
+  .modal-adjustment {
+    width: min(100%, 720px);
+    max-height: 94vh;
+    overflow: auto;
+  }
+}

@@ -1,5 +1,6 @@
 /* Cuentas — distribución y lenguaje visual Verdia */
-.accounts-page{height:100%;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding-bottom:0;box-sizing:border-box}
+.accounts-page{position:relative;height:100%;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding-bottom:22px;box-sizing:border-box}
+.accounts-page > *{position:relative;z-index:1}
 
 .accounts-page .page-header{flex:none}
 
@@ -42,7 +43,9 @@
 .account-stat-copy small{font-size:8px;line-height:1.05;font-weight:650;color:var(--muted);margin-top:3px}
 
 
-.accounts-page .section-card{padding:22px 28px 24px;border-radius:18px;min-height:0;flex:0 0 auto;display:flex;flex-direction:column;overflow:hidden;margin-bottom:22px}
+.accounts-page .section-card{padding:22px 28px 24px;border-radius:18px;min-height:0;flex:1 1 auto;display:flex;flex-direction:column;overflow:hidden;margin-bottom:0;background:rgba(255,255,255,.78);border-color:rgba(220,231,220,.9);backdrop-filter:blur(2px)}
+.accounts-page .section-card:first-of-type{min-height:0}
+.accounts-page .section-card .section-title{flex:none}
 .accounts-page .section-title{margin-bottom:16px;display:flex;align-items:flex-start;gap:18px}
 .accounts-page .section-title>div:first-child{min-width:0}
 .accounts-page .section-title h2{font-family:var(--font-heading);font-size:25px;letter-spacing:-.035em;color:var(--graphite)}
@@ -50,16 +53,17 @@
 .accounts-section-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex:none}
 .accounts-new-button{min-height:38px;padding:0 15px;font-size:11px;border-radius:10px;white-space:nowrap}
 
-.account-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;min-height:0;overflow:auto;padding:2px 6px 8px 2px;align-content:start}
+.account-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;min-height:0;flex:1 1 auto;overflow-y:auto;overflow-x:hidden;padding:2px 8px 12px 2px;align-content:start;scrollbar-gutter:stable}
 .account-grid.list-view{grid-template-columns:1fr;gap:12px}
-.account-grid.list-view .account-card{min-height:112px;padding:16px 22px;display:grid;grid-template-columns:auto minmax(260px,1.25fr) minmax(180px,.55fr) auto;grid-template-rows:auto auto;align-items:center;column-gap:28px;row-gap:4px}
+.account-grid.list-view .account-card{min-height:112px;padding:16px 22px;display:grid;grid-template-columns:auto minmax(260px,1.25fr) minmax(280px,.8fr);grid-template-rows:auto auto;align-items:center;column-gap:28px;row-gap:4px}
 .account-grid.list-view .account-card-top{grid-column:1;grid-row:1 / span 2;margin:0;justify-content:flex-start;gap:10px}
 .account-grid.list-view .account-card>strong{grid-column:2;grid-row:1;align-self:end}
 .account-grid.list-view .account-type{grid-column:2;grid-row:2;margin:0;align-self:start}
-.account-grid.list-view .account-balance{grid-column:3;grid-row:1 / span 2;margin:0;padding:0;text-align:right;white-space:nowrap}
-.account-grid.list-view .account-actions{grid-column:4;grid-row:1 / span 2;margin:0;justify-content:flex-end;gap:10px}
+.account-grid.list-view .account-financial-row{grid-column:3;grid-row:1 / span 2;margin:0;padding:0;justify-content:space-between;gap:20px}
+.account-grid.list-view .account-balance{margin:0;padding:0;white-space:nowrap}
+.account-grid.list-view .account-actions{margin:0;justify-content:flex-end;gap:10px}
 
-.account-card{border:1px solid rgba(207,224,208,.9);border-radius:16px;background:rgba(255,255,255,.72);padding:18px 20px;min-height:178px;display:flex;flex-direction:column;box-shadow:0 7px 20px rgba(40,94,69,.045);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.account-card{border:1px solid rgba(207,224,208,.9);border-radius:16px;background:rgba(255,255,255,.72);padding:18px 20px;min-height:178px;display:flex;flex-direction:column;box-shadow:none;transition:transform .18s ease,border-color .18s ease}
 /* Categoría de cuenta: el fondo ayuda a reconocer el tipo sin competir con el saldo. */
 .account-card--bank{background:rgba(232,246,243,.72);border-color:rgba(197,220,209,.95)}
 .account-card--cash{background:rgba(255,244,217,.72);border-color:rgba(233,215,170,.95)}
@@ -77,14 +81,15 @@
 .account-card--usd.account-card--bank .account-icon,.account-card--usd.account-card--bank .account-currency{color:#174A37;background:rgba(196,220,209,.96)}
 .account-card--usd.account-card--cash .account-icon,.account-card--usd.account-card--cash .account-currency{color:#76570E;background:rgba(239,215,164,.96)}
 .account-card--usd.account-card--savings .account-icon,.account-card--usd.account-card--savings .account-currency{color:#56458F;background:rgba(208,198,237,.96)}
-.account-card:hover{transform:translateY(-1px);box-shadow:0 11px 26px rgba(40,94,69,.08);border-color:#cfe0d0}
+.account-card:hover{transform:translateY(-1px);box-shadow:none;border-color:#cfe0d0}
 .account-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .account-icon{width:42px;height:42px;border-radius:12px;background:var(--sage);color:var(--forest);display:grid;place-items:center}
 .account-currency{font-size:10px;font-weight:850;color:var(--forest);background:var(--sage);padding:6px 9px;border-radius:8px}
 .account-card>strong{font-family:var(--font-heading);font-size:17px;line-height:1.2;color:var(--graphite)}
 .account-type{font-size:10px;color:var(--muted);margin-top:4px}
-.account-balance{font-family:var(--font-heading);font-size:27px;font-weight:800;letter-spacing:-.035em;color:var(--graphite);margin-top:auto;padding-top:18px;line-height:1.05}
-.account-actions{display:flex;gap:8px;align-items:center;margin-top:14px}
+.account-financial-row{margin-top:auto;padding-top:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;min-width:0}
+.account-balance{font-family:var(--font-heading);font-size:27px;font-weight:800;letter-spacing:-.035em;color:var(--graphite);line-height:1.05;white-space:nowrap}
+.account-actions{display:flex;gap:8px;align-items:center;flex:none;margin:0}
 .account-actions .btn{min-height:34px;padding:0 13px;font-size:10px;font-weight:750;border-radius:10px}
 .icon-button{width:34px;height:34px;border:1px solid var(--line);background:#fff;border-radius:10px;color:var(--forest);display:grid;place-items:center;transition:background .15s ease,border-color .15s ease}
 .icon-button:hover:not(:disabled){background:var(--cream);border-color:#cfe0d0}
@@ -92,7 +97,7 @@
 
 @media(max-width:1150px){
   .account-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .account-grid.list-view .account-card{grid-template-columns:auto minmax(220px,1fr) minmax(150px,.55fr) auto;column-gap:22px}
+  .account-grid.list-view .account-card{grid-template-columns:auto minmax(220px,1fr) minmax(260px,.8fr);column-gap:22px}
 }
 @media(max-width:900px){
   .account-summary{grid-template-columns:1fr 1fr}
@@ -133,4 +138,304 @@
 
 @media(max-width:850px){
   .accounts-page{height:calc(100vh - 76px)}
+}
+
+
+/* Cuentas mantiene el mismo fondo botánico del resto de Verdia sin crear scroll de página. */
+.accounts-page::after{
+  content:"";
+  position:absolute;
+  right:-40px;
+  bottom:-120px;
+  width:620px;
+  height:920px;
+  background:url("../../assets/landing/botanical/enredadera-recorrido.svg") no-repeat right bottom/contain;
+  opacity:.13;
+  pointer-events:none;
+  z-index:0;
+}
+.account-grid::-webkit-scrollbar{width:8px}
+.account-grid::-webkit-scrollbar-track{background:rgba(228,237,225,.35);border-radius:999px}
+.account-grid::-webkit-scrollbar-thumb{background:rgba(40,94,69,.28);border-radius:999px}
+.account-grid::-webkit-scrollbar-thumb:hover{background:rgba(40,94,69,.42)}
+
+@media(min-width:851px){
+  .accounts-page .section-card:first-of-type{margin-bottom:0}
+}
+
+.account-opening-meta{display:flex;flex-direction:column;gap:3px;margin-top:9px;font-size:8px;color:#66756d;font-weight:650}
+.account-opening-meta span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-button-with-label{position:relative}
+.icon-button-with-label>span{position:absolute;right:0;bottom:calc(100% + 7px);background:var(--graphite);color:#fff;padding:5px 7px;border-radius:7px;font-size:8px;font-weight:750;line-height:1;white-space:nowrap;opacity:0;transform:translateY(3px);pointer-events:none;transition:opacity .14s ease,transform .14s ease;z-index:20}
+.icon-button-with-label:hover>span,.icon-button-with-label:focus-visible>span{opacity:1;transform:translateY(0)}
+.icon-button-danger{color:#b44f4f}
+.icon-button-danger:hover:not(:disabled){background:#fff2f0;border-color:#e4c4c0}
+.archived-list>div>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.archived-list>div>div strong{font-family:var(--font-heading);font-size:11px;color:var(--graphite)}
+.archived-list>div>div span{font-size:8px;color:var(--muted)}
+.account-feedback{position:fixed;right:28px;bottom:24px;z-index:1000;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #d7e5d7;border-radius:12px;padding:10px 14px;box-shadow:0 12px 32px rgba(38,52,43,.12);font-size:10px;font-weight:700;color:var(--graphite)}
+.account-feedback-icon{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:var(--sage);color:var(--forest);font-weight:900}
+.adjustment-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.adjustment-card{border:1px solid var(--line);border-radius:14px;padding:13px;background:rgba(243,246,239,.72);display:flex;flex-direction:column;gap:4px;min-width:0}
+.adjustment-card span{font-size:9px;font-weight:750;color:var(--muted)}
+.adjustment-card strong{font-family:var(--font-heading);font-size:23px;line-height:1.1;color:var(--graphite)}
+.adjustment-card small{font-size:8px;color:var(--muted);line-height:1.35}
+.adjustment-card input{width:100%;box-sizing:border-box;border:0;background:transparent;font-family:var(--font-heading);font-size:23px;font-weight:800;color:var(--graphite);outline:none;padding:2px 0}
+.adjustment-card.is-positive{border-color:#c6ddc7;background:#f1f8ec}
+.adjustment-card.is-negative{border-color:#e4c8c0;background:#fff5f1}
+.adjustment-warning{display:flex;gap:10px;align-items:flex-start;border:1px solid #ead9ae;background:#fff8e8;border-radius:12px;padding:11px 13px;margin:0 0 16px;color:#6c5722}
+.adjustment-warning svg{flex:none;margin-top:1px}
+.adjustment-warning div{display:flex;flex-direction:column;gap:3px}
+.adjustment-warning strong{font-size:10px}
+.adjustment-warning span{font-size:9px;line-height:1.45}
+.adjustment-redirect{border:1px solid #d9e6da;background:#f5f8f3;border-radius:12px;padding:11px 13px;display:flex;flex-direction:column;gap:4px;margin-top:2px}
+.adjustment-redirect strong{font-size:10px;color:var(--graphite)}
+.adjustment-redirect span{font-size:9px;color:var(--muted);line-height:1.45}
+.adjustment-impact{border:1px solid #d7e5d7;background:#f1f7ee;border-radius:12px;padding:11px 13px;font-size:9px;font-weight:700;color:#365640;margin-top:2px}
+.choice-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice-card{border:1px solid var(--line);border-radius:11px;padding:10px;display:flex;flex-direction:column;gap:3px;cursor:pointer;background:#fff}
+.choice-card.selected{border-color:#a8c9aa;background:#f5f9f3}
+.choice-card input{position:absolute;opacity:0;pointer-events:none}
+.choice-card span{font-size:10px;font-weight:800;color:var(--graphite)}
+.choice-card small{font-size:8px;color:var(--muted);line-height:1.35}
+@media(max-width:800px){.adjustment-grid{grid-template-columns:1fr}.choice-row{grid-template-columns:1fr}.account-actions{flex-wrap:wrap}.account-opening-meta{margin-top:7px}}
+
+/* Ajuste de layout: cada tarjeta contiene toda su información y acciones sin desbordarse. */
+.accounts-page .section-card {
+  flex: 0 0 auto;
+}
+
+.accounts-page .section-card:first-of-type {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.accounts-page .section-card + .section-card {
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.account-card {
+  min-height: 218px;
+  box-sizing: border-box;
+}
+
+.account-financial-row {
+  margin-top: auto;
+  padding-top: 14px;
+  align-items: center;
+}
+
+.account-actions {
+  min-width: 0;
+}
+
+.account-actions .btn,
+.account-actions .icon-button {
+  flex: 0 0 auto;
+}
+
+.account-grid.list-view .account-card {
+  min-height: 136px;
+  grid-template-rows: auto auto auto;
+}
+
+.account-grid.list-view .account-opening-meta {
+  grid-column: 2;
+  grid-row: 3;
+  margin-top: 3px;
+}
+
+.account-grid.list-view .account-financial-row {
+  grid-column: 3;
+  grid-row: 1 / span 3;
+}
+
+@media (max-width: 1150px) {
+  .account-card {
+    min-height: 218px;
+  }
+}
+
+@media (max-width: 800px) {
+  .account-card {
+    min-height: 218px;
+  }
+
+  .account-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
+/* Ajuste de saldo — jerarquía visual y lectura clara. */
+.adjustment-card-label{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  min-height:20px;
+}
+.adjustment-card-label > span:first-child{
+  font-size:11px;
+  font-weight:850;
+  color:#53635b;
+  letter-spacing:.005em;
+}
+.adjustment-label-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:19px;
+  padding:3px 7px;
+  border-radius:999px;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+.adjustment-label-badge--calculated{background:#e4ede1;color:#285e45}
+.adjustment-label-badge--real{background:#dcebd7;color:#285e45}
+.adjustment-label-badge--difference{background:#eef1ee;color:#59665f}
+.adjustment-card strong{font-size:25px}
+.adjustment-card small{
+  font-size:9px;
+  font-weight:600;
+  color:#65736c;
+  line-height:1.45;
+}
+.adjustment-card--observed input{
+  font-size:25px;
+  padding:3px 0;
+}
+.adjustment-warning{
+  padding:13px 15px;
+  border-width:1px;
+}
+.adjustment-warning strong{
+  font-size:11px;
+  font-weight:850;
+}
+.adjustment-warning span{
+  font-size:9.5px;
+  line-height:1.5;
+}
+.adjustment-details-grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  column-gap:16px;
+  row-gap:12px;
+}
+.adjustment-details-grid .form-field-full{
+  grid-column:1 / -1;
+}
+.adjustment-date-display{
+  height:52px;
+  min-height:52px;
+  box-sizing:border-box;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#f7f9f6;
+  padding:0 13px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  color:var(--graphite);
+  font-size:12px;
+  font-weight:750;
+}
+.adjustment-auto-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#e4ede1;
+  color:#285e45;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+.adjustment-details-grid .form-field{
+  min-width:0;
+}
+.adjustment-details-grid .modal-select{
+  width:100%;
+  min-width:0;
+}
+.adjustment-details-grid .modal-select .custom-select-trigger{
+  height:52px;
+  min-height:52px;
+  box-sizing:border-box;
+}
+.adjustment-details-grid .account-form-help{
+  font-size:9px;
+  margin-top:6px;
+}
+.adjustment-impact{
+  border:2px solid #b9d3ba;
+  background:#eaf4e5;
+  border-radius:13px;
+  padding:13px 15px;
+  margin-top:4px;
+  color:#285e45;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.adjustment-impact-label{
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:#54715b;
+}
+.adjustment-impact strong{
+  font-size:12px;
+  line-height:1.35;
+  font-weight:850;
+}
+.adjustment-impact small{
+  font-size:9px;
+  font-weight:650;
+  color:#52655a;
+  line-height:1.4;
+}
+.archived-list>div{
+  padding:15px 4px;
+  min-height:58px;
+  box-sizing:border-box;
+}
+.archived-list>div>div strong{
+  font-size:14px;
+  line-height:1.2;
+}
+.archived-list>div>div span{
+  font-size:10px;
+  line-height:1.35;
+  color:#5f6f67;
+  font-weight:650;
+}
+@media(max-width:800px){
+  .adjustment-details-grid{grid-template-columns:1fr}
+  .adjustment-details-grid .form-field-full{grid-column:auto}
+}
+
+/* Ajuste de saldo: el texto auxiliar de la fecha no debe alterar la alineación del control vecino. */
+.adjustment-details-grid .form-field{
+  align-self:start;
+  align-content:start;
+}
+.adjustment-details-grid .form-field:first-child{
+  position:relative;
+}
+.adjustment-details-grid .form-field:first-child .account-form-help{
+  position:absolute;
+  left:0;
+  top:calc(100% - 4px);
+  width:100%;
+  margin:0;
+  pointer-events:none;
+}
+.adjustment-details-grid .form-field:nth-child(2){
+  align-self:start;
 }
