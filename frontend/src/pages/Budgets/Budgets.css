@@ -124,9 +124,14 @@
 /* Vista cards */
 .budgets-page .budget-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
   align-items: stretch;
+}
+
+.budgets-page .budget-card {
+  width: 100%;
+  min-width: 0;
 }
 
 .budgets-page .budget-card {
@@ -138,9 +143,15 @@
 }
 
 .budgets-page .budget-card-top {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: start;
   gap: 15px;
+}
+
+.budgets-page .budget-card-top .inline-actions {
+  min-width: 0;
+  flex: none;
 }
 
 .budgets-page .budget-card-title {
@@ -214,6 +225,13 @@
   z-index: 2;
 }
 
+/* Cuando el relleno supera el centro, el porcentaje pasa a texto claro para conservar contraste. */
+.budgets-page .budget-progress > strong.is-over-fill,
+.budgets-page .budget-list-progress > strong.is-over-fill {
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .16);
+}
+
 @media (max-width: 1000px) {
   .budgets-page .budget-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -274,7 +292,7 @@
     font-size: 22px;
   }
 }
-.inline-actions{display:flex;gap:3px;margin-left:auto}.budget-card-top{display:flex;align-items:flex-start;gap:10px}.budget-card-top .inline-actions{margin-left:auto}
+.inline-actions{display:flex;gap:3px;margin-left:auto}.budget-card-top .inline-actions{margin-left:auto}
 .budget-derived{display:flex;justify-content:space-between;gap:10px;margin-top:12px;font-size:11px;color:var(--muted);line-height:1.35}.budget-derived strong{color:var(--graphite);font-weight:750}.budget-list-values{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 /* Lista: borde de categoría + porcentaje dentro de la barra + acciones donde antes estaba el %. */
@@ -373,5 +391,115 @@
   }
   .budgets-page .budget-list-progress > strong {
     font-size: 10px;
+  }
+}
+
+/* Confirmaciones y feedback de acciones de presupuestos. */
+.budget-confirmation {
+  display: grid;
+  gap: 22px;
+}
+
+.budget-confirmation-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #F7F9F6;
+}
+
+.budget-confirmation-summary strong {
+  color: var(--graphite);
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.budget-confirmation-summary span {
+  color: var(--graphite);
+  font-size: 18px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.budget-confirmation-summary--danger {
+  border-color: rgba(178, 75, 68, .2);
+  background: #FEF5F4;
+}
+
+.budget-confirmation p {
+  margin: 0;
+  color: var(--graphite);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.budget-confirmation-actions {
+  margin-top: 0;
+  padding-top: 20px;
+  gap: 12px;
+}
+
+.budget-confirmation-actions .btn {
+  min-height: 46px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.budget-confirmation-actions .btn-danger {
+  border: 1px solid #B24B44;
+  background: #B24B44;
+  color: #fff;
+}
+
+.budget-confirmation-actions .btn-danger:hover {
+  background: #A5413B;
+  border-color: #A5413B;
+}
+
+.budget-feedback {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 2000;
+  min-width: 300px;
+  max-width: 430px;
+  min-height: 50px;
+  padding: 12px 16px;
+  border: 1px solid rgba(40, 94, 69, .14);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--graphite);
+  box-shadow: 0 16px 38px rgba(38, 52, 43, .16);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.budget-feedback-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: #E7F4E6;
+  color: var(--forest);
+  font-weight: 900;
+}
+
+@media (max-width: 650px) {
+  .budget-feedback {
+    left: 16px;
+    right: 16px;
+    bottom: 18px;
+    min-width: 0;
+    max-width: none;
   }
 }
