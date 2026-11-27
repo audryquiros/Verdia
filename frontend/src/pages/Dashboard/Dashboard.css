@@ -1064,3 +1064,30 @@
 .stats-grid .stat-card.stat-cream .stat-copy strong{
   font-size:25px;
 }
+
+/* Alineación estructural del Dashboard: Vera ocupa exactamente la altura
+   de la columna principal, sin depender de una altura fija. */
+@media (min-width: 1101px){
+  .dashboard-grid{
+    height:auto;
+    align-items:stretch;
+    grid-auto-rows:auto;
+  }
+  .dashboard-grid .main-col{
+    height:auto;
+    align-self:stretch;
+  }
+  .dashboard-grid .side-col{
+    align-self:stretch;
+    display:flex;
+    min-height:0;
+    height:auto;
+  }
+  .dashboard-grid .side-col .vera-card{
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    flex:1 1 auto;
+    align-self:stretch;
+  }
+}

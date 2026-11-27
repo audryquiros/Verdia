@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { Landmark, Wallet, PiggyBank, Plus, Archive, DollarSign, RotateCcw, Trash2, SlidersHorizontal, AlertTriangle } from 'lucide-react';
+import { Landmark, Wallet, PiggyBank, Plus, Archive, DollarSign, RotateCcw, Trash2, SlidersHorizontal, AlertTriangle, Pencil } from 'lucide-react';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import SectionCard from '../../components/SectionCard/SectionCard.jsx';
 import Modal from '../../components/Modal/Modal.jsx';
@@ -49,6 +49,7 @@ export default function Accounts() {
   const [form, setForm] = useState(emptyForm);
   const [adjustment, setAdjustment] = useState(emptyAdjustment);
   const [view, setView] = useState('cards');
+  const [showArchived, setShowArchived] = useState(false);
   const [feedback, setFeedback] = useState(null);
   const [pendingAdjustment, setPendingAdjustment] = useState(null);
 
@@ -160,13 +161,29 @@ export default function Accounts() {
         </div>
       </div>
 
-      <SectionCard title="Mis cuentas" subtitle="Cada cuenta mantiene su propia moneda, saldo inicial e historial." action={<div className="accounts-section-actions"><button className="btn btn-primary accounts-new-button" onClick={openCreate}><Plus size={17} />Nueva cuenta</button><ViewSwitcher value={view} onChange={setView} options={[{ value: 'cards', label: 'Tarjetas' }, { value: 'list', label: 'Lista' }]} ariaLabel="Formato de cuentas" /></div>}>
-        <div className={`account-grid ${view === 'list' ? 'list-view' : ''}`}>
-          {activeAccounts.map((account) => {
+      <SectionCard title={showArchived ? 'Cuentas archivadas' : 'Mis cuentas'} subtitle={showArchived ? 'Se conservan para mantener el historial. Puedes reactivarlas cuando lo necesites.' : 'Cada cuenta mantiene su propia moneda, saldo inicial e historial.'} action={<div className="accounts-section-actions"><button className="btn btn-primary accounts-new-button" onClick={openCreate}><Plus size={17} />Nueva cuenta</button><button className="btn btn-outline accounts-archive-toggle" onClick={() => setShowArchived((value) => !value)} aria-pressed={showArchived}><Archive size={16} />{showArchived ? 'Cuentas activas' : 'Archivadas'}</button><ViewSwitcher value={view} onChange={setView} options={[{ value: 'cards', label: 'Tarjetas' }, { value: 'list', label: 'Lista' }]} ariaLabel="Formato de cuentas" /></div>}>
+        <div className={`account-grid ${view === 'list' ? 'list-view' : ''} ${showArchived ? 'archived-view' : ''}`}>
+          {(showArchived ? archivedAccounts : activeAccounts).map((account) => {
             const Icon = iconMap[account.type] || Wallet;
             const balance = getAccountBalance(account.id);
             const hasMovements = hasAnyMovement(account.id, data.movements || []);
             const canArchive = Math.abs(balance) < 0.000001;
+            if (showArchived) {
+              return (
+                <article className="account-card account-card--archived" key={account.id}>
+                  <div className="account-card-top"><span className="account-icon"><Icon size={19} /></span><span className="account-currency">{account.currency}</span></div>
+                  <strong>{account.name}</strong>
+                  <span className="account-type">{typeOptions.find((item) => item.value === account.type)?.label || account.type}</span>
+                  <div className="account-opening-meta"><span>Saldo inicial: {formatMoney(account.initialBalance, account.currency)}</span><span>Apertura: {formatOpeningDate(account.openingDate)}</span></div>
+                  <div className="account-financial-row">
+                    <div className="account-balance">{formatMoney(balance, account.currency)}</div>
+                    <div className="account-actions">
+                      <button className="icon-button icon-button-with-label action-reactivate" onClick={() => reactivateAccount(account.id)} aria-label={`Reactivar ${account.name}`}><RotateCcw size={16} /><span>Reactivar</span></button>
+                    </div>
+                  </div>
+                </article>
+              );
+            }
             return (
               <article className={`account-card account-card--${account.type} ${account.currency === 'USD' ? 'account-card--usd' : ''}`} key={account.id}>
                 <div className="account-card-top"><span className="account-icon"><Icon size={19} /></span><span className="account-currency">{account.currency}</span></div>
@@ -176,29 +193,18 @@ export default function Accounts() {
                 <div className="account-financial-row">
                   <div className="account-balance">{formatMoney(balance, account.currency)}</div>
                   <div className="account-actions">
-                    <button className="btn btn-outline" onClick={() => openEdit(account)}>Editar</button>
-                    <button className="icon-button icon-button-with-label" onClick={() => openAdjustment(account)} aria-label={`Ajustar saldo de ${account.name}`}><SlidersHorizontal size={16} /><span>Ajustar saldo</span></button>
-                    <button className="icon-button icon-button-with-label" title={canArchive ? undefined : 'Solo puedes archivar una cuenta con saldo cero'} disabled={!canArchive} onClick={() => archiveAccount(account.id)} aria-label={`Archivar ${account.name}`}><Archive size={16} /><span>Archivar</span></button>
-                    {!hasMovements && <button className="icon-button icon-button-with-label icon-button-danger" onClick={() => deleteSelectedAccount(account)} aria-label={`Eliminar ${account.name}`}><Trash2 size={16} /><span>Eliminar</span></button>}
+                    <button className="icon-button icon-button-with-label action-edit" onClick={() => openEdit(account)} aria-label={`Editar ${account.name}`}><Pencil size={16} /><span>Editar</span></button>
+                    <button className="icon-button icon-button-with-label action-adjust" onClick={() => openAdjustment(account)} aria-label={`Ajustar saldo de ${account.name}`}><SlidersHorizontal size={16} /><span>Ajustar saldo</span></button>
+                    {canArchive && <button className="icon-button icon-button-with-label action-archive" onClick={() => archiveAccount(account.id)} aria-label={`Archivar ${account.name}`}><Archive size={16} /><span>Archivar</span></button>}
+                    {!hasMovements && <button className="icon-button icon-button-with-label icon-button-danger action-delete" onClick={() => deleteSelectedAccount(account)} aria-label={`Eliminar ${account.name}`}><Trash2 size={16} /><span>Eliminar</span></button>}
                   </div>
                 </div>
               </article>
             );
           })}
-          {!activeAccounts.length && <div className="empty-state"><strong>No tienes cuentas activas</strong><span>Agrega la primera cuenta para empezar a calcular tu balance real.</span></div>}
+          {!(showArchived ? archivedAccounts : activeAccounts).length && <div className="empty-state"><strong>{showArchived ? 'No tienes cuentas archivadas' : 'No tienes cuentas activas'}</strong><span>{showArchived ? 'Las cuentas que archives aparecerán aquí y conservarán todo su historial.' : 'Agrega la primera cuenta para empezar a calcular tu balance real.'}</span></div>}
         </div>
       </SectionCard>
-
-      {archivedAccounts.length > 0 && (
-        <SectionCard title="Archivadas" subtitle="Se conservan para mantener el historial. Puedes reactivarlas cuando lo necesites.">
-          <div className="archived-list">
-            {archivedAccounts.map((account) => <div key={account.id}>
-              <div><strong>{account.name}</strong><span>Saldo actual: {formatMoney(getAccountBalance(account.id), account.currency)} · {account.currency}</span></div>
-              <button className="icon-button icon-button-with-label" onClick={() => reactivateAccount(account.id)} aria-label={`Reactivar ${account.name}`}><RotateCcw size={16} /><span>Reactivar</span></button>
-            </div>)}
-          </div>
-        </SectionCard>
-      )}
 
       {feedback && <div className="account-feedback" role="status" aria-live="polite"><CheckIcon />{feedback.message}</div>}
 

@@ -253,3 +253,102 @@
 }
 .inline-actions{display:flex;gap:3px;margin-left:auto}.budget-card-top{display:flex;align-items:flex-start;gap:10px}.budget-card-top .inline-actions{margin-left:auto}
 .budget-derived{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:8px;color:var(--muted)}.budget-derived strong{color:var(--graphite);font-weight:750}.budget-list-values{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* Lista: borde de categoría + porcentaje dentro de la barra + acciones donde antes estaba el %. */
+.budgets-page .budget-list-item {
+  border-left: 4px solid var(--category-border, var(--line));
+  padding-left: 12px;
+}
+.budgets-page .budget-list-title-row {
+  align-items: center;
+}
+.budgets-page .budget-list-title-row .inline-actions {
+  margin-left: auto;
+  flex: none;
+}
+.budgets-page .budget-list-title-row .icon-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
+}
+.budgets-page .budget-list-title-row .icon-btn:hover {
+  border-color: var(--line);
+  background: var(--cream);
+  color: var(--forest);
+  transform: translateY(-1px);
+}
+.budgets-page .budget-list-title-row .icon-btn-danger:hover {
+  color: var(--danger);
+  background: #fff2f0;
+}
+.budgets-page .budget-list-title-row .icon-btn span {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  top: calc(100% + 7px);
+  background: var(--graphite);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -3px);
+  pointer-events: none;
+  transition: opacity .14s ease, transform .14s ease;
+  z-index: 20;
+}
+.budgets-page .budget-list-title-row .icon-btn:hover span,
+.budgets-page .budget-list-title-row .icon-btn:focus-visible span {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.budgets-page .budget-list-values {
+  margin: 6px 0 10px;
+}
+.budgets-page .budget-list-progress {
+  position: relative;
+  width: 100%;
+  min-height: 14px;
+}
+.budgets-page .budget-list-progress .progress-wrap {
+  width: 100%;
+}
+.budgets-page .budget-list-progress .progress {
+  height: 20px;
+  border-radius: 999px;
+}
+.budgets-page .budget-list-progress > strong {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--graphite);
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .01em;
+  text-shadow: 0 1px 1px rgba(255,255,255,.55);
+  pointer-events: none;
+  z-index: 2;
+}
+@media (max-width: 650px) {
+  .budgets-page .budget-list-item {
+    padding-left: 9px;
+  }
+  .budgets-page .budget-list-title-row .icon-btn {
+    width: 30px;
+    height: 30px;
+  }
+  .budgets-page .budget-list-progress .progress {
+    height: 16px;
+  }
+  .budgets-page .budget-list-progress > strong {
+    font-size: 10px;
+  }
+}

@@ -53,15 +53,15 @@
 .accounts-section-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex:none}
 .accounts-new-button{min-height:38px;padding:0 15px;font-size:11px;border-radius:10px;white-space:nowrap}
 
-.account-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;min-height:0;flex:1 1 auto;overflow-y:auto;overflow-x:hidden;padding:2px 8px 12px 2px;align-content:start;scrollbar-gutter:stable}
-.account-grid.list-view{grid-template-columns:1fr;gap:12px}
-.account-grid.list-view .account-card{min-height:112px;padding:16px 22px;display:grid;grid-template-columns:auto minmax(260px,1.25fr) minmax(280px,.8fr);grid-template-rows:auto auto;align-items:center;column-gap:28px;row-gap:4px}
-.account-grid.list-view .account-card-top{grid-column:1;grid-row:1 / span 2;margin:0;justify-content:flex-start;gap:10px}
+.account-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;min-height:0;flex:1 1 auto;overflow-y:auto;overflow-x:hidden;padding:2px 8px 12px 2px;align-content:stretch;grid-auto-rows:minmax(218px,1fr);scrollbar-gutter:stable}
+.account-grid.list-view{grid-template-columns:minmax(0,1040px);justify-content:center;gap:16px;align-content:start}
+.account-grid.list-view .account-card{min-height:136px;height:136px;padding:16px 22px;display:grid;grid-template-columns:140px minmax(220px,1.25fr) minmax(280px,.8fr);grid-template-rows:auto auto;align-items:center;column-gap:28px;row-gap:4px;overflow:visible}
+.account-grid.list-view .account-card-top{grid-column:1;grid-row:1 / span 2;margin:0;width:100%;justify-content:center;align-items:center;gap:10px}
 .account-grid.list-view .account-card>strong{grid-column:2;grid-row:1;align-self:end}
 .account-grid.list-view .account-type{grid-column:2;grid-row:2;margin:0;align-self:start}
 .account-grid.list-view .account-financial-row{grid-column:3;grid-row:1 / span 2;margin:0;padding:0;justify-content:space-between;gap:20px}
 .account-grid.list-view .account-balance{margin:0;padding:0;white-space:nowrap}
-.account-grid.list-view .account-actions{margin:0;justify-content:flex-end;gap:10px}
+.account-grid.list-view .account-actions{margin:0;justify-content:flex-end;gap:10px;align-items:center}
 
 .account-card{border:1px solid rgba(207,224,208,.9);border-radius:16px;background:rgba(255,255,255,.72);padding:18px 20px;min-height:178px;display:flex;flex-direction:column;box-shadow:none;transition:transform .18s ease,border-color .18s ease}
 /* Categoría de cuenta: el fondo ayuda a reconocer el tipo sin competir con el saldo. */
@@ -176,7 +176,7 @@
 .account-feedback{position:fixed;right:28px;bottom:24px;z-index:1000;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #d7e5d7;border-radius:12px;padding:10px 14px;box-shadow:0 12px 32px rgba(38,52,43,.12);font-size:10px;font-weight:700;color:var(--graphite)}
 .account-feedback-icon{width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:var(--sage);color:var(--forest);font-weight:900}
 .adjustment-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}
-.adjustment-card{border:1px solid var(--line);border-radius:14px;padding:13px;background:rgba(243,246,239,.72);display:flex;flex-direction:column;gap:4px;min-width:0}
+.adjustment-card{border:1px solid var(--line);border-radius:14px;padding:11px 13px;background:rgba(243,246,239,.72);display:grid;grid-template-rows:auto auto auto;align-content:start;gap:4px;min-width:0;min-height:112px;box-sizing:border-box}
 .adjustment-card span{font-size:9px;font-weight:750;color:var(--muted)}
 .adjustment-card strong{font-family:var(--font-heading);font-size:23px;line-height:1.1;color:var(--graphite)}
 .adjustment-card small{font-size:8px;color:var(--muted);line-height:1.35}
@@ -200,13 +200,15 @@
 .choice-card small{font-size:8px;color:var(--muted);line-height:1.35}
 @media(max-width:800px){.adjustment-grid{grid-template-columns:1fr}.choice-row{grid-template-columns:1fr}.account-actions{flex-wrap:wrap}.account-opening-meta{margin-top:7px}}
 
-/* Ajuste de layout: cada tarjeta contiene toda su información y acciones sin desbordarse. */
+/* El panel de cuentas aprovecha todo el espacio vertical disponible. */
 .accounts-page .section-card {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .accounts-page .section-card:first-of-type {
   flex: 1 1 auto;
+  height: auto;
   min-height: 0;
 }
 
@@ -237,13 +239,15 @@
 
 .account-grid.list-view .account-card {
   min-height: 136px;
-  grid-template-rows: auto auto auto;
+  height: 136px;
+  grid-template-rows: auto auto;
 }
 
 .account-grid.list-view .account-opening-meta {
   grid-column: 2;
-  grid-row: 3;
+  grid-row: 2;
   margin-top: 3px;
+  align-self: start;
 }
 
 .account-grid.list-view .account-financial-row {
@@ -296,16 +300,21 @@
 .adjustment-label-badge--calculated{background:#e4ede1;color:#285e45}
 .adjustment-label-badge--real{background:#dcebd7;color:#285e45}
 .adjustment-label-badge--difference{background:#eef1ee;color:#59665f}
-.adjustment-card strong{font-size:25px}
+.adjustment-card strong{font-size:27px;line-height:1.05}
 .adjustment-card small{
   font-size:9px;
   font-weight:600;
   color:#65736c;
-  line-height:1.45;
+  line-height:1.3;
+  align-self:auto;
+  margin-top:0;
 }
 .adjustment-card--observed input{
-  font-size:25px;
-  padding:3px 0;
+  font-size:27px;
+  line-height:1.05;
+  height:30px;
+  padding:0;
+  box-sizing:border-box;
 }
 .adjustment-warning{
   padding:13px 15px;
@@ -438,4 +447,679 @@
 }
 .adjustment-details-grid .form-field:nth-child(2){
   align-self:start;
+}
+
+/* El scroll queda dentro de las cuentas, mientras el panel aprovecha el alto libre. */
+@media (min-width: 851px){
+  .accounts-page .section-card:first-of-type{
+    flex:1 1 auto;
+    height:auto;
+    min-height:0;
+  }
+  .accounts-page .section-card:first-of-type .account-grid{
+    flex:1 1 auto;
+    min-height:0;
+    overflow-y:auto;
+  }
+}
+
+/* Tarjetas de ajuste más compactas: el espacio se usa para jerarquía, no para aire vacío. */
+.modal-adjustment .adjustment-card{
+  min-height:112px;
+  padding:11px 13px;
+  gap:4px;
+}
+.modal-adjustment .adjustment-card strong,
+.modal-adjustment .adjustment-card--observed input{
+  font-size:27px;
+  line-height:1.05;
+}
+.modal-adjustment .adjustment-card small{
+  font-size:9px;
+  line-height:1.3;
+}
+
+/* Alternar entre cuentas activas y archivadas desde el mismo panel. */
+.accounts-archive-toggle {
+  min-height: 38px;
+  padding: 0 14px;
+  font-size: 11px;
+  border-radius: 10px;
+  white-space: nowrap;
+  gap: 7px;
+}
+.accounts-archive-toggle:hover {
+  background: var(--cream);
+  border-color: #cfe0d0;
+  color: var(--forest);
+}
+.account-card--archived {
+  background: #f0f2f0;
+  border-color: #d8ddd9;
+  color: #68716c;
+  filter: saturate(.35);
+}
+.account-card--archived .account-icon,
+.account-card--archived .account-currency {
+  background: #e2e6e3;
+  color: #68716c;
+}
+.account-card--archived > strong,
+.account-card--archived .account-balance {
+  color: #606964;
+}
+.account-card--archived .account-type,
+.account-card--archived .account-opening-meta {
+  color: #858d88;
+}
+.account-card--archived .icon-button {
+  color: #606964;
+  background: #f7f8f7;
+}
+.account-card--archived .icon-button:hover:not(:disabled) {
+  background: #fff;
+  border-color: #c7cfca;
+  color: var(--forest);
+}
+.account-grid.archived-view {
+  /* Las archivadas mantienen la misma altura visual de las tarjetas activas.
+     No estiramos una sola tarjeta para llenar todo el panel. */
+  align-content: start;
+  grid-auto-rows: 218px;
+}
+.account-grid.archived-view .account-card {
+  min-height: 218px;
+  height: 218px;
+}
+
+
+.account-grid.list-view .account-card--archived {
+  min-height:136px;
+  height:136px;
+}
+
+.account-grid.list-view .account-actions .icon-button {
+  flex:0 0 34px;
+}
+
+.account-grid.list-view.archived-view .account-card {
+  min-height:136px;
+  height:136px;
+}
+
+@media (max-width: 1150px) {
+  .account-grid.list-view {
+    grid-template-columns:minmax(0,1040px);
+  }
+}
+
+@media (max-width: 650px) {
+  .accounts-section-actions {
+    flex-wrap: wrap;
+  }
+  .accounts-archive-toggle {
+    flex: 1;
+  }
+}
+
+@media (min-width: 851px){
+  .accounts-page .account-grid:not(.list-view){
+    align-content:stretch;
+    grid-auto-rows:minmax(218px,1fr);
+  }
+  .accounts-page .account-grid.list-view{
+    align-content:start;
+    grid-auto-rows:136px;
+    row-gap:16px;
+  }
+}
+
+
+/* Lista de cuentas: separación, centrado y hover consistente con Verdia. */
+.account-grid.list-view .account-card-top .account-icon,
+.account-grid.list-view .account-card-top .account-currency {
+  flex:none;
+}
+
+.account-grid.list-view .account-card-top .account-icon {
+  display:grid;
+  place-items:center;
+}
+
+.account-grid.list-view .account-card-top .account-currency {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:42px;
+  box-sizing:border-box;
+}
+
+.account-actions .icon-button,
+.accounts-archive-toggle,
+.accounts-new-button {
+  transition:transform .16s ease, background .16s ease, border-color .16s ease, color .16s ease, box-shadow .16s ease;
+}
+
+.account-actions .icon-button:hover:not(:disabled),
+.account-actions .icon-button:focus-visible {
+  transform:translateY(-2px);
+  background:var(--cream);
+  border-color:#b9d2c0;
+  color:var(--forest);
+  box-shadow:0 6px 14px rgba(40,94,69,.10);
+}
+
+.account-actions .icon-button-danger:hover:not(:disabled),
+.account-actions .icon-button-danger:focus-visible {
+  background:#fff2f0;
+  border-color:#e4c4c0;
+  color:#b44f4f;
+}
+
+.accounts-archive-toggle:hover,
+.accounts-archive-toggle:focus-visible {
+  transform:translateY(-2px);
+  background:var(--cream);
+  border-color:#b9d2c0;
+  color:var(--forest);
+  box-shadow:0 6px 14px rgba(40,94,69,.10);
+}
+
+.accounts-new-button:hover,
+.accounts-new-button:focus-visible {
+  transform:translateY(-2px);
+  box-shadow:0 7px 16px rgba(40,94,69,.16);
+}
+
+.icon-button-with-label > span {
+  bottom:calc(100% + 8px);
+  right:50%;
+  transform:translate(50%, 3px);
+}
+.icon-button-with-label:hover > span,
+.icon-button-with-label:focus-visible > span {
+  transform:translate(50%, 0);
+}
+
+@media (max-width:1150px) and (min-width:851px) {
+  .account-grid.list-view .account-card {
+    grid-template-columns:120px minmax(180px,1fr) minmax(250px,.8fr);
+    column-gap:20px;
+  }
+}
+
+
+@media (max-width: 850px) {
+  .account-grid.list-view .account-card {
+    height:auto;
+    min-height:136px;
+    grid-template-columns:96px minmax(0,1fr);
+    grid-template-rows:auto auto auto;
+    column-gap:16px;
+  }
+  .account-grid.list-view .account-card-top {
+    grid-column:1;
+    grid-row:1 / span 3;
+    width:100%;
+  }
+  .account-grid.list-view .account-card > strong {
+    grid-column:2;
+    grid-row:1;
+  }
+  .account-grid.list-view .account-type {
+    grid-column:2;
+    grid-row:2;
+  }
+  .account-grid.list-view .account-opening-meta {
+    grid-column:2;
+    grid-row:3;
+  }
+  .account-grid.list-view .account-financial-row {
+    grid-column:2;
+    grid-row:4;
+    margin-top:8px;
+  }
+  .accounts-page .account-grid.list-view {
+    grid-auto-rows:auto;
+  }
+}
+
+/* Corrección final — vista Lista de cuentas.
+   La lista vuelve a un ancho contenido, cada tarjeta tiene una separación real
+   y la información ocupa tres zonas sin superponerse. */
+@media (min-width: 851px) {
+  .accounts-page .account-grid.list-view {
+    width: min(100%, 1040px);
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 16px;
+    row-gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+  }
+
+  .accounts-page .account-grid.list-view .account-card {
+    width: 100%;
+    min-height: 158px;
+    height: 158px;
+    box-sizing: border-box;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: 150px minmax(280px, 1fr) minmax(360px, 430px);
+    grid-template-rows: auto auto auto;
+    column-gap: 26px;
+    row-gap: 5px;
+    align-items: center;
+    overflow: visible;
+  }
+
+  .accounts-page .account-grid.list-view .account-card-top {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .accounts-page .account-grid.list-view .account-card-top .account-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: grid;
+    place-items: center;
+  }
+
+  .accounts-page .account-grid.list-view .account-card-top .account-currency {
+    min-width: 48px;
+    height: 32px;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .accounts-page .account-grid.list-view .account-card > strong {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    min-width: 0;
+    font-size: 22px;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .accounts-page .account-grid.list-view .account-type {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .accounts-page .account-grid.list-view .account-opening-meta {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: start;
+    margin: 0;
+    font-size: 9px;
+    line-height: 1.35;
+    gap: 3px;
+  }
+
+  .accounts-page .account-grid.list-view .account-financial-row {
+    grid-column: 3;
+    grid-row: 1 / 4;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .accounts-page .account-grid.list-view .account-balance {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    line-height: 1;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .accounts-page .account-grid.list-view .account-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  /* Hover de Verdia: el botón nace como icono y se expande para revelar su nombre. */
+  .accounts-page .account-grid.list-view .account-actions .icon-button-with-label,
+  .accounts-page .account-grid.list-view .account-actions .icon-button {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: width .18s ease, min-width .18s ease, padding .18s ease,
+      background .16s ease, border-color .16s ease, color .16s ease,
+      box-shadow .16s ease, transform .16s ease;
+  }
+
+  .accounts-page .account-grid.list-view .account-actions .icon-button-with-label > span {
+    position: static;
+    right: auto;
+    bottom: auto;
+    max-width: 0;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    transform: none;
+    overflow: hidden;
+    color: currentColor;
+    background: transparent;
+    border-radius: 0;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+    transition: max-width .18s ease, opacity .12s ease, padding .18s ease;
+  }
+
+  .accounts-page .account-grid.list-view .account-actions .icon-button-with-label:hover,
+  .accounts-page .account-grid.list-view .account-actions .icon-button-with-label:focus-visible {
+    width: max-content;
+    min-width: 40px;
+    padding: 0 11px;
+    transform: translateY(-2px);
+    background: var(--cream);
+    border-color: #b9d2c0;
+    color: var(--forest);
+    box-shadow: 0 6px 14px rgba(40,94,69,.10);
+  }
+
+  .accounts-page .account-grid.list-view .account-actions .icon-button-with-label:hover > span,
+  .accounts-page .account-grid.list-view .account-actions .icon-button-with-label:focus-visible > span {
+    max-width: 110px;
+    padding-left: 2px;
+    opacity: 1;
+  }
+
+  .accounts-page .account-grid.list-view .account-actions .icon-button-danger:hover,
+  .accounts-page .account-grid.list-view .account-actions .icon-button-danger:focus-visible {
+    background: #fff2f0;
+    border-color: #e4c4c0;
+    color: #b44f4f;
+  }
+
+  .accounts-page .account-grid.list-view .account-card--archived {
+    min-height: 158px;
+    height: 158px;
+  }
+}
+
+/* Los controles de cambio de vista mantienen el mismo lenguaje de interacción. */
+.accounts-page .accounts-archive-toggle,
+.accounts-page .accounts-new-button {
+  transition: transform .16s ease, background .16s ease, border-color .16s ease,
+    color .16s ease, box-shadow .16s ease;
+}
+
+.accounts-page .accounts-archive-toggle:hover,
+.accounts-page .accounts-archive-toggle:focus-visible {
+  transform: translateY(-2px);
+  background: var(--cream);
+  border-color: #b9d2c0;
+  color: var(--forest);
+  box-shadow: 0 6px 14px rgba(40,94,69,.10);
+}
+
+@media (max-width: 850px) {
+  .accounts-page .account-grid.list-view .account-card {
+    width: 100%;
+    min-height: 170px;
+    height: auto;
+    grid-template-columns: 90px minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto;
+    row-gap: 6px;
+  }
+
+  .accounts-page .account-grid.list-view .account-card-top {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    align-self: center;
+  }
+
+  .accounts-page .account-grid.list-view .account-card > strong {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 19px;
+  }
+
+  .accounts-page .account-grid.list-view .account-type {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .accounts-page .account-grid.list-view .account-opening-meta {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .accounts-page .account-grid.list-view .account-financial-row {
+    grid-column: 2;
+    grid-row: 4;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .accounts-page .account-grid.list-view .account-balance {
+    font-size: 26px;
+  }
+}
+
+/* =========================================================
+   Hover de acciones Verdia — tarjetas y lista
+   El botón empieza como icono y se expande dentro del propio
+   espacio para mostrar el nombre de la acción.
+   ========================================================= */
+.accounts-page .account-actions {
+  overflow: visible;
+}
+
+.accounts-page .account-actions .icon-button-with-label {
+  position: relative;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    width .18s ease,
+    min-width .18s ease,
+    padding .18s ease,
+    transform .16s ease,
+    background .16s ease,
+    border-color .16s ease,
+    color .16s ease,
+    box-shadow .16s ease;
+}
+
+/* El texto deja de ser tooltip y pasa a formar parte del botón expandido. */
+.accounts-page .account-actions .icon-button-with-label > span {
+  position: static;
+  right: auto;
+  bottom: auto;
+  max-width: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  transform: none;
+  overflow: hidden;
+  pointer-events: none;
+  color: currentColor;
+  background: transparent;
+  border-radius: 0;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  transition:
+    max-width .18s ease,
+    width .18s ease,
+    opacity .12s ease,
+    padding .18s ease;
+}
+
+.accounts-page .account-actions .icon-button-with-label:hover,
+.accounts-page .account-actions .icon-button-with-label:focus-visible {
+  transform: translateY(-2px);
+  padding: 0 11px;
+  min-width: var(--action-hover-width);
+  width: var(--action-hover-width);
+  justify-content: center;
+  background: var(--cream);
+  border-color: #b9d2c0;
+  color: var(--forest);
+  box-shadow: 0 6px 14px rgba(40,94,69,.10);
+}
+
+.accounts-page .account-actions .icon-button-with-label:hover > span,
+.accounts-page .account-actions .icon-button-with-label:focus-visible > span {
+  width: auto;
+  max-width: 120px;
+  padding-left: 2px;
+  opacity: 1;
+}
+
+.accounts-page .account-actions .action-edit {
+  --action-hover-width: 78px;
+}
+
+.accounts-page .account-actions .action-adjust {
+  --action-hover-width: 112px;
+}
+
+.accounts-page .account-actions .action-archive,
+.accounts-page .account-actions .action-reactivate {
+  --action-hover-width: 92px;
+}
+
+.accounts-page .account-actions .action-delete {
+  --action-hover-width: 88px;
+}
+
+.accounts-page .account-actions .icon-button-danger:hover,
+.accounts-page .account-actions .icon-button-danger:focus-visible {
+  background: #fff2f0;
+  border-color: #e4c4c0;
+  color: #b44f4f;
+}
+
+/* En tarjetas hay más espacio vertical: mantenemos los iconos centrados
+   y permitimos que el botón crezca sin cortar la etiqueta. */
+.accounts-page .account-grid:not(.list-view) .account-actions {
+  align-items: center;
+  overflow: visible;
+}
+
+.accounts-page .account-grid:not(.list-view) .account-actions .icon-button-with-label {
+  flex: 0 0 40px;
+}
+
+.accounts-page .account-grid:not(.list-view) .account-actions .icon-button-with-label:hover,
+.accounts-page .account-grid:not(.list-view) .account-actions .icon-button-with-label:focus-visible {
+  flex-basis: var(--action-hover-width);
+}
+
+/* En lista también se mantiene el mismo componente, sin una implementación
+   distinta del hover. */
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label {
+  flex: 0 0 40px;
+}
+
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label:hover,
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label:focus-visible {
+  flex-basis: var(--action-hover-width);
+}
+
+/* Los controles superiores también usan la elevación de Verdia. */
+.accounts-page .accounts-archive-toggle:hover,
+.accounts-page .accounts-archive-toggle:focus-visible {
+  transform: translateY(-2px);
+  background: var(--cream);
+  border-color: #b9d2c0;
+  color: var(--forest);
+  box-shadow: 0 6px 14px rgba(40,94,69,.10);
+}
+
+/* Override final para la vista Lista: el mismo ancho controlado del hover,
+   evitando que las reglas anteriores de max-content interfieran. */
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label {
+  width: 40px;
+  min-width: 40px;
+  flex: 0 0 40px;
+  overflow: hidden;
+}
+
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label > span {
+  position: static;
+  display: inline-block;
+  width: 0;
+  max-width: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  color: currentColor;
+  background: transparent;
+  transform: none;
+}
+
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label:hover,
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label:focus-visible {
+  width: var(--action-hover-width);
+  min-width: var(--action-hover-width);
+  flex-basis: var(--action-hover-width);
+  max-width: var(--action-hover-width);
+  padding: 0 11px;
+  transform: translateY(-2px);
+}
+
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label:hover > span,
+.accounts-page .account-grid.list-view .account-actions .icon-button-with-label:focus-visible > span {
+  width: auto;
+  max-width: 120px;
+  padding-left: 2px;
+  opacity: 1;
 }
