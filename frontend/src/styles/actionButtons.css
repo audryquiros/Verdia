@@ -1,0 +1,135 @@
+/* Acciones Verdia — patrón compartido basado en los botones de Movimientos.
+   El estado normal es un icono centrado; al pasar el cursor el mismo botón
+   se expande y revela su nombre sin cambiar el layout de los demás controles. */
+.action-hover-button {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  flex: 0 0 34px;
+  padding: 0 !important;
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--graphite);
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center;
+  gap: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font: 750 11px/1 var(--font-body);
+  line-height: 0;
+  transition: width .22s ease, min-width .22s ease, flex-basis .22s ease,
+    background-color .18s ease, border-color .18s ease, color .18s ease,
+    padding .22s ease, gap .22s ease, justify-content .22s ease, transform .16s ease;
+}
+
+.action-hover-button svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: 0 !important;
+  flex: 0 0 15px;
+  align-self: center;
+  stroke-width: 1.9;
+}
+
+.action-hover-button > span {
+  width: 0;
+  max-width: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+  overflow: hidden;
+  pointer-events: none;
+  color: currentColor;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  transition: width .22s ease, max-width .22s ease, opacity .16s ease, transform .22s ease;
+}
+
+.action-hover-button:hover,
+.action-hover-button:focus-visible {
+  width: var(--action-hover-width, 86px);
+  min-width: var(--action-hover-width, 86px);
+  flex-basis: var(--action-hover-width, 86px);
+  padding: 0 10px !important;
+  justify-content: flex-start !important;
+  gap: 7px;
+  border-color: var(--soft-green);
+  background: #F3F6EF;
+  color: var(--forest);
+  transform: translateY(-1px);
+}
+
+.action-hover-button:hover > span,
+.action-hover-button:focus-visible > span {
+  width: auto;
+  max-width: 110px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.action-hover-button.action-confirm {
+  --action-hover-width: 104px;
+}
+.action-hover-button.action-edit {
+  --action-hover-width: 86px;
+}
+.action-hover-button.action-adjust {
+  --action-hover-width: 112px;
+}
+.action-hover-button.action-archive,
+.action-hover-button.action-reactivate,
+.action-hover-button.action-delete {
+  --action-hover-width: 92px;
+}
+
+.action-hover-button.action-danger:hover,
+.action-hover-button.action-danger:focus-visible,
+.action-hover-button.icon-button-danger:hover,
+.action-hover-button.icon-button-danger:focus-visible {
+  border-color: rgba(178,75,68,.18);
+  background: #FBEAEA;
+  color: var(--danger);
+}
+
+.action-hover-button:focus-visible {
+  outline: 3px solid rgba(169,210,154,.34);
+  outline-offset: 2px;
+}
+
+/* En listas de contenido, reservar el espacio del grupo evita que el hover
+   comprima el monto o mueva las demás acciones. */
+.inline-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Cuentas usa el mismo patrón sin importar si está en cards o lista. */
+.accounts-page .account-actions .action-hover-button {
+  width: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+}
+
+.accounts-page .account-grid.list-view .account-actions .action-hover-button:hover,
+.accounts-page .account-grid.list-view .account-actions .action-hover-button:focus-visible {
+  width: var(--action-hover-width, 86px);
+  min-width: var(--action-hover-width, 86px);
+  flex-basis: var(--action-hover-width, 86px);
+  padding: 0 10px !important;
+  justify-content: flex-start !important;
+  gap: 7px;
+}
