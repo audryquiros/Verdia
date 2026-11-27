@@ -140,9 +140,9 @@ export default function Movements() {
               return <div className="movement-row-wrapper" key={item.id}>
                 <MovementRow name={item.name} category={item.category || 'Sin categoría'} date={new Date(`${item.date}T12:00:00`).toLocaleDateString('es-CR',{day:'2-digit',month:'short'}).replace('.','')} amount={formatMoney(item.amount,item.currency)} type={item.type === 'income' ? 'income' : 'expense'} status={item.status} icon={Icon} categoryVisual={item.type === 'income' ? null : getCategoryColor(item.category)} />
                 <div className="movement-actions">
-                  {item.status === 'planned' && <button className="movement-action movement-action-confirm" onClick={() => handleConfirm(item)} aria-label={`Confirmar ${item.name}`}><Check size={15} /><span>Confirmar</span></button>}
-                  {['confirmed','planned'].includes(item.status) && <button className="movement-action" onClick={() => openEdit(item)} aria-label={`Editar ${item.name}`}><Pencil size={15} /><span>Editar</span></button>}
-                  {['confirmed','planned'].includes(item.status) && <button className="movement-action movement-action-danger" onClick={() => handleCancel(item)} aria-label={`${item.status === 'confirmed' ? 'Anular' : 'Cancelar'} ${item.name}`}><XCircle size={15} /><span>{item.status === 'confirmed' ? 'Anular' : 'Cancelar'}</span></button>}
+                  {item.status === 'planned' && <button className="movement-action action-hover-button action-confirm" onClick={() => handleConfirm(item)} aria-label={`Confirmar ${item.name}`}><Check size={15} /><span>Confirmar</span></button>}
+                  {['confirmed','planned'].includes(item.status) && <button className="movement-action action-hover-button action-edit" onClick={() => openEdit(item)} aria-label={`Editar ${item.name}`}><Pencil size={15} /><span>Editar</span></button>}
+                  {['confirmed','planned'].includes(item.status) && <button className="movement-action action-hover-button action-danger" onClick={() => handleCancel(item)} aria-label={`${item.status === 'confirmed' ? 'Anular' : 'Cancelar'} ${item.name}`}><XCircle size={15} /><span>{item.status === 'confirmed' ? 'Anular' : 'Cancelar'}</span></button>}
                   {!['confirmed','planned'].includes(item.status) && <span className="movement-action-status">{statusLabel}</span>}
                 </div>
               </div>;

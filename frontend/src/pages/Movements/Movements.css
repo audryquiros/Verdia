@@ -896,3 +896,58 @@
     overflow: hidden;
   }
 }
+
+
+/* Acciones: usar el mismo patrón global de Verdia. El grupo reserva el ancho máximo
+   para que la expansión no empuje ni recorte los botones durante la transición. */
+.movements-page-card .movement-actions {
+  width: 300px;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  overflow: visible;
+  padding-right: 0;
+}
+.movements-page-card .movement-row-wrapper {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+.movements-page-card .movement-action.action-hover-button {
+  width: 34px;
+  min-width: 34px;
+  flex: 0 0 34px;
+}
+.movements-page-card .movement-action.action-hover-button:hover,
+.movements-page-card .movement-action.action-hover-button:focus-visible {
+  width: var(--action-hover-width, 86px);
+  min-width: var(--action-hover-width, 86px);
+  flex-basis: var(--action-hover-width, 86px);
+}
+@media (max-width: 1000px) {
+  .movements-page-card .movement-actions {
+    width: 285px;
+    min-width: 285px;
+  }
+  .movements-page-card .movement-row-wrapper {
+    grid-template-columns: minmax(0, 1fr) 285px;
+  }
+}
+@media (max-width: 760px) {
+  .movements-page-card .movement-actions {
+    width: 220px;
+    min-width: 220px;
+  }
+  .movements-page-card .movement-row-wrapper {
+    grid-template-columns: minmax(0, 1fr) 220px;
+  }
+}
+@media (max-width: 650px) {
+  .movements-page-card .movement-actions {
+    width: 130px;
+    min-width: 130px;
+  }
+  .movements-page-card .movement-row-wrapper {
+    grid-template-columns: minmax(0, 1fr) 130px;
+  }
+}
