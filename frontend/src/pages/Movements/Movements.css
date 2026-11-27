@@ -815,3 +815,112 @@
     --action-hover-width: 84px;
   }
 }
+
+/* Tabla de movimientos: las acciones pasan a ser una columna real.
+   Descripción/categoría y estado/monto ceden espacio (~20%) para que las acciones
+   tengan una zona propia y no compriman los datos financieros. */
+.movements-page-card .table-head,
+.movements-page-card .movement-table-row {
+  grid-template-columns:
+    96px
+    minmax(220px, 0.92fr)
+    minmax(170px, 0.76fr)
+    110px
+    110px
+    minmax(250px, 1.05fr);
+  column-gap: 10px;
+}
+
+.movements-page-card .table-head .actions-heading {
+  text-align: right;
+  padding-right: 2px;
+}
+
+.movements-page-card .movement-table-row {
+  min-width: 0;
+}
+
+.movements-page-card .movement-actions {
+  width: auto;
+  min-width: 0;
+  justify-content: flex-end;
+  gap: 6px;
+  padding-right: 0;
+  overflow: visible;
+}
+
+.movements-page-card .movement-action-status {
+  justify-self: end;
+}
+
+@media (max-width: 1000px) {
+  .movements-page-card .table-head,
+  .movements-page-card .movement-table-row {
+    grid-template-columns:
+      76px
+      minmax(180px, 0.92fr)
+      minmax(140px, 0.76fr)
+      100px
+      100px
+      minmax(220px, 1.05fr);
+    column-gap: 8px;
+  }
+
+  .movements-page-card .movement-actions {
+    width: auto;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .movements-page-card .table-head,
+  .movements-page-card .movement-table-row {
+    grid-template-columns:
+      68px
+      minmax(170px, 1fr)
+      minmax(125px, 0.72fr)
+      92px
+      92px
+      minmax(190px, 0.95fr);
+    column-gap: 7px;
+  }
+}
+
+@media (max-width: 760px) {
+  .movements-page-card .table-head,
+  .movements-page-card .movement-table-row {
+    grid-template-columns:
+      68px
+      minmax(170px, 1fr)
+      92px
+      92px
+      minmax(160px, 0.9fr);
+    column-gap: 7px;
+  }
+
+  .movements-page-card .table-head span:nth-child(3),
+  .movements-page-card .movement-category {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .movements-page-card .table-head,
+  .movements-page-card .movement-table-row {
+    grid-template-columns:
+      60px
+      minmax(150px, 1fr)
+      105px
+      minmax(130px, 0.9fr);
+    column-gap: 8px;
+  }
+
+  .movements-page-card .table-head span:nth-child(4),
+  .movements-page-card .movement-status {
+    display: none;
+  }
+
+  .movements-page-card .movement-actions {
+    gap: 4px;
+  }
+}

@@ -19,6 +19,7 @@ export default function MovementRow({
   icon,
   categoryTone,
   categoryVisual,
+  actions = null,
 }) {
   const income = type === 'income';
   const Icon = icon || defaultIcons[category] || Wallet;
@@ -72,6 +73,10 @@ export default function MovementRow({
       <strong className={`movement-amount ${income ? 'income' : ''}`} role="cell">
         {income ? '+' : '-'}{amount}
       </strong>
+
+      <div className="movement-actions" role="cell">
+        {actions}
+      </div>
     </div>
   );
 }
